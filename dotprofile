@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# For use with MinGW
+
+echo ""
+echo ""
+echo "Welcome!"
+echo ""
+echo "here - current path Windows-style"
+echo "shua - open current path in explorer"
+echo "show - list git repos in current folder"
+
+alias ll='ls -l'
+alias here="pwd | tr \'/\' \'\\\\\\\\\' | sed \"s/\\\\\\\\c/C:/\""
+alias shua='start `here`'
+alias show='find . -type d -maxdepth 3 | while read dir; do if [ -d "$dir/.git" ]; then echo $dir; fi; done;'
