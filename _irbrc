@@ -1,0 +1,7 @@
+begin
+  require 'pry'
+  Pry.start
+  exit
+ rescue
+   # do nothing if pry fails to load
+ end
