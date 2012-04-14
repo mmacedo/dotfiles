@@ -1,8 +1,8 @@
-= My dot files
+# My dot files
 
 Designed for my own use.
 
-== Git Bash (Windows)
+## Git Bash (Windows)
 
     gem install rubygems bundler pry pry-exception_explorer hirb awesome_print map_by_method
     cp -f _profile ~/.profile
@@ -10,7 +10,7 @@ Designed for my own use.
     cp -f _irbrc ~/.irbrc
     cp -f _railsrc ~/.railsrc
 
-== OS X
+## OS X
 
     sudo gem install rubygems bundler pry pry-exception_explorer hirb awesome_print map_by_method
     cp _pryrc ~/.pryrc
