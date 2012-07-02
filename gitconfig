@@ -1,0 +1,14 @@
+[user]
+	name = Michel Pavan Macedo
+	email = michelpm@gmail.com
+[core]
+	editor = /usr/bin/vim --nofork
+[merge]
+	tool = meld
+[color]
+	ui = true
+[alias]
+	unstage = reset HEAD
+	co = checkout
+  ci = commit
+  s = status
