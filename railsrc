@@ -1,1 +1,1 @@
--m https://raw.github.com/RailsApps/rails3-application-templates/master/rails3-haml-html5-template.rb
+-m .rails/template.rb -O -T
