@@ -1,6 +1,8 @@
 [user]
 	name = Michel Pavan Macedo
 	email = michelpm@gmail.com
+[credential]
+	helper = cache
 [core]
 	editor = /usr/bin/vim --nofork
 [merge]
@@ -10,5 +12,5 @@
 [alias]
 	unstage = reset HEAD
 	co = checkout
-  ci = commit
-  s = status
+	ci = commit
+	s = status
