@@ -1,12 +1,12 @@
 # coding:utf-8 vim:ft=ruby
 
-require 'map_by_method'
-require 'awesome_print'
-require 'hirb'
+gems = %w{map_by_method awesome_print hirb}
 
-Hirb.enable
-
-Pry.config.editor = "mvim --no-fork"
+Pry.config.print = proc do |output, value|
+  value = value.to_a if defined?(ActiveRecord) && value.is_a?(ActiveRecord::Relation)
+  value = value.to_a if defined?(Mongoid) && value.is_a?(Mongoid::Criteria)
+  Hirb::View.view_or_page_output(value) || Pry::Helpers::BaseHelpers.stagger_output(value.ai)
+end
 
 Pry.config.prompt = [
   proc { |obj, nest_level, pry|
@@ -21,11 +21,6 @@ Pry.config.prompt = [
   }
 ]
 
-Pry.config.print = proc do |output, value|
-  value = value.to_a if defined?(ActiveRecord) && value.is_a?(ActiveRecord::Relation)
-  Hirb::View.view_or_page_output(value) || Pry::Helpers::BaseHelpers.stagger_output(value.ai)
-end
-
 Pry.config.exception_handler = proc do |output, exception, pry|
   if exception.instance_of? Interrupt
     output.puts ""
@@ -37,7 +32,26 @@ Pry.config.exception_handler = proc do |output, exception, pry|
   end
 end
 
-Pry.hooks.add_hook :before_session, :rails do |output, target, pry|
+Pry.hooks.add_hook :before_session, :gems  do
+
+  require 'rubygems'
+  ENV['BUNDLE_GEMFILE'] ||= File.expand_path 'Gemfile'
+  gemfile = ENV['BUNDLE_GEMFILE']
+  lockfile = "#{ENV['BUNDLE_GEMFILE']}.lock"
+
+  if File.exists?(gemfile) && File.exists?(lockfile)
+    lines = File.open(lockfile).to_a
+    # require what is not in the Gemfile before loading Bundler
+    gems.delete_if{|g| lines.all?{|line| line !~ /^\s*#{g}\s/ } && ( require g || true ) }
+    require 'bundler/setup'
+  end
+
+  gems.each{|g| require g }.clear
+  Hirb.enable
+end
+
+Pry.hooks.add_hook :before_session, :rails do
+
   unless defined?(Rails) && Rails.env
     begin
       require './config/environment' if File.exists? './config/environment.rb'
@@ -45,7 +59,6 @@ Pry.hooks.add_hook :before_session, :rails do |output, target, pry|
       return
     end
   end
-
 
   # show ActiveRecord SQL queries in the console
   if defined? ActiveRecord
@@ -70,4 +83,5 @@ Pry.hooks.add_hook :before_session, :rails do |output, target, pry|
       require 'console_with_helpers'
     end
   end
+
 end
