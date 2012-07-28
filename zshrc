@@ -1,7 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-plugins=(git bundler gem rbenv npm autojump thor heroku)
+plugins=(git bundler gem rbenv npm autojump thor heroku pip virtualenvwrapper)
 
 source $ZSH/oh-my-zsh.sh
 
