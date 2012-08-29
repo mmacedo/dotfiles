@@ -14,6 +14,7 @@ Designed for my own use.
  * rbenv-installer
  * python
  * setuptools
+ * node
  * build-essential
 
 ## Apps ##
@@ -21,6 +22,9 @@ Designed for my own use.
  * Guake (Ubuntu)
  * iTerm (OS X)
  * Sublime Text 2
+   * package_control
+   * sublime-theme-railscasts
+   * phoenix-theme
  * FBReader
  * Chromium
 
@@ -50,6 +54,8 @@ Designed for my own use.
     cp zshrc ~/.zshrc
     sudo easy_install pip
     sudo pip install virtualenv virtualenvwrapper
+    cp npmrc ~/.npmrc
+    cp config/sublime-text-2/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
     . ~/.zshrc
 
 ## Ubuntu ##
@@ -65,4 +71,6 @@ Designed for my own use.
     cp zshrc ~/.zshrc
     sudo easy_install pip
     sudo pip install virtualenv virtualenvwrapper
+    cp npmrc ~/.npmrc
+    cp config/sublime-text-2/Packages/User/Preferences.sublime-settings ~/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
     . ~/.zshrc

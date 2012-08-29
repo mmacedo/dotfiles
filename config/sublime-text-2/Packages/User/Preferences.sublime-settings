@@ -1,0 +1,16 @@
+{
+	"color_scheme": "Packages/RailsCasts Colour Scheme/RailsCastsColorScheme.tmTheme",
+	"font_size": 15,
+	"tab_size": 2,
+	"translate_tabs_to_spaces": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+
+	"theme": "Phoenix Dark.sublime-theme",
+	"phoenix_color_orange": true,
+	"phoenix_solid_current_tab": true,
+	"phoenix_dirty_bottom_bar_orange": true,
+	"phoenix_color_expanded_folder": true
+}
