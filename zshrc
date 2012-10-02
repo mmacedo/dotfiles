@@ -11,8 +11,5 @@ unsetopt correct_all
 setopt complete_aliases
 
 function gvim () { (/usr/bin/gvim -f "$@" 1> /dev/null &) }
-function subl () { (/usr/bin/sublime "$@" 1> /dev/null &) }
+function subl () { (/usr/bin/subl "$@" 1> /dev/null &) }
 function open () { (/usr/bin/xdg-open "$@" 1> /dev/null &) }
-
-export PATH="$PATH:$HOME/git-achievements"
-alias git='git-achievements'
