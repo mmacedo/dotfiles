@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Scala IDE
+Comment=Eclipse with Scala
+Icon=/home/mmacedo/scalaide/icon.xpm
+Exec=/home/mmacedo/scalaide/eclipse
+Terminal=false
+Categories=Development;IDE;Java;

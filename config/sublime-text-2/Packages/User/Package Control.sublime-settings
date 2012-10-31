@@ -1,0 +1,29 @@
+{
+	"auto_upgrade_last_run": 1351642593,
+	"installed_packages":
+	[
+		"Backbone.js",
+		"ChangeQuotes",
+		"CoffeeScript",
+		"Dotfiles Syntax Highlighting",
+		"eco",
+		"EJS",
+		"Haml",
+		"Handlebars",
+		"Jade",
+		"LESS",
+		"Package Control",
+		"Rails Partial",
+		"RailsCasts Colour Scheme",
+		"Ruby 1.9 Hash Converter",
+		"Sass",
+		"SCSS",
+		"SideBarEnhancements",
+		"Stylus",
+		"Theme - Phoenix",
+		"ToggleQuotes",
+		"Tomorrow Color Schemes",
+		"TrailingSpaces",
+		"WordCount"
+	]
+}

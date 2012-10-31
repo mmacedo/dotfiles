@@ -14,5 +14,6 @@
 	co = checkout
 	ci = commit
 	s = status
+	ll = log --oneline
 [achievement]
 	upload = true

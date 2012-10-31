@@ -9,7 +9,7 @@ files.each do |file|
 	if ! File.exists? homefile
 		puts "#{homefile} does not exist!"
 	else
-		`diff #{repofile} #{homefile}`
+		`diff "#{repofile}" "#{homefile}"`
 		if $? != 0
 			puts "#{homefile} is different!"
 		else
