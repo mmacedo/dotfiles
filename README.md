@@ -25,7 +25,7 @@ Ubuntu 12.10 Quantal Quetzal
     sudo apt-get update
     # need UI interaction here
     sudo apt-get install -y ttf-mscorefonts-installer
-    sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket git-tf typesafe-stack xclip libqt4-dev
+    sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
 
     # Remove unwanted packages and update
     sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission*
@@ -38,20 +38,41 @@ Ubuntu 12.10 Quantal Quetzal
     # Add SSH key on GitHub
 
     # Setup workspace
+    DOTFILES=~/ws/other/dotfiles
     mkdir -p ~/ws/{rb,sc,js,other}
-    git clone git@github.com:mmacedo/dotfiles.git ~/ws/other/dotfiles
+    git clone git@github.com:mmacedo/dotfiles.git $DOTFILES
     git clone git@github.com:mmacedo/mmacedo.github.com.git ~/ws/other/blog
     git clone git@github.com:mmacedo/euler.git ~/ws/other/euler
 
+    # Build git and git-subtree from source
+    git clone https://github.com/git/git
+    sudo apt-get remove -y git git-man
+    cd git
+    make prefix=/usr/local all
+    sudo checkinstall --pkgname=git make prefix=/usr/local install
+    cd contrib/subtree
+    make prefix=/usr/local
+    sudo checkinstall --pkgname=git-subtree make prefix=/usr/local install
+    sudo checkinstall --pkgname=git-subtree-doc make prefix=/usr/local install-doc
+    ../../..
+
+    # Install git-tf
+    # Get latest from http://gittf.codeplex.com/
+    unzip -j -o -d git-tf git-tf-1.0.1.20120827.zip
+    rm git-tf-1.0.1.20120827.zip
+    sed -i '2i\GITTF_HOME="/usr/lib/git-tf"' git-tf/git-tf
+    sudo mv git-tf /usr/lib/
+    sudo ln -s /usr/lib/git-tf/git-tf /usr/bin/git-tf
+
     # Sublime Text 2
     curl http://sublime.wbond.net/Package%20Control.sublime-package > ~/.config/sublime-text-2/Installed\ Packages/Package\ Control.sublime-package
-    cp ~/ws/other/dotfiles/config/sublime-text-2/Packages/User/* ~/.config/sublime-text-2/Packages/User
+    cp $DOTFILES/config/sublime-text-2/Packages/User/* ~/.config/sublime-text-2/Packages/User
 
-    # Scala IDE
+    # Install Scala IDE
     curl http://downloads.typesafe.com.s3.amazonaws.com/scalaide-pack/2.1.0.m2-29-20121023/scala-SDK-2.1-M2-2.9-linux.gtk.x86_64.tar.gz | tar zx
     mv eclipse ~/scalaide
-    cp ~/ws/other/dotfiles/local/share/applications/scalaide.desktop ~/.local/share/applications/scalaide.desktop
-    cp ~/ws/other/dotfiles/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
+    cp $DOTFILES/local/share/applications/scalaide.desktop ~/.local/share/applications/scalaide.desktop
+    cp $DOTFILES/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
 
     # Python
     sudo easy_install pip
@@ -68,7 +89,7 @@ Ubuntu 12.10 Quantal Quetzal
     # oh-my-zsh
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
     chsh -s /bin/zsh
-    cp ~/ws/other/dotfiles/zshrc ~/.zshrc
+    cp $DOTFILES/zshrc ~/.zshrc
     /bin/zsh
 
     # Ruby (part 2: MRI)
