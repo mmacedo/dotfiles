@@ -8,6 +8,56 @@ Ubuntu 12.10 Quantal Quetzal
 
 ## Setup
 
+    # Install apt-fast
+    sudo add-apt-repository ppa:apt-fast/stable
+    sudo apt-get update
+    # need UI interaction here
+    sudo apt-get install -y apt-fast
+
+    # Add multiple repositories for apt
+    # Empty the list, easier than sed'ing to remove and insert lines
+    sudo rm /etc/apt/sources.list
+    sudo touch /etc/apt/sources.list
+    # Add repositories (closer to me)
+    function addLineToSources () { echo "$@" | sudo tee -a /etc/apt/sources.list 1>/dev/null  }
+    for url in http://mirror.globo.com/ubuntu/archive/ http://ubuntu.c3sl.ufpr.br/ubuntu/ http://espelhos.edugraf.ufsc.br/ubuntu/
+    do
+      addLineToSources
+      addLineToSources "# $url"
+      addLineToSources
+      addLineToSources deb $url quantal main restricted
+      addLineToSources deb-src $url quantal main restricted
+      addLineToSources deb $url quantal-updates main restricted
+      addLineToSources deb-src $url quantal-updates main restricted
+      addLineToSources deb $url quantal universe
+      addLineToSources deb-src $url quantal universe
+      addLineToSources deb $url quantal-updates universe
+      addLineToSources deb-src $url quantal-updates universe
+      addLineToSources deb $url quantal multiverse
+      addLineToSources deb-src $url quantal multiverse
+      addLineToSources deb $url quantal-updates multiverse
+      addLineToSources deb-src $url quantal-updates multiverse
+      addLineToSources deb $url quantal-backports main restricted universe multiverse
+      addLineToSources deb-src $url quantal-backports main restricted universe multiverse
+      addLineToSources deb $url quantal-security main restricted
+      addLineToSources deb-src $url quantal-security main restricted
+      addLineToSources deb $url quantal-security universe
+      addLineToSources deb-src $url quantal-security universe
+      addLineToSources deb $url quantal-security multiverse
+      addLineToSources deb-src $url quantal-security multiverse
+    done
+    # Add partner and ppa repositories
+    addLineToSources
+    addLineToSources "# Partners"
+    addLineToSources
+    addLineToSources "# deb http://archive.canonical.com/ubuntu quantal partner"
+    addLineToSources "# deb-src http://archive.canonical.com/ubuntu quantal partner"
+    addLineToSources
+    addLineToSources "# PPA's"
+    addLineToSources
+    addLineToSources deb http://extras.ubuntu.com/ubuntu quantal main
+    addLineToSources deb-src http://extras.ubuntu.com/ubuntu quantal main
+
     # Add ppa's
     sudo add-apt-repository ppa:chris-lea/node.js
     sudo add-apt-repository ppa:webupd8team/sublime-text-2
@@ -22,15 +72,15 @@ Ubuntu 12.10 Quantal Quetzal
     rm repo-deb-build-0002.deb
 
     # Install packages
-    sudo apt-get update
+    sudo apt-fast update
     # need UI interaction here
-    sudo apt-get install -y ttf-mscorefonts-installer
-    sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
+    sudo apt-fast install -y ttf-mscorefonts-installer
+    sudo apt-fast install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
 
     # Remove unwanted packages and update
-    sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission*
-    sudo apt-get update
-    sudo apt-get upgrade -y
+    sudo apt-fast purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
+    sudo apt-fast update
+    sudo apt-fast upgrade -y
 
     # Setup SSH keys
     ssh-keygen -t rsa -C "michelpm@gmail.com"
@@ -46,7 +96,7 @@ Ubuntu 12.10 Quantal Quetzal
 
     # Build git and git-subtree from source
     git clone https://github.com/git/git
-    sudo apt-get remove -y git git-man
+    sudo apt-fast remove -y git git-man
     cd git
     make prefix=/usr/local all
     sudo checkinstall --pkgname=git make prefix=/usr/local install
