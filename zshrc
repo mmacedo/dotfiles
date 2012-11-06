@@ -10,6 +10,18 @@ unsetopt correct_all
 # necessary for git-achievements
 setopt complete_aliases
 
+# zsh already has .. and ...
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+function cd-git () {
+  newwd=.
+  while [[ ! -d $newwd/.git ]] && [[ "$(readlink -f $newwd)" != / ]]; do
+    newwd=$newwd/..
+  done
+  [[ "$(readlink -f $newwd)" == / ]] || cd $newwd
+}
+
 function gvim () { (/usr/bin/gvim -f "$@" 1> /dev/null &) }
 function subl () { (/usr/bin/subl "$@" 1> /dev/null &) }
 function open () { (/usr/bin/xdg-open "$@" 1> /dev/null &) }
@@ -39,6 +51,7 @@ function echo_gray () { echo -e "\033[1;30m$@\033[0m" }
 function echo_doc () { echo_gray "$1 \t\t-- $2" }
 
 function , () {
+  echo_doc "cd-git()" "go to the root of the current git repository"
   echo_doc "gvim(file, args...)" "open file on gvim"
   echo_doc "subl(file, args...)" "open file on subl"
   echo_doc "open(file, args...)" "open file with X"
