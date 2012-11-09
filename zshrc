@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="af-magic"
+ZSH_THEME="fino"
 
 plugins=(git bundler gem rbenv npm autojump thor heroku pip virtualenvwrapper mvn)
 
