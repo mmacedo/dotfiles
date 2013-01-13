@@ -9,56 +9,6 @@ Ubuntu 12.10 Quantal Quetzal
 ## Setup
 
 ```shell
-# Install apt-fast
-sudo add-apt-repository ppa:apt-fast/stable
-sudo apt-get update
-# need UI interaction here
-sudo apt-get install -y apt-fast
-
-# Add multiple repositories for apt
-# Empty the list, easier than sed'ing to remove and insert lines
-sudo rm /etc/apt/sources.list
-sudo touch /etc/apt/sources.list
-# Add repositories (closer to me)
-function addLineToSources () { echo "$@" | sudo tee -a /etc/apt/sources.list 1>/dev/null  }
-for url in http://mirror.globo.com/ubuntu/archive/ http://ubuntu.c3sl.ufpr.br/ubuntu/ http://espelhos.edugraf.ufsc.br/ubuntu/
-do
-  addLineToSources
-  addLineToSources "# $url"
-  addLineToSources
-  addLineToSources deb $url quantal main restricted
-  addLineToSources deb-src $url quantal main restricted
-  addLineToSources deb $url quantal-updates main restricted
-  addLineToSources deb-src $url quantal-updates main restricted
-  addLineToSources deb $url quantal universe
-  addLineToSources deb-src $url quantal universe
-  addLineToSources deb $url quantal-updates universe
-  addLineToSources deb-src $url quantal-updates universe
-  addLineToSources deb $url quantal multiverse
-  addLineToSources deb-src $url quantal multiverse
-  addLineToSources deb $url quantal-updates multiverse
-  addLineToSources deb-src $url quantal-updates multiverse
-  addLineToSources deb $url quantal-backports main restricted universe multiverse
-  addLineToSources deb-src $url quantal-backports main restricted universe multiverse
-  addLineToSources deb $url quantal-security main restricted
-  addLineToSources deb-src $url quantal-security main restricted
-  addLineToSources deb $url quantal-security universe
-  addLineToSources deb-src $url quantal-security universe
-  addLineToSources deb $url quantal-security multiverse
-  addLineToSources deb-src $url quantal-security multiverse
-done
-# Add partner and ppa repositories
-addLineToSources
-addLineToSources "# Partners"
-addLineToSources
-addLineToSources "# deb http://archive.canonical.com/ubuntu quantal partner"
-addLineToSources "# deb-src http://archive.canonical.com/ubuntu quantal partner"
-addLineToSources
-addLineToSources "# PPA's"
-addLineToSources
-addLineToSources deb http://extras.ubuntu.com/ubuntu quantal main
-addLineToSources deb-src http://extras.ubuntu.com/ubuntu quantal main
-
 # Add ppa's
 sudo add-apt-repository ppa:chris-lea/node.js
 sudo add-apt-repository ppa:webupd8team/sublime-text-2
@@ -73,15 +23,15 @@ sudo dpkg -i repo-deb-build-0002.deb
 rm repo-deb-build-0002.deb
 
 # Install packages
-sudo apt-fast update
+sudo apt-get update
 # need UI interaction here
-sudo apt-fast install -y ttf-mscorefonts-installer
-sudo apt-fast install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
+sudo apt-get install -y ttf-mscorefonts-installer
+sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
 
 # Remove unwanted packages and update
-sudo apt-fast purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
-sudo apt-fast update
-sudo apt-fast upgrade -y
+sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
+sudo apt-get update
+sudo apt-get upgrade -y
 
 # Setup SSH keys
 ssh-keygen -t rsa -C "michelpm@gmail.com"
@@ -105,7 +55,7 @@ cd contrib/subtree
 make prefix=/usr/local
 sudo checkinstall --pkgname=git-subtree make prefix=/usr/local install
 sudo checkinstall --pkgname=git-subtree-doc make prefix=/usr/local install-doc
-../../..
+cd ../../..
 
 # Install git-tf
 # Get latest from http://gittf.codeplex.com/
@@ -145,8 +95,8 @@ cp $DOTFILES/zshrc ~/.zshrc
 
 # Ruby (part 2: MRI)
 sudo rbenv bootstrap-ubuntu-12-04
-rbenv install 1.9.3-p286
-rbenv global 1.9.3-p286
+rbenv install 1.9.3-p362
+rbenv global 1.9.3-p362
 rbenv rehash
 gem update --system
 gem install $(echo $SAFEGEMS therubyracer bson_ext yajl-ruby pry pry-exception_explorer awesome_print map_by_method twitter-bootstrap-rails)
@@ -156,8 +106,8 @@ gem update
 curl -Lo- https://bit.ly/janus-bootstrap | bash
 
 # Ruby (part 3: JRuby)
-rbenv install jruby-1.7.0
-rbenv shell jruby-1.7.0
+rbenv install jruby-1.7.2
+rbenv shell jruby-1.7.2
 rbenv rehash
 gem update --system
 gem install $(echo $SAFEGEMS therubyrhino jruby-openssl)
