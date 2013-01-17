@@ -12,6 +12,7 @@ Ubuntu 12.10 Quantal Quetzal
 # Add ppa's
 sudo add-apt-repository ppa:chris-lea/node.js
 sudo add-apt-repository ppa:webupd8team/sublime-text-2
+sudo add-apt-repository ppa:skype-wrapper/ppa
 
 # Opera
 wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
@@ -19,14 +20,18 @@ sudo sh -c 'echo "deb http://deb.opera.com/opera/ stable non-free" >> /etc/apt/s
 
 # Typesafe (Scala)
 curl -O http://apt.typesafe.com/repo-deb-build-0002.deb
-sudo dpkg -i repo-deb-build-0002.deb
-rm repo-deb-build-0002.deb
+sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 
 # Install packages
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text opera python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
+sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
+
+# Skype
+wget -O skype http://download.skype.com/linux/skype-ubuntu-lucid_4.1.0.20-1_i386.deb
+sudo dpkg -i skype && rm skype
+sudo apt-get install -y skype-wrapper
 
 # Remove unwanted packages and update
 sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
