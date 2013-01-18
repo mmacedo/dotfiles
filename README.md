@@ -97,7 +97,7 @@ sudo npm install -global coffee-script underscore lodash express node-inspector 
 # Ruby (part 1: rbenv and plugins)
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-SAFEGEMS="bundler rake thor rails_apps_composer rails sinatra puma mongoid guard guard-livereload rack-livereload devise simple_form inherited_resources has_scope kaminari haml-rails less-rails-bootstrap coffee-rails rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist execjs reek brakeman simplecov ruby-graphviz"
+SAFEGEMS="bundler ruby-graphviz rake thor mongoid pg guard execjs rails haml-rails coffee-rails devise less-rails-bootstrap rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist"
 
 # oh-my-zsh
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
@@ -117,7 +117,7 @@ rbenv install 1.9.3-p362
 rbenv global 1.9.3-p362
 rbenv rehash
 gem update --system
-gem install $(echo $SAFEGEMS therubyracer bson_ext yajl-ruby pry pry-exception_explorer awesome_print map_by_method twitter-bootstrap-rails)
+gem install $(echo $SAFEGEMS therubyracer bson_ext yajl-ruby twitter-bootstrap-rails)
 gem update
 
 # gVim
