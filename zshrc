@@ -10,6 +10,10 @@ unsetopt correct_all
 # necessary for git-achievements
 setopt complete_aliases
 
+# setup ADT paths
+export ANDROID_SDK_HOME="/home/mmacedo/adt/sdk"
+export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
+
 # zsh already has .. and ...
 alias ....='cd ../../..'
 alias .....='cd ../../../..'

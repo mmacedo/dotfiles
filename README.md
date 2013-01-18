@@ -26,7 +26,7 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
+sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc
 
 # Skype
 wget -O skype http://download.skype.com/linux/skype-ubuntu-lucid_4.1.0.20-1_i386.deb
@@ -78,14 +78,21 @@ cp $DOTFILES/config/sublime-text-2/Packages/User/* ~/.config/sublime-text-2/Pack
 curl http://downloads.typesafe.com.s3.amazonaws.com/scalaide-pack/2.1.0.m2-29-20121023/scala-SDK-2.1-M2-2.9-linux.gtk.x86_64.tar.gz | tar zx
 mv eclipse ~/scalaide
 cp $DOTFILES/local/share/applications/scalaide.desktop ~/.local/share/applications/scalaide.desktop
-cp $DOTFILES/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
+mkdir ~/scalaide/configuration/.settings && cp $DOTFILES/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
+
+# Install ADT bundle
+curl -O http://dl.google.com/android/adt/adt-bundle-linux-x86_64.zip
+unzip adt-bundle-linux-x86_64.zip && rm adt-bundle-linux-x86_64.zip
+mv adt-bundle-linux-x86_64 ~/adt
+cp $DOTFILES/local/share/applications/adt.desktop ~/.local/share/applications/adt.desktop
+mkdir ~/adt/eclipse/configuration/.settings && cp $DOTFILES/adt/org.eclipse.ui.ide.prefs ~/adt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
 
 # Python
 sudo easy_install pip
 sudo pip install virtualenv virtualenvwrapper
 
 # Node.js
-sudo npm install -global coffee-script underscore express node-inspector bower
+sudo npm install -global coffee-script underscore lodash express node-inspector bower
 
 # Ruby (part 1: rbenv and plugins)
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
@@ -97,6 +104,12 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
 /bin/zsh
+
+# Heroku Toolbelt (it will modify .zshrc)
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku login
+heroku keys:clear
+heroku keys:add
 
 # Ruby (part 2: MRI)
 sudo rbenv bootstrap-ubuntu-12-04
