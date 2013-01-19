@@ -1,19 +1,17 @@
 {
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
 	"font_face": "Inconsolata",
-	"font_size": 16,
+	"font_size": 13,
+	"highlight_line": true,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true,
-	"highlight_line": true,
-	"theme": "Phoenix Dark.sublime-theme",
-
-	// Configuration for the Phoenix Theme
 	"phoenix_color_expanded_folder": true,
 	"phoenix_color_orange": true,
 	"phoenix_dirty_bottom_bar_orange": true,
-	"phoenix_solid_current_tab": true
+	"phoenix_solid_current_tab": true,
+	"tab_size": 2,
+	"theme": "Phoenix Dark.sublime-theme",
+	"translate_tabs_to_spaces": true
 }
