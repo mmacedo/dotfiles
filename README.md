@@ -18,6 +18,10 @@ sudo add-apt-repository ppa:skype-wrapper/ppa
 wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
 sudo sh -c 'echo "deb http://deb.opera.com/opera/ stable non-free" >> /etc/apt/sources.list.d/opera.list'
 
+# Google Talk Plugin
+curl -O https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb
+sudo dpkg -i google-talkplugin_current_amd64.deb && rm google-talkplugin_current_amd64.deb
+
 # Typesafe (Scala)
 curl -O http://apt.typesafe.com/repo-deb-build-0002.deb
 sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
