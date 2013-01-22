@@ -15,5 +15,4 @@
 	ci = commit
 	s = status
 	ll = log --oneline
-[achievement]
-	upload = true
+	tree = log --graph --decorate --color --all --oneline

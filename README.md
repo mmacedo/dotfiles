@@ -73,6 +73,9 @@ sudo checkinstall --pkgname=git-subtree make prefix=/usr/local install
 sudo checkinstall --pkgname=git-subtree-doc make prefix=/usr/local install-doc
 cd ../../..
 
+# Configure git
+cp $DOTFILES/gitconfig ~/.gitconfig
+
 # Install git-tf
 # Get latest from http://gittf.codeplex.com/
 unzip -j -o -d git-tf git-tf-1.0.1.20120827.zip
