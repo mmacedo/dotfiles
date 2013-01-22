@@ -30,7 +30,7 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev
+sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 
 # PhantomJS
 PHANTOMJS=phantomjs-1.8.1-linux-x86_64
