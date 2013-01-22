@@ -30,11 +30,18 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm phantomjs rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl
+sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev
+
+# PhantomJS
+PHANTOMJS=phantomjs-1.8.1-linux-x86_64
+curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
+sudo mv $PHANTOMJS /usr/lib/$PHANTOMJS
+sudo ln -s /usr/local/lib/$PHANTOMJS /usr/lib/phantomjs
+sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 # Skype
-wget -O skype http://download.skype.com/linux/skype-ubuntu-lucid_4.1.0.20-1_i386.deb
-sudo dpkg -i skype && rm skype
+curl -o skype.deb http://download.skype.com/linux/skype-ubuntu-lucid_4.1.0.20-1_i386.deb
+sudo dpkg -i skype.deb && rm skype.deb
 sudo apt-get install -y skype-wrapper
 
 # Remove unwanted packages and update
@@ -104,13 +111,13 @@ echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 SAFEGEMS="bundler ruby-graphviz rake thor mongoid pg guard execjs rails haml-rails coffee-rails devise less-rails-bootstrap rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist"
 
 # oh-my-zsh
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | dash
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
 /bin/zsh
 
 # Heroku Toolbelt (it will modify .zshrc)
-wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | dash
 heroku login
 heroku keys:clear
 heroku keys:add
