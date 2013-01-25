@@ -30,7 +30,7 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser chromium-codecs-ffmpeg-extra opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git git-doc git-svn git-flow git-subtree git-subtree-doc gitstats gitk fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser chromium-codecs-ffmpeg-extra opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git git-doc git-extras git-svn git-flow git-subtree git-subtree-doc gitstats gitk fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 
 # PhantomJS
 PHANTOMJS=phantomjs-1.8.1-linux-x86_64
@@ -103,8 +103,10 @@ SAFEGEMS="bundler ruby-graphviz rake thor mongoid pg guard execjs rails haml-rai
 
 # oh-my-zsh
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | dash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
+cp $DOTFILES/zshenv ~/.zshenv
 /bin/zsh
 
 # Heroku Toolbelt
