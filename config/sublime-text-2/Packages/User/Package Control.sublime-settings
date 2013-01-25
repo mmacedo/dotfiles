@@ -2,6 +2,7 @@
 	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
+		"Alignment",
 		"Backbone.js",
 		"ChangeQuotes",
 		"Dotfiles Syntax Highlighting",
@@ -11,6 +12,7 @@
 		"Handlebars",
 		"Jade",
 		"LESS",
+		"Markdown Preview",
 		"Package Control",
 		"Rails Partial",
 		"RailsCasts Colour Scheme",
@@ -27,6 +29,7 @@
 		"Tomorrow Color Schemes",
 		"TrailingSpaces",
 		"Underscore.js Snippets",
+		"VAlign",
 		"WordCount"
 	]
 }

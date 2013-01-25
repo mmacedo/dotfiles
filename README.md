@@ -30,7 +30,7 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser chromium-codecs-ffmpeg-extra opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git git-doc git-svn git-flow git-subtree git-subtree-doc gitstats gitk fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 
 # PhantomJS
 PHANTOMJS=phantomjs-1.8.1-linux-x86_64
@@ -60,18 +60,6 @@ mkdir -p ~/ws/{rb,sc,js,other}
 git clone git@github.com:mmacedo/dotfiles.git $DOTFILES
 git clone git@github.com:mmacedo/mmacedo.github.com.git ~/ws/other/blog
 git clone git@github.com:mmacedo/euler.git ~/ws/other/euler
-
-# Build git and git-subtree from source
-git clone https://github.com/git/git
-sudo apt-get remove -y git git-man
-cd git
-make prefix=/usr/local all
-sudo checkinstall --pkgname=git make prefix=/usr/local install
-cd contrib/subtree
-make prefix=/usr/local
-sudo checkinstall --pkgname=git-subtree make prefix=/usr/local install
-sudo checkinstall --pkgname=git-subtree-doc make prefix=/usr/local install-doc
-cd ../../..
 
 # Configure git
 cp $DOTFILES/gitconfig ~/.gitconfig
@@ -106,7 +94,7 @@ sudo easy_install pip
 sudo pip install virtualenv virtualenvwrapper
 
 # Node.js
-sudo npm install -global coffee-script underscore lodash express node-inspector bower
+sudo npm install -global coffee-script less jade underscore lodash jasmine-node express node-inspector bower
 
 # Ruby (part 1: rbenv and plugins)
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
@@ -119,7 +107,7 @@ chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
 /bin/zsh
 
-# Heroku Toolbelt (it will modify .zshrc)
+# Heroku Toolbelt
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | dash
 heroku login
 heroku keys:clear

@@ -14,9 +14,15 @@ setopt complete_aliases
 export ANDROID_SDK_HOME="/home/mmacedo/adt/sdk"
 export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
 
+# setup nodejs paths
+export NODE_PATH=/usr/lib/node_modules
+
 # zsh already has .. and ...
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+
+# rbenv overrides npm installed lessc
+alias lessjs='/usr/bin/lessc'
 
 function cd-git () {
   newwd=.
@@ -29,12 +35,6 @@ function cd-git () {
 function gvim () { (/usr/bin/gvim -f "$@" 1> /dev/null &) }
 function subl () { (/usr/bin/subl "$@" 1> /dev/null &) }
 function open () { (/usr/bin/xdg-open "$@" 1> /dev/null &) }
-
-function nailgun () {
-  sudo sh -c ""
-  (JRUBY_OPTS="--1.9" sudo $(rbenv which jruby) --ng-server 1> /dev/null &)
-  export JRUBY_OPTS="--ng --1.9"
-}
 
 function newexe () {
   case $(basename $1) in
@@ -59,12 +59,7 @@ function , () {
   echo_doc "gvim(file, args...)" "open file on gvim"
   echo_doc "subl(file, args...)" "open file on subl"
   echo_doc "open(file, args...)" "open file with X"
-  echo_doc "nailgun()" "start a nailgun server"
   echo_doc "newexe(file)" "create a executable file and open it on subl"
-  echo_doc "echo_red(text)" "prints red"
-  echo_doc "echo_green(text)" "prints green"
-  echo_doc "echo_gray(text)" "prints gray"
-  echo_doc "echo_doc(command, description)" "prints line autocomplete style documentation"
 }
 
 echo_gray "Run , to list commands."
