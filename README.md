@@ -27,10 +27,23 @@ curl -O http://apt.typesafe.com/repo-deb-build-0002.deb
 sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 
 # Install packages
+typeset -A pkgfor
+pkgfor[app]="fbreader sublime-text vim-gtk racket meld guake"
+pkgfor[avd]="cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils"
+pkgfor[build]="build-essential checkinstall"
+pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
+pkgfor[font]="fonts-inconsolata"
+pkgfor[git]="git git-doc git-extras git-svn git-flow git-subtree git-subtree-doc gitstats gitk"
+pkgfor[media]="qbittorrent vlc audacious"
+pkgfor[shell]="zsh autojump xclip curl"
+pkgfor[stack]="python-setuptools typesafe-stack nodejs npm rbenv openjdk-7-jdk"
+pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
+pkgfor[x64]="ia32-libs"
+pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera djview-plugin"
 sudo apt-get update
 # need UI interaction here
 sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y aptitude build-essential zsh autojump curl openjdk-7-jdk vim-gtk chromium-browser chromium-codecs-ffmpeg-extra opera libqt4-webkit:i386 djview-plugin qbittorrent vlc audacious guake ubuntu-restricted-extras p7zip-full p7zip-rar sublime-text python-software-properties nodejs npm rbenv mongodb libsqlite3-dev postgresql libpq-dev fonts-inconsolata git git-doc git-extras git-svn git-flow git-subtree git-subtree-doc gitstats gitk fbreader libxslt-dev libxml2-dev libxml2-utils python-setuptools meld graphviz racket typesafe-stack xclip libqt4-dev make checkinstall libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libsvn-perl libfreetype6-dev cpu-checker qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+sudo apt-get install -y ${pkgfor[app]} ${pkgfor[avd]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[font]} ${pkgfor[git]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[x64]} ${pkgfor[web]} graphviz libxslt-dev libxml2-dev libxml2-utils libqt4-dev libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev asciidoc libreadline-dev libfreetype6-dev libqt4-webkit:i386
 
 # PhantomJS
 PHANTOMJS=phantomjs-1.8.1-linux-x86_64
