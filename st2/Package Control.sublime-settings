@@ -2,12 +2,16 @@
 	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
+		"AdvancedNewFile",
 		"Alignment",
 		"Backbone.js",
 		"ChangeQuotes",
+		"Color Highlighter",
 		"Dotfiles Syntax Highlighting",
 		"eco",
 		"EJS",
+		"Git",
+		"Github Tools",
 		"Haml",
 		"Handlebars",
 		"Jade",
@@ -16,6 +20,7 @@
 		"Package Control",
 		"Rails Partial",
 		"RailsCasts Colour Scheme",
+		"RSpecNavigator",
 		"Ruby 1.9 Hash Converter",
 		"Ruby on Rails snippets",
 		"RubyTest",
@@ -24,12 +29,16 @@
 		"SideBarEnhancements",
 		"Stylus",
 		"sublime-better-coffeescript",
+		"SublimeLinter Beta",
 		"Theme - Phoenix",
+		"Theme - Soda",
 		"ToggleQuotes",
 		"Tomorrow Color Schemes",
 		"TrailingSpaces",
 		"Underscore.js Snippets",
+		"Unicode Character Highlighter",
 		"VAlign",
-		"WordCount"
+		"WordCount",
+		"WordHighlight"
 	]
 }
