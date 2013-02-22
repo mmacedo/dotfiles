@@ -1,10 +1,17 @@
 {
-	"color_scheme": "Packages/Theme - Phoenix/Color Scheme/Tomorrow-Night.tmTheme",
+	"color_scheme": "Packages/RailsCasts Colour Scheme/RailsCastsColorScheme.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Inconsolata",
-	"font_size": 17,
+	"font_size": 13,
 	"highlight_line": true,
 	"ignored_packages":
 	[
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active",
+		"draw_stack"
 	],
 	"phoenix_color_expanded_folder": true,
 	"phoenix_color_orange": true,
@@ -12,5 +19,6 @@
 	"phoenix_solid_current_tab": true,
 	"tab_size": 2,
 	"theme": "Phoenix Dark.sublime-theme",
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
 }
