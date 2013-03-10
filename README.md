@@ -154,8 +154,8 @@ PORTABLE_GEMS="bundler ruby-graphviz rake thor pry awesome_print mongoid guard e
 
 # Ruby (part 2: CRuby)
 sudo rbenv bootstrap-ubuntu-12-04
-rbenv install 1.9.3-p385
-rbenv global 1.9.3-p385
+rbenv install 2.0.0-p0
+rbenv global 2.0.0-p0
 rbenv rehash
 gem update --system
 gem install $(echo $PORTABLE_GEMS pg sqlite3 therubyracer bson_ext yajl-ruby pry-debugger pry-stack_explorer)
