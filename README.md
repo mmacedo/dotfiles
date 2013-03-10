@@ -149,8 +149,8 @@ sudo npm install -global coffee-script less jade ejs jasmine-node
 
 # Ruby (part 1: rbenv and plugins)
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-echo "gem: --no-ri --no-rdoc" > ~/.gemrc
-PORTABLE_GEMS="bundler ruby-graphviz rake thor mongoid guard execjs rails haml-rails coffee-rails twitter-bootstrap-rails rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist"
+for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc "~/.$(basename $rc)"; done
+PORTABLE_GEMS="bundler ruby-graphviz rake thor pry awesome_print mongoid guard execjs rails haml-rails coffee-rails twitter-bootstrap-rails rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist"
 
 # Ruby (part 2: CRuby)
 sudo rbenv bootstrap-ubuntu-12-04
@@ -158,7 +158,7 @@ rbenv install 1.9.3-p385
 rbenv global 1.9.3-p385
 rbenv rehash
 gem update --system
-gem install $(echo $PORTABLE_GEMS pg sqlite3 therubyracer bson_ext yajl-ruby)
+gem install $(echo $PORTABLE_GEMS pg sqlite3 therubyracer bson_ext yajl-ruby pry-debugger pry-stack_explorer)
 gem update
 
 # gVim

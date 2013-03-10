@@ -11,6 +11,8 @@ unsetopt correct_all
 setopt complete_aliases
 # commands that start with space are not recorded
 setopt hist_ignore_space
+# enable comments on command line
+setopt interactive_comments
 
 # setup elixir path
 export PATH="/home/mmacedo/elixir/bin:$PATH"
@@ -19,35 +21,48 @@ export PATH="/home/mmacedo/elixir/bin:$PATH"
 export ANDROID_SDK_HOME="/home/mmacedo/adt/sdk"
 export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
 
-# rbenv overrides npm installed lessc
+# rbenv overrides lessc installed through npm
 alias lessjs='/usr/bin/lessc'
 
-function gvim () { (/usr/bin/gvim -f "$@" 1> /dev/null &) }
-function subl () { (/usr/bin/subl "$@" 1> /dev/null &) }
-function open () { (/usr/bin/xdg-open "$@" 1> /dev/null &) }
+function gvim () { nohup /usr/bin/gvim -f "$@" &>/dev/null }
+function subl () { nohup /usr/bin/subl "$@" &>/dev/null }
+function open () { nohup /usr/bin/xdg-open "$@" &>/dev/null }
 
-# Create file with +x and #!
+# create file with +x and #!
 function newexe () {
+  # guess shebang by file extension
   case $(basename $1) in
-    *.js) sh=node;;
-    *.rb) sh=ruby;;
-    *.py) sh=python;;
-    *.*) sh=$(echo $(basename $1) | awk -F . '{print $NF}');;
-    *) sh=sh;;
+    *.js)  sh=node;;
+    # add -mode(compile), without it, escript is too slow
+    *.erl) sh="escript\n\n-mode(compile).";;
+    *.rb)  sh=ruby;;
+    *.py)  sh=python;;
+    # unkonwn extension try the extension as shebang
+    *.*)   sh=$(echo $(basename $1) | awk -F . '{print $NF}');;
+    # no extension means default shell
+    *)     sh=sh;;
   esac
 
+  # ensure directory is created
   mkdir -p $(dirname $1)
-  if [ ! -f teste.txt ]; then echo "#!/usr/bin/env $sh" > $1; fi
+  # create the file with the shebang
+  if [ ! -f teste.txt ]; then echo -n "#\!/usr/bin/env $sh\n\n" > $1; fi
+  # add permissions to execute
   chmod +x $1
+  # open in the editor
   subl $1
 }
 
 # mv with the last argument is guaranteed to be a directory
 function mvtodir () {
+  # last argument is the target directory
   dir="${@: -1}"
+  # all but the last argument are the files/folders to move
   files="${@:1:-1}"
+  # ensure target directory is created
   mkdir -p "$dir" || return $?
-  mv -t $dir $files
+  # pass target directory explicitly
+  mv --target-directory="$dir" $(echo $files)
 }
 
 ### Added by the Heroku Toolbelt

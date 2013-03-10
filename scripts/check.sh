@@ -18,6 +18,11 @@ diff $DOTFILES/gitconfig ~/.gitconfig
 # Diff ack configuration
 diff $DOTFILES/ackrc ~/.ackrc
 
+# Diff ruby configuration
+diff $DOTFILES/gemrc ~/.gemrc
+diff $DOTFILES/irbrc ~/.irbrc
+diff $DOTFILES/pryrc ~/.pryrc
+
 APPS=~/.local/share/applications
 # Diff applications configuration
 diff $DOTFILES/mimeapps.list $APPS/mimeapps.list
