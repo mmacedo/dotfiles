@@ -41,15 +41,16 @@ function newfile () {
 function newexe () {
   # guess shebang by file extension
   case $(basename $1) in
-    *.js)  sh=node;;
+    *.coffee) sh=coffee
+    *.js)     sh=node;;
     # add -mode(compile), it is usually faster
-    *.erl) sh="escript\n\n-mode(compile).";;
-    # DrRacket
-    *.scm) sh="racket\n#lang racket";;
-    *.rb)  sh=ruby;;
-    *.py)  sh=python;;
-    # no extension means default shell
-    *)     sh=bash;;
+    *.erl)    sh="escript\n\n-mode(compile).";;
+    *.scm)    sh="racket\n#lang scheme";;
+    *.rkt)    sh="racket\n#lang racket";;
+    *.rb)     sh=ruby;;
+    *.py)     sh=python;;
+    # defaults to bash
+    *)        sh=bash;;
   esac
 
   # ensure directory is created
