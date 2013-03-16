@@ -58,7 +58,7 @@ sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[f
 # PhantomJS
 PHANTOMJS=phantomjs-1.8.1-linux-x86_64
 curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
-sudo mv $PHANTOMJS /usr/lib/$PHANTOMJS
+sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 # elixir
@@ -149,8 +149,8 @@ sudo npm install -global coffee-script less jade ejs jasmine-node
 
 # Ruby (part 1: rbenv and plugins)
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc "~/.$(basename $rc)"; done
-PORTABLE_GEMS="bundler ruby-graphviz rake thor pry awesome_print mongoid guard execjs rails haml-rails coffee-rails twitter-bootstrap-rails rspec-rails factory_girl_rails database_cleaner jasminerice poltergeist"
+for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc ~/.${rc##*/}; done
+PORTABLE_GEMS="bundler ruby-graphviz rake thor pry awesome_print mongoid guard execjs rails haml-rails coffee-rails twitter-bootstrap-rails rspec-rails factory_girl_rails fuubar database_cleaner jasminerice poltergeist"
 
 # Ruby (part 2: CRuby)
 sudo rbenv bootstrap-ubuntu-12-04
@@ -158,7 +158,7 @@ rbenv install 2.0.0-p0
 rbenv global 2.0.0-p0
 rbenv rehash
 gem update --system
-gem install $(echo $PORTABLE_GEMS pg sqlite3 therubyracer bson_ext yajl-ruby pry-debugger pry-stack_explorer)
+gem install $(echo $PORTABLE_GEMS pg sqlite3 therubyracer bson_ext yajl-ruby pry-debugger pry-stack_explorer ruby-prof)
 gem update
 
 # gVim

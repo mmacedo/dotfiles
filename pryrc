@@ -1,8 +1,1 @@
-require 'awesome_print'
-
-def debug
-  require 'pry-debugger'
-  require 'pry-stack_explorer'
-rescue
-  puts 'Failed to load debugger gems.'
-end
+require File.expand_path('./ws/etc/dotfiles/ruby_utils.rb', File.dirname(__FILE__))

@@ -28,25 +28,34 @@ function gvim () { nohup /usr/bin/gvim -f "$@" &>/dev/null }
 function subl () { nohup /usr/bin/subl "$@" &>/dev/null }
 function open () { nohup /usr/bin/xdg-open "$@" &>/dev/null }
 
+function newfile () {
+  # ensure directory is created
+  mkdir -p $(dirname $1)
+  # ensure the file exists
+  touch $(basename $1)
+  # open in the editor
+  subl $1
+}
+
 # create file with +x and #!
 function newexe () {
   # guess shebang by file extension
   case $(basename $1) in
     *.js)  sh=node;;
-    # add -mode(compile), without it, escript is too slow
+    # add -mode(compile), it is usually faster
     *.erl) sh="escript\n\n-mode(compile).";;
+    # DrRacket
+    *.scm) sh="racket\n#lang racket";;
     *.rb)  sh=ruby;;
     *.py)  sh=python;;
-    # unkonwn extension try the extension as shebang
-    *.*)   sh=$(echo $(basename $1) | awk -F . '{print $NF}');;
     # no extension means default shell
-    *)     sh=sh;;
+    *)     sh=bash;;
   esac
 
   # ensure directory is created
   mkdir -p $(dirname $1)
   # create the file with the shebang
-  if [ ! -f teste.txt ]; then echo -n "#\!/usr/bin/env $sh\n\n" > $1; fi
+  if [ ! -f teste.txt ]; then echo -n "#!/usr/bin/env $sh\n\n" > $1; fi
   # add permissions to execute
   chmod +x $1
   # open in the editor
