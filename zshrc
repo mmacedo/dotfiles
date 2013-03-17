@@ -41,7 +41,7 @@ function newfile () {
 function newexe () {
   # guess shebang by file extension
   case $(basename $1) in
-    *.coffee) sh=coffee
+    *.coffee) sh=coffee;;
     *.js)     sh=node;;
     # add -mode(compile), it is usually faster
     *.erl)    sh="escript\n\n-mode(compile).";;
@@ -56,7 +56,7 @@ function newexe () {
   # ensure directory is created
   mkdir -p $(dirname $1)
   # create the file with the shebang
-  if [ ! -f teste.txt ]; then echo -n "#!/usr/bin/env $sh\n\n" > $1; fi
+  if [ ! -f "$1" ]; then ( echo -n \#\!; echo -n "/usr/bin/env $sh\n\n" ) > $1; fi
   # add permissions to execute
   chmod +x $1
   # open in the editor
