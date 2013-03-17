@@ -93,7 +93,7 @@ heroku keys:add
 
 # Setup workspace
 DOTFILES=~/ws/etc/dotfiles
-mkdir -p ~/ws/{rb,sc,js,etc}
+mkdir -p ~/ws/{etc,clone,rb,js,st2,sc,adt}
 git clone git@github.com:mmacedo/dotfiles.git $DOTFILES
 git clone git@github.com:mmacedo/mmacedo.github.com.git ~/ws/etc/blog
 git clone git@github.com:mmacedo/euler.git ~/ws/etc/euler
