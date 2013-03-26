@@ -27,7 +27,7 @@ wget -O - http://binaries.erlang-solutions.com/debian/erlang_solutions.asc | sud
 echo "deb http://binaries.erlang-solutions.com/debian quantal contrib" | sudo tee -a /etc/apt/sources.list.d/esl.list
 
 # Heroku Toolbelt ppa
-wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
 echo "deb http://toolbelt.heroku.com/ubuntu ./" | sudo tee /etc/apt/sources.list.d/heroku.list
 
 # Opera ppa
@@ -44,14 +44,14 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 
 # Install packages
 typeset -A pkgfor
-pkgfor[app]="fbreader sublime-text vim-gtk racket meld guake"
+pkgfor[app]="fbreader sublime-text vim-gtk racket meld guake pinta"
 pkgfor[build]="build-essential checkinstall"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[font]="fonts-inconsolata"
 pkgfor[git]="git git-svn gitstats gitk"
 pkgfor[media]="qbittorrent vlc audacious"
 pkgfor[shell]="zsh ack-grep autojump xclip trash-cli curl imagemagick heroku-toolbelt"
-pkgfor[stack]="python-setuptools typesafe-stack nodejs npm rbenv openjdk-7-jdk esl-erlang"
+pkgfor[stack]="python-setuptools typesafe-stack nodejs rbenv openjdk-7-jdk esl-erlang"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[x64]="ia32-libs"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera djview-plugin google-talkplugin skype skype-wrapper"
