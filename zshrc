@@ -79,3 +79,11 @@ function mvtodir () {
   # pass target directory explicitly
   mv --target-directory="$dir" $(echo $files)
 }
+
+# uninstall all gems from current ruby
+function removeallgems () {
+  gem list \
+  | cut -d" " -f1 \
+  | grep -v "^minitest\|rake\|bigdecimal\|io-console\|json\|rdoc\|test-unit\|psych\$" \
+  | xargs gem uninstall -aIx
+}
