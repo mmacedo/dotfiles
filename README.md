@@ -167,16 +167,16 @@ sudo npm install -global coffee-script less jade ejs jasmine-node
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc ~/.${rc##*/}; done
 
-GEMS_FOR_BUNDLER=bundler ruby-graphviz
-GEMS_FOR_PRY=pry awesome_print pry-debugger pry-stack_explorer ruby-prof
-DATABASE_GEMS=mongoid pg sqlite3
-C_GEMS=therubyracer bson_ext yajl-ruby nokogiri
+GEMS_FOR_BUNDLER="bundler ruby-graphviz"
+GEMS_FOR_PRY="pry awesome_print pry-debugger pry-stack_explorer ruby-prof"
+DATABASE_GEMS="mongoid pg sqlite3"
+C_GEMS="therubyracer bson_ext yajl-ruby nokogiri"
 
 # Ruby (part 2: CRuby)
 sudo rbenv bootstrap-ubuntu-12-04
 rbenv install 2.0.0-p0
 rbenv global 2.0.0-p0
-rbenv rehash
+eval "$(rbenv init -)"
 gem update --system
 gem install $(echo rake thor $GEMS_FOR_BUNDLER $GEMS_FOR_PRY $DATABASE_GEMS $C_GEMS)
 gem update
