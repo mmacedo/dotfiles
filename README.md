@@ -128,7 +128,15 @@ ST2=~/.config/sublime-text-2
 mkdir -p $ST2/{Installed\ Packages,Packages/User}
 curl http://sublime.wbond.net/Package%20Control.sublime-package > $ST2/Installed\ Packages/Package\ Control.sublime-package
 cp $DOTFILES/st2/* $ST2/Packages/User
-# Open Sublime Text and wait a bunch of minutes for package_control to install all packages
+# Open Sublime Text and wait a bunch of minutes for package_control to install all packages (several errors and manual restarts are expected)
+
+# Sublime Text 2 - URL handler
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
+chmod +x sublime-url-handler
+sudo mv sublime-url-handler /usr/bin/
+sudo mv sublime-url-handler.desktop /usr/share/applications/
+sudo update-desktop-database
 
 # Install Scala IDE
 curl http://downloads.typesafe.com.s3.amazonaws.com/scalaide-pack/2.1.0.m2-29-20121023/scala-SDK-2.1-M2-2.9-linux.gtk.x86_64.tar.gz | tar zx
@@ -136,6 +144,7 @@ mv eclipse ~/scalaide
 convert ~/scalaide/icon.xpm -resize 48x48 ~/scalaide/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/scalaide/scalaide.desktop ~/.local/share/applications/scalaide.desktop
 mkdir -p ~/scalaide/configuration/.settings && cp $DOTFILES/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
+update-desktop-database
 
 # Install ADT bundle
 curl -O http://dl.google.com/android/adt/adt-bundle-linux-x86_64.zip
@@ -144,6 +153,7 @@ mv adt-bundle-linux-x86_64 ~/adt
 cp $DOTFILES/adt/adt.xpm ~/adt/eclipse/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/adt/adt.desktop ~/.local/share/applications/adt.desktop
 mkdir -p ~/adt/eclipse/configuration/.settings && cp $DOTFILES/adt/org.eclipse.ui.ide.prefs ~/adt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
+update-desktop-database
 
 # Python
 sudo easy_install pip
