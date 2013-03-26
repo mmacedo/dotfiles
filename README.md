@@ -8,7 +8,12 @@ Ubuntu 13.04 Raring Ringtail (x86_64)
 
 ## Setup
 
+Disclaimer: Do not paste it. Some comments are actually instructions for non-automated steps.
+
 ```shell
+# It is meant to run on bash
+/usr/bin/env bash
+
 # Enable partner
 sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 
@@ -81,10 +86,10 @@ ssh-keygen -t rsa -C "michelpm@gmail.com"
 
 # Upload key to Github
 xclip -sel clip < ~/.ssh/id_rsa.pub
+# Go to this page, click 'Add SSH key', paste to 'Key' and click 'Add key'
 nohup xdg-open https://github.com/settings/ssh &>/dev/null
-# Click 'Add SSH key', paste to 'Key' and click 'Add key'
-nohup xdg-open https://mail.google.com/mail/u/0/#inbox &>/dev/null
-# Confirm key
+# Open your mail client, read message from Github and confirm SSH key
+nohup xdg-open https://mail.google.com &>/dev/null
 
 # Upload key to Heroku
 heroku login
