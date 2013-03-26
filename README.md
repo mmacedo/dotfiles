@@ -61,7 +61,7 @@ sudo apt-get install -y ttf-mscorefonts-installer
 sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[font]} ${pkgfor[git]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[x64]} ${pkgfor[web]} graphviz libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev
 
 # PhantomJS
-PHANTOMJS=phantomjs-1.8.1-linux-x86_64
+PHANTOMJS=phantomjs-1.9.0-linux-x86_64
 curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
 sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
