@@ -1,7 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="fino"
 
-plugins=(git git-extras bundler gem rbenv npm autojump thor heroku pip virtualenvwrapper history-substring-search zsh-syntax-highlighting)
+plugins=(git bundler gem rbenv npm autojump thor heroku pip virtualenvwrapper history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
