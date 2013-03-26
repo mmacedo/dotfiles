@@ -16,6 +16,9 @@ setopt interactive_comments
 # Always pushd when changing directory
 setopt auto_pushd
 
+# Override rm, learn not to trust own fingers
+alias rm='trash-put'
+
 # setup elixir path
 export PATH="/home/mmacedo/elixir/bin:$PATH"
 # setup ADT paths
