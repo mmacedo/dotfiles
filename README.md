@@ -68,7 +68,7 @@ sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 
 # elixir
 git clone https://github.com/elixir-lang/elixir -b stable
-cd elixir && make test && cd ..
+pushd elixir && make test && popd
 
 # expm
 curl -O http://expm.co/__download__/expm && chmod +x expm
