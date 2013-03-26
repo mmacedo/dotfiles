@@ -147,9 +147,10 @@ mkdir -p ~/scalaide/configuration/.settings && cp $DOTFILES/scalaide/org.eclipse
 update-desktop-database
 
 # Install ADT bundle
-curl -O http://dl.google.com/android/adt/adt-bundle-linux-x86_64.zip
-unzip adt-bundle-linux-x86_64.zip && rm adt-bundle-linux-x86_64.zip
-mv adt-bundle-linux-x86_64 ~/adt
+ADTBUNDLE=adt-bundle-linux-x86_64-20130219
+curl -O http://dl.google.com/android/adt/$ADTBUNDLE.zip
+unzip $ADTBUNDLE.zip && rm $ADTBUNDLE.zip
+mv $ADTBUNDLE ~/adt
 cp $DOTFILES/adt/adt.xpm ~/adt/eclipse/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/adt/adt.desktop ~/.local/share/applications/adt.desktop
 mkdir -p ~/adt/eclipse/configuration/.settings && cp $DOTFILES/adt/org.eclipse.ui.ide.prefs ~/adt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
