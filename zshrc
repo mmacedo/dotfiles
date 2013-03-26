@@ -5,29 +5,32 @@ plugins=(git git-extras bundler gem rbenv npm autojump thor heroku pip virtualen
 
 source $ZSH/oh-my-zsh.sh
 
-# annoying, don't enable
+# Annoying, don't enable
 unsetopt correct_all
-# necessary for git-achievements
+# Necessary for git-achievements
 setopt complete_aliases
-# commands that start with space are not recorded
+# Commands that start with space are not recorded
 setopt hist_ignore_space
-# enable comments on command line
+# Enable comments on command line
 setopt interactive_comments
 
 # setup elixir path
 export PATH="/home/mmacedo/elixir/bin:$PATH"
-
 # setup ADT paths
 export ANDROID_SDK_HOME="/home/mmacedo/adt/sdk"
 export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
 
 # rbenv overrides lessc installed through npm
 alias lessjs='/usr/bin/lessc'
 
+# better commands to open GUI apps
 function gvim () { nohup /usr/bin/gvim -f "$@" &>/dev/null }
 function subl () { nohup /usr/bin/subl "$@" &>/dev/null }
 function open () { nohup /usr/bin/xdg-open "$@" &>/dev/null }
 
+# create folder, file and open it on sublime text
 function newfile () {
   # ensure directory is created
   mkdir -p $(dirname $1)
@@ -74,6 +77,3 @@ function mvtodir () {
   # pass target directory explicitly
   mv --target-directory="$dir" $(echo $files)
 }
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
