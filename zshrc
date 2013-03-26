@@ -13,6 +13,8 @@ setopt complete_aliases
 setopt hist_ignore_space
 # Enable comments on command line
 setopt interactive_comments
+# Always pushd when changing directory
+setopt auto_pushd
 
 # setup elixir path
 export PATH="/home/mmacedo/elixir/bin:$PATH"
