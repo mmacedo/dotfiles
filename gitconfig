@@ -1,18 +1,26 @@
 [user]
-	name = Michel Pavan Macedo
-	email = michelpm@gmail.com
+  name = Michel Pavan Macedo
+  email = michelpm@gmail.com
 [credential]
-	helper = cache
+  helper = cache
 [core]
-	editor = /usr/bin/vim --nofork
-[merge]
-	tool = meld
+  editor = /usr/bin/vim --nofork
 [color]
-	ui = true
+  ui = true
 [alias]
-	unstage = reset HEAD
-	co = checkout
-	ci = commit
-	s = status
-	ll = log --oneline
-	tree = log --graph --decorate --color --all --oneline
+  unstage = reset HEAD
+  co = checkout
+  ci = commit
+  s = status
+  ll = log --oneline
+  tree = log --graph --decorate --color --all --oneline
+[pull]
+  rebase = true
+[difftool]
+  prompt = false
+[diff]
+  tool = kdiff3
+[mergetool]
+  keepBackup = false
+[merge]
+  tool = kdiff3

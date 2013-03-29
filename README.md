@@ -44,7 +44,7 @@ sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 
 # Install packages
 typeset -A pkgfor
-pkgfor[app]="fbreader sublime-text vim-gtk racket meld guake pinta"
+pkgfor[app]="fbreader sublime-text vim-gtk racket kdiff3-qt meld guake pinta"
 pkgfor[build]="build-essential checkinstall"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[font]="fonts-inconsolata"
