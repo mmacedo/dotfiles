@@ -1,20 +1,29 @@
 # My dot files #
 
-Designed for my own use.
+Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.
+
 
 ## OS
 
 Ubuntu 13.04 Raring Ringtail (x86_64)
 
+
 ## Setup
 
-Disclaimer: Do not paste it. Some comments are actually instructions for non-automated steps.
+All commands below are meant to run on bash.
 
-```shell
-# It is meant to run on bash
+```bash
+# Open bash
 /usr/bin/env bash
+```
 
-# Enable partner
+
+### Install software
+
+Add software sources to install software that are not from Canonical:
+
+```bash
+# Enable Canonical Partner
 sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 
 # Add ppa's
@@ -41,6 +50,16 @@ echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" | sudo tee /et
 # Typesafe (Scala) ppa
 wget http://apt.typesafe.com/repo-deb-build-0002.deb
 sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
+```
+
+Install apt packages:
+
+```bash
+# Update package list
+sudo apt-get update
+
+# Install this package first, because it requires manual interaction
+sudo apt-get install -y ttf-mscorefonts-installer
 
 # Install packages
 typeset -A pkgfor
@@ -55,17 +74,31 @@ pkgfor[stack]="python-setuptools typesafe-stack nodejs rbenv openjdk-7-jdk esl-e
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[x64]="ia32-libs"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera djview-plugin google-talkplugin skype skype-wrapper"
-sudo apt-get update
-# need UI interaction here
-sudo apt-get install -y ttf-mscorefonts-installer
-sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[font]} ${pkgfor[git]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[x64]} ${pkgfor[web]} graphviz libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev
+sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[font]} ${pkgfor[git]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[x64]} ${pkgfor[web]} graphviz exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev
 
-# PhantomJS
+# Remove unwanted packages
+sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
+
+# Perform full upgrade
+sudo apt-get dist-upgrade -y
+
+# Clean up
+sudo apt-get autoremove --purge -y
+sudo apt-get autoclean
+```
+
+Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
+
+```bash
 PHANTOMJS=phantomjs-1.9.0-linux-x86_64
 curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
 sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
+```
 
+Install [Elixir](http://elixir-lang.org/) and [expm](http://expm.co/):
+
+```bash
 # elixir
 git clone https://github.com/elixir-lang/elixir -b stable
 pushd elixir && make test && popd
@@ -73,80 +106,150 @@ pushd elixir && make test && popd
 # expm
 curl -O http://expm.co/__download__/expm && chmod +x expm
 sudo mv expm /usr/bin/expm
+```
 
-# Remove unwanted packages, update and clean up
-sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get autoremove --purge -y
-sudo apt-get autoclean
+Install [Git-TF](https://gittf.codeplex.com/):
 
-# Setup SSH key
-ssh-keygen -t rsa -C "michelpm@gmail.com"
-
-# Upload key to Github
-xclip -sel clip < ~/.ssh/id_rsa.pub
-# Go to this page, click 'Add SSH key', paste to 'Key' and click 'Add key'
-nohup xdg-open https://github.com/settings/ssh &>/dev/null
-# Open your mail client, read message from Github and confirm SSH key
-nohup xdg-open https://mail.google.com &>/dev/null
-
-# Upload key to Heroku
-heroku login
-heroku keys:clear
-heroku keys:add
-
-# Setup workspace
-DOTFILES=~/ws/etc/dotfiles
-mkdir -p ~/ws/{etc,st2,clone,ruby,js,scala,adt}
-git clone git@github.com:mmacedo/dotfiles.git $DOTFILES
-git clone git@github.com:mmacedo/mmacedo.github.com.git ~/ws/etc/blog
-git clone git@github.com:mmacedo/euler.git ~/ws/etc/euler
-
-# Configure default applications
-sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
-sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
-cp $DOTFILES/mimeapps.list ~/.local/share/applications
-
-# Configure ack
-sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
-cp $DOTFILES/ackrc ~/.ackrc
-
-# Configure git
-cp $DOTFILES/gitconfig ~/.gitconfig
-
-# Install git-tf
-GITTF=git-tf-2.0.1.20130107
+```bash
+GITTF=git-tf-2.0.2.20130214
 wget http://download.microsoft.com/download/A/E/2/AE23B059-5727-445B-91CC-15B7A078A7F4/$GITTF.zip
 unzip $GITTF.zip && mv $GITTF git-tf && rm $GITTF.zip
 sed -i 's/dirname "$0"/dirname "$(readlink -f $0)"/' git-tf/git-tf
 sudo mv git-tf /usr/lib/
 sudo ln -s /usr/lib/git-tf/git-tf /usr/bin/git-tf
+```
 
-# Sublime Text 2
+
+### Configure development environment
+
+Configure SSH key:
+
+```bash
+# Generate SSH key
+ssh-keygen -t rsa -C "michelpm@gmail.com"
+
+# Copy to clipboard
+xclip -sel clip < ~/.ssh/id_rsa.pub
+```
+
+To upload to [Github](https://github.com/), go to [Account settings](https://github.com/settings/ssh), click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.
+
+To upload the key to [Heroku](http://www.heroku.com/), use the [Heroku Toolbelt](https://toolbelt.herokuapp.com/):
+
+```bash
+# Login
+heroku login
+
+# Remove previous keys if you are not using them anymore, you may use also `keys:remove`
+heroku keys:clear
+
+# Upload
+heroku keys:add
+```
+
+Configure workspace:
+
+```bash
+# The directory where you are going to clone the dotfiles repository
+# This variable will be used in several steps from here on
+DOTFILES=~/ws/etc/dotfiles
+
+# Create empty folders on the workspace
+mkdir -p ~/ws/{etc,st2,scala,adt,ruby,js}
+
+# Clone this repository
+git clone https://github.com/mmacedo/dotfiles $DOTFILES
+```
+
+
+### Configure programming stacks
+
+Install [pip](http://www.pip-installer.org/) and [virtualenv](http://www.virtualenv.org/):
+
+```bash
+sudo easy_install pip
+sudo pip install virtualenv virtualenvwrapper
+```
+
+Install global [NPM](http://nodejs.org/) ([Node.js](http://nodejs.org/)) packages for their binaries (they will not be in the path to require as a library):
+
+```bash
+sudo npm install -global coffee-script less jade ejs jasmine-node
+```
+
+Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and the build the latest MRI/CRuby:
+
+```bash
+# Run rbenv-installer
+curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+
+# Run rbenv-bootstrap to install apt packages necessary to build Ruby on Ubuntu
+sudo rbenv bootstrap-ubuntu-12-04
+
+# Copy Ruby dotfiles
+for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc ~/.${rc##*/}; done
+
+# Load rbenv ruby to install gems
+eval "$(rbenv init -)"
+
+# List of gems to install
+GEMS_FOR_BUNDLER="bundler ruby-graphviz"
+GEMS_FOR_PRY="pry awesome_print pry-debugger pry-stack_explorer ruby-prof"
+DATABASE_GEMS="mongoid pg sqlite3"
+C_GEMS="therubyracer bson_ext yajl-ruby nokogiri"
+
+# Install latest MRI
+rbenv install 2.0.0-p0
+rbenv global 2.0.0-p0
+
+# Install gems
+gem update --system
+gem install $(echo rake thor $GEMS_FOR_BUNDLER $GEMS_FOR_PRY $DATABASE_GEMS $C_GEMS)
+```
+
+
+### Install and configure text editors and IDE's
+
+Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
+
+```bash
 ST2=~/.config/sublime-text-2
-mkdir -p $ST2/{Installed\ Packages,Packages/User}
-curl http://sublime.wbond.net/Package%20Control.sublime-package > $ST2/Installed\ Packages/Package\ Control.sublime-package
-cp $DOTFILES/st2/* $ST2/Packages/User
-# Open Sublime Text and wait a bunch of minutes for package_control to install all packages (several errors and manual restarts are expected)
 
-# Sublime Text 2 - URL handler
-wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
-wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
+# Copy configuration
+mkdir -p $ST2/Packages/User
+cp $DOTFILES/st2/* $ST2/Packages/User
+
+# Install package_control package
+mkdir -p $ST2/Installed\ Packages
+curl http://sublime.wbond.net/Package%20Control.sublime-package > $ST2/Installed\ Packages/Package\ Control.sublime-package
+
+# Install url handler for txtm:// and subl:// with Sublime Text 2
 chmod +x sublime-url-handler
 sudo mv sublime-url-handler /usr/bin/
 sudo mv sublime-url-handler.desktop /usr/share/applications/
 sudo update-desktop-database
+```
 
-# Install Scala IDE
+Install a [Vim](http://www.vim.org/) [distribution](https://github.com/carlhuda/janus) (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.
+
+```bash
+curl -Lo- https://bit.ly/janus-bootstrap | bash
+```
+
+Install [Scala IDE](http://scala-ide.org/):
+
+```bash
 curl http://downloads.typesafe.com.s3.amazonaws.com/scalaide-pack/2.1.0.m2-29-20121023/scala-SDK-2.1-M2-2.9-linux.gtk.x86_64.tar.gz | tar zx
 mv eclipse ~/scalaide
 convert ~/scalaide/icon.xpm -resize 48x48 ~/scalaide/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/scalaide/scalaide.desktop ~/.local/share/applications/scalaide.desktop
 mkdir -p ~/scalaide/configuration/.settings && cp $DOTFILES/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
 update-desktop-database
+```
 
-# Install ADT bundle
+Install [ADT Bundle](https://developer.android.com/sdk/installing/bundle.html):
+
+```bash
 ADTBUNDLE=adt-bundle-linux-x86_64-20130219
 curl -O http://dl.google.com/android/adt/$ADTBUNDLE.zip
 unzip $ADTBUNDLE.zip && rm $ADTBUNDLE.zip
@@ -155,40 +258,38 @@ cp $DOTFILES/adt/adt.xpm ~/adt/eclipse/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/adt/adt.desktop ~/.local/share/applications/adt.desktop
 mkdir -p ~/adt/eclipse/configuration/.settings && cp $DOTFILES/adt/org.eclipse.ui.ide.prefs ~/adt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
 update-desktop-database
+```
 
-# Python
-sudo easy_install pip
-sudo pip install virtualenv virtualenvwrapper
 
-# Node.js
-sudo npm install -global coffee-script less jade ejs jasmine-node
+### Configure command line tools
 
-# Ruby (part 1: rbenv)
-curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
-for rc in $DOTFILES/{irb,pry,gem}rc; do cp $rc ~/.${rc##*/}; done
+Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.
 
-GEMS_FOR_BUNDLER="bundler ruby-graphviz"
-GEMS_FOR_PRY="pry awesome_print pry-debugger pry-stack_explorer ruby-prof"
-DATABASE_GEMS="mongoid pg sqlite3"
-C_GEMS="therubyracer bson_ext yajl-ruby nokogiri"
+```bash
+sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
+sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
+cp $DOTFILES/mimeapps.list ~/.local/share/applications
+```
 
-# Ruby (part 2: CRuby)
-sudo rbenv bootstrap-ubuntu-12-04
-rbenv install 2.0.0-p0
-rbenv global 2.0.0-p0
-eval "$(rbenv init -)"
-gem update --system
-gem install $(echo rake thor $GEMS_FOR_BUNDLER $GEMS_FOR_PRY $DATABASE_GEMS $C_GEMS)
-gem update
+Configure [ack](http://betterthangrep.com/):
 
-# gVim
-curl -Lo- https://bit.ly/janus-bootstrap | bash
+```bash
+sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+cp $DOTFILES/ackrc ~/.ackrc
+```
 
-# oh-my-zsh
+Configure [git](http://git-scm.com/):
+
+```bash
+cp $DOTFILES/gitconfig ~/.gitconfig
+```
+
+Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
+
+```bash
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | dash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
 cp $DOTFILES/zshenv ~/.zshenv
-/bin/zsh
 ```
