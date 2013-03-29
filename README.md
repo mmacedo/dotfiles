@@ -239,7 +239,7 @@ curl -Lo- https://bit.ly/janus-bootstrap | bash
 Install [Scala IDE](http://scala-ide.org/):
 
 ```bash
-curl http://downloads.typesafe.com.s3.amazonaws.com/scalaide-pack/2.1.0.m2-29-20121023/scala-SDK-2.1-M2-2.9-linux.gtk.x86_64.tar.gz | tar zx
+curl http://downloads.typesafe.com/scalaide-pack/3.0.0.vfinal-210-20130326/scala-SDK-3.0.0-vfinal-2.10-linux.gtk.x86_64.tar.gz | tar zx
 mv eclipse ~/scalaide
 convert ~/scalaide/icon.xpm -resize 48x48 ~/scalaide/icon.xpm
 mkdir -p ~/.local/share/applications && cp $DOTFILES/scalaide/scalaide.desktop ~/.local/share/applications/scalaide.desktop
