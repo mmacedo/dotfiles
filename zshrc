@@ -19,14 +19,6 @@ setopt auto_pushd
 # Override rm, learn not to trust own fingers
 alias rm='trash-put'
 
-# setup elixir path
-export PATH="/home/mmacedo/elixir/bin:$PATH"
-# setup ADT paths
-export ANDROID_SDK_HOME="/home/mmacedo/adt/sdk"
-export PATH="$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$PATH"
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 # rbenv overrides lessc installed through npm
 alias lessjs='/usr/bin/lessc'
 
