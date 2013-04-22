@@ -14,6 +14,8 @@
   s = status
   ll = log --oneline
   tree = log --graph --decorate --color --all --oneline
+  beforepush = rebase -i @{upstream}
+  reviewpush = diff @{upstream}
 [pull]
   rebase = true
 [difftool]
