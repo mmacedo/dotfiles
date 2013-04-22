@@ -46,10 +46,6 @@ echo "deb http://deb.opera.com/opera/ stable non-free" | sudo tee /etc/apt/sourc
 # Google Talk Plugin ppa
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list
-
-# Typesafe (Scala) ppa
-wget http://apt.typesafe.com/repo-deb-build-0002.deb
-sudo dpkg -i repo-deb-build-0002.deb && rm repo-deb-build-0002.deb
 ```
 
 Install apt packages:
@@ -70,7 +66,7 @@ pkgfor[font]="fonts-inconsolata"
 pkgfor[git]="git git-svn gitstats gitk"
 pkgfor[media]="qbittorrent vlc audacious"
 pkgfor[shell]="zsh ack-grep autojump xclip trash-cli curl imagemagick heroku-toolbelt"
-pkgfor[stack]="python-setuptools typesafe-stack nodejs rbenv openjdk-7-jdk esl-erlang"
+pkgfor[stack]="python-setuptools nodejs rbenv openjdk-7-jdk esl-erlang"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[x64]="ia32-libs"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera djview-plugin google-talkplugin skype skype-wrapper"
@@ -94,18 +90,6 @@ PHANTOMJS=phantomjs-1.9.0-linux-x86_64
 curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
 sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
-```
-
-Install [Elixir](http://elixir-lang.org/) and [expm](http://expm.co/):
-
-```bash
-# elixir
-git clone https://github.com/elixir-lang/elixir -b stable
-pushd elixir && make test && popd
-
-# expm
-curl -O http://expm.co/__download__/expm && chmod +x expm
-sudo mv expm /usr/bin/expm
 ```
 
 Install [Git-TF](https://gittf.codeplex.com/):
@@ -163,6 +147,49 @@ git clone https://github.com/mmacedo/dotfiles $DOTFILES
 
 
 ### Configure programming stacks
+
+Install [Elixir](http://elixir-lang.org/) and [expm](http://expm.co/):
+
+```bash
+# elixir
+sudo git clone https://github.com/elixir-lang/elixir -b stable
+pushd elixir && make test && popd
+
+# expm
+curl -O http://expm.co/__download__/expm && chmod +x expm
+sudo mv expm bin/expm
+```
+
+Install [sbt](http://www.scala-sbt.org/):
+
+```bash
+curl http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.tgz | tar -xz
+```
+
+Install [giter8](https://github.com/n8han/giter8) using [Conscript](https://github.com/n8han/conscript):
+
+```bash
+curl https://raw.github.com/n8han/conscript/master/setup.sh | bash
+bin/cs n8han/giter8
+```
+
+Install [scala](http://www.scala-lang.org/):
+
+```bash
+SCALA=scala-2.10.1
+curl http://www.scala-lang.org/downloads/distrib/files/$SCALA.tgz | tar -xz
+mv $SCALA scala
+```
+
+Install [Play!](http://www.playframework.com/):
+
+```bash
+PLAY=play-2.1.1
+curl http://downloads.typesafe.com/play/2.1.1/$PLAY.zip
+unzip $PLAY.zip
+mv $PLAY play
+ln -s ~/play/play bin/play
+```
 
 Install [pip](http://www.pip-installer.org/) and [virtualenv](http://www.virtualenv.org/):
 
@@ -287,7 +314,7 @@ cp $DOTFILES/gitconfig ~/.gitconfig
 Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
 
 ```bash
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | dash
+curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
