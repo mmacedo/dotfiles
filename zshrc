@@ -82,3 +82,13 @@ function removeallgems () {
   | grep -v "^minitest\|rake\|bigdecimal\|io-console\|json\|rdoc\|test-unit\|psych\$" \
   | xargs gem uninstall -aIx
 }
+
+function git_current_branch() { git symbolic-ref --short HEAD 2> /dev/null; }
+
+function git_update () {
+  REMOTE=$1
+  if [[ -z "$REMOTE" ]]; then echo "Usage: command REMOTE [BRANCH]" 1>&2 ; return 1 ; fi
+  BRANCH=$2
+  [ -n "$BRANCH" ] || BRANCH="$(git_current_branch)"
+  git fetch $REMOTE && git rebase -p $REMOTE/$BRANCH
+}
