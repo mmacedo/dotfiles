@@ -317,7 +317,7 @@ Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyru
 
 ```bash
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
-git clone https://github.com/zsh-users/zsh-syntax-highlighting .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 chsh -s /bin/zsh
 cp $DOTFILES/zshrc ~/.zshrc
 cp $DOTFILES/zshenv ~/.zshenv

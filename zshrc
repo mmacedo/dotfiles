@@ -6,6 +6,7 @@ plugins=(git bundler gem rbenv npm autojump thor heroku pip virtualenvwrapper hi
 source $ZSH/oh-my-zsh.sh
 
 # Annoying, don't enable
+unsetopt correct_all
 unsetopt correct
 # Necessary for git-achievements
 setopt complete_aliases
