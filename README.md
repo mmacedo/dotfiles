@@ -251,8 +251,10 @@ mkdir -p $ST2/Installed\ Packages
 curl http://sublime.wbond.net/Package%20Control.sublime-package > $ST2/Installed\ Packages/Package\ Control.sublime-package
 
 # Install url handler for txtm:// and subl:// with Sublime Text 2
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
 chmod +x sublime-url-handler
 sudo mv sublime-url-handler /usr/bin/
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
 sudo mv sublime-url-handler.desktop /usr/share/applications/
 sudo update-desktop-database
 ```
