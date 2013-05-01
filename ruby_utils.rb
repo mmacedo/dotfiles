@@ -96,6 +96,12 @@ def time
   result
 end
 
-def own_methods(o)
-  o.methods - o.class.superclass.instance_methods
+def own_methods(obj)
+  if obj.is_a? Class
+    obj.methods - obj.superclass.methods
+  elsif obj.is_a? Module
+    obj.methods - Module.instance_methods
+  else
+    obj.methods - obj.class.superclass.instance_methods
+  end
 end
