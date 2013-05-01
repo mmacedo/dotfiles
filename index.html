@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>mmacedo's dotfiles by mmacedo</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>mmacedo's dotfiles</h1>
+        <h2>My very own scripts ^^</h2>
+        <a href="https://github.com/mmacedo/dotfiles" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>My dot files</h1>
+
+<p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
+
+<h2>OS</h2>
+
+<p>Ubuntu 13.04 Raring Ringtail (x86_64)</p>
+
+<h2>Setup</h2>
+
+<p>All commands below are meant to run on bash.</p>
+
+<div class="highlight"><pre><span class="c"># Open bash</span>
+/usr/bin/env bash
+</pre></div>
+
+<h3>Install software</h3>
+
+<p>Add software sources to install software that are not from Canonical:</p>
+
+<div class="highlight"><pre><span class="c"># Enable Canonical Partner</span>
+sudo sed -i <span class="s2">"/^# deb .*partner/ s/^# //"</span> /etc/apt/sources.list
+
+<span class="c"># Add ppa's</span>
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
+sudo add-apt-repository -y ppa:skype-wrapper/ppa
+
+<span class="c"># Erlang/OTP ppa</span>
+wget -O - http://binaries.erlang-solutions.com/debian/erlang_solutions.asc | sudo apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb http://binaries.erlang-solutions.com/debian quantal contrib"</span> | sudo tee -a /etc/apt/sources.list.d/esl.list
+
+<span class="c"># Heroku Toolbelt ppa</span>
+wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb http://toolbelt.heroku.com/ubuntu ./"</span> | sudo tee /etc/apt/sources.list.d/heroku.list
+
+<span class="c"># Opera ppa</span>
+wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb http://deb.opera.com/opera/ stable non-free"</span> | sudo tee /etc/apt/sources.list.d/opera.list
+
+<span class="c"># Google Talk Plugin ppa</span>
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb http://dl.google.com/linux/talkplugin/deb/ stable main"</span> | sudo tee /etc/apt/sources.list.d/google.list
+</pre></div>
+
+<p>Install apt packages:</p>
+
+<div class="highlight"><pre><span class="c"># Update package list</span>
+sudo apt-get update
+
+<span class="c"># Install this package first, because it requires manual interaction</span>
+sudo apt-get install -y ttf-mscorefonts-installer
+
+<span class="c"># Install packages</span>
+<span class="nb">typeset</span> -A pkgfor
+pkgfor<span class="o">[</span>app<span class="o">]=</span><span class="s2">"fbreader sublime-text vim-gtk racket kdiff3-qt meld guake pinta"</span>
+pkgfor<span class="o">[</span>build<span class="o">]=</span><span class="s2">"build-essential checkinstall"</span>
+pkgfor<span class="o">[</span>db<span class="o">]=</span><span class="s2">"mongodb libsqlite3-dev postgresql libpq-dev"</span>
+pkgfor<span class="o">[</span>font<span class="o">]=</span><span class="s2">"fonts-inconsolata"</span>
+pkgfor<span class="o">[</span>git<span class="o">]=</span><span class="s2">"git git-svn gitstats gitk"</span>
+pkgfor<span class="o">[</span>media<span class="o">]=</span><span class="s2">"qbittorrent vlc audacious"</span>
+pkgfor<span class="o">[</span>shell<span class="o">]=</span><span class="s2">"zsh ack-grep autojump xclip trash-cli curl imagemagick heroku-toolbelt"</span>
+pkgfor<span class="o">[</span>stack<span class="o">]=</span><span class="s2">"python-setuptools nodejs rbenv openjdk-7-jdk esl-erlang"</span>
+pkgfor<span class="o">[</span>ubuntu<span class="o">]=</span><span class="s2">"ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"</span>
+pkgfor<span class="o">[</span>x64<span class="o">]=</span><span class="s2">"ia32-libs"</span>
+pkgfor<span class="o">[</span>web<span class="o">]=</span><span class="s2">"chromium-browser chromium-codecs-ffmpeg-extra opera djview-plugin google-talkplugin skype skype-wrapper"</span>
+sudo apt-get install -y <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[app]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[build]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[db]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[font]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[git]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[media]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[shell]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[stack]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[ubuntu]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[x64]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[web]</span><span class="k">}</span> graphviz exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev
+
+<span class="c"># Remove unwanted packages</span>
+sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
+
+<span class="c"># Perform full upgrade</span>
+sudo apt-get dist-upgrade -y
+
+<span class="c"># Clean up</span>
+sudo apt-get autoremove --purge -y
+sudo apt-get autoclean
+</pre></div>
+
+<p>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
+
+<div class="highlight"><pre><span class="nv">PHANTOMJS</span><span class="o">=</span>phantomjs-1.9.0-linux-x86_64
+curl http://phantomjs.googlecode.com/files/<span class="nv">$PHANTOMJS</span>.tar.bz2 | tar -xj
+sudo mv <span class="nv">$PHANTOMJS</span> /usr/lib/phantomjs
+sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
+</pre></div>
+
+<p>Install <a href="https://gittf.codeplex.com/">Git-TF</a>:</p>
+
+<div class="highlight"><pre><span class="nv">GITTF</span><span class="o">=</span>git-tf-2.0.2.20130214
+wget http://download.microsoft.com/download/A/E/2/AE23B059-5727-445B-91CC-15B7A078A7F4/<span class="nv">$GITTF</span>.zip
+unzip <span class="nv">$GITTF</span>.zip <span class="o">&amp;&amp;</span> mv <span class="nv">$GITTF</span> git-tf <span class="o">&amp;&amp;</span> rm <span class="nv">$GITTF</span>.zip
+sed -i <span class="s1">'s/dirname "$0"/dirname "$(readlink -f $0)"/'</span> git-tf/git-tf
+sudo mv git-tf /usr/lib/
+sudo ln -s /usr/lib/git-tf/git-tf /usr/bin/git-tf
+</pre></div>
+
+<h3>Configure development environment</h3>
+
+<p>Configure SSH key:</p>
+
+<div class="highlight"><pre><span class="c"># Generate SSH key</span>
+ssh-keygen -t rsa -C <span class="s2">"michelpm@gmail.com"</span>
+
+<span class="c"># Copy to clipboard</span>
+xclip -sel clip &lt; ~/.ssh/id_rsa.pub
+</pre></div>
+
+<p>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
+
+<p>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
+
+<div class="highlight"><pre><span class="c"># Login</span>
+heroku login
+
+<span class="c"># Remove previous keys if you are not using them anymore, you may use also `keys:remove`</span>
+heroku keys:clear
+
+<span class="c"># Upload</span>
+heroku keys:add
+</pre></div>
+
+<p>Configure workspace:</p>
+
+<div class="highlight"><pre><span class="c"># The directory where you are going to clone the dotfiles repository</span>
+<span class="c"># This variable will be used in several steps from here on</span>
+<span class="nv">DOTFILES</span><span class="o">=</span>~/ws/etc/dotfiles
+
+<span class="c"># Create empty folders on the workspace</span>
+mkdir -p ~/ws/<span class="o">{</span>etc,st2,scala,adt,ruby,js<span class="o">}</span>
+
+<span class="c"># Clone this repository</span>
+git clone https://github.com/mmacedo/dotfiles <span class="nv">$DOTFILES</span>
+</pre></div>
+
+<h3>Configure programming stacks</h3>
+
+<p>Install <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://expm.co/">expm</a>:</p>
+
+<div class="highlight"><pre><span class="c"># elixir</span>
+sudo git clone https://github.com/elixir-lang/elixir -b stable
+<span class="nb">pushd </span>elixir <span class="o">&amp;&amp;</span> make <span class="nb">test</span> <span class="o">&amp;&amp;</span> <span class="nb">popd</span>
+
+<span class="c"># expm</span>
+curl -O http://expm.co/__download__/expm <span class="o">&amp;&amp;</span> chmod +x expm
+sudo mv expm bin/expm
+</pre></div>
+
+<p>Install <a href="http://www.scala-sbt.org/">sbt</a>:</p>
+
+<div class="highlight"><pre>curl http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.tgz | tar -xz
+</pre></div>
+
+<p>Install <a href="https://github.com/n8han/giter8">giter8</a> using <a href="https://github.com/n8han/conscript">Conscript</a>:</p>
+
+<div class="highlight"><pre>curl https://raw.github.com/n8han/conscript/master/setup.sh | bash
+bin/cs n8han/giter8
+</pre></div>
+
+<p>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
+
+<div class="highlight"><pre><span class="nv">SCALA</span><span class="o">=</span>scala-2.10.1
+curl http://www.scala-lang.org/downloads/distrib/files/<span class="nv">$SCALA</span>.tgz | tar -xz
+mv <span class="nv">$SCALA</span> scala
+</pre></div>
+
+<p>Install <a href="http://www.playframework.com/">Play!</a>:</p>
+
+<div class="highlight"><pre><span class="nv">PLAY</span><span class="o">=</span>play-2.1.1
+curl http://downloads.typesafe.com/play/2.1.1/<span class="nv">$PLAY</span>.zip
+unzip <span class="nv">$PLAY</span>.zip
+mv <span class="nv">$PLAY</span> play
+ln -s ~/play/play bin/play
+</pre></div>
+
+<p>Install <a href="http://www.pip-installer.org/">pip</a> and <a href="http://www.virtualenv.org/">virtualenv</a>:</p>
+
+<div class="highlight"><pre>sudo easy_install pip
+sudo pip install virtualenv virtualenvwrapper
+</pre></div>
+
+<p>Install global <a href="http://nodejs.org/">NPM</a> (<a href="http://nodejs.org/">Node.js</a>) packages for their binaries (they will not be in the path to require as a library):</p>
+
+<div class="highlight"><pre>sudo npm install -global coffee-script less jade ejs jasmine-node
+</pre></div>
+
+<p>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and the build the latest MRI/CRuby:</p>
+
+<div class="highlight"><pre><span class="c"># Run rbenv-installer</span>
+curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+
+<span class="c"># Run rbenv-bootstrap to install apt packages necessary to build Ruby on Ubuntu</span>
+sudo rbenv bootstrap-ubuntu-12-04
+
+<span class="c"># Copy Ruby dotfiles</span>
+<span class="k">for </span>rc in <span class="nv">$DOTFILES</span>/<span class="o">{</span>irb,pry,gem<span class="o">}</span>rc; <span class="k">do </span>cp <span class="nv">$rc</span> ~/.<span class="k">${</span><span class="nv">rc</span><span class="p">##*/</span><span class="k">}</span>; <span class="k">done</span>
+
+<span class="c"># Load rbenv ruby to install gems</span>
+<span class="nb">eval</span> <span class="s2">"$(rbenv init -)"</span>
+
+<span class="c"># List of gems to install</span>
+<span class="nv">GEMS_FOR_BUNDLER</span><span class="o">=</span><span class="s2">"bundler ruby-graphviz"</span>
+<span class="nv">GEMS_FOR_PRY</span><span class="o">=</span><span class="s2">"pry awesome_print pry-debugger pry-stack_explorer ruby-prof"</span>
+<span class="nv">DATABASE_GEMS</span><span class="o">=</span><span class="s2">"mongoid pg sqlite3"</span>
+<span class="nv">C_GEMS</span><span class="o">=</span><span class="s2">"therubyracer bson_ext yajl-ruby nokogiri"</span>
+
+<span class="c"># Install latest MRI</span>
+rbenv install 2.0.0-p0
+rbenv global 2.0.0-p0
+
+<span class="c"># Install gems</span>
+gem update --system
+gem install <span class="k">$(</span><span class="nb">echo </span>rake thor <span class="nv">$GEMS_FOR_BUNDLER</span> <span class="nv">$GEMS_FOR_PRY</span> <span class="nv">$DATABASE_GEMS</span> <span class="nv">$C_GEMS</span><span class="k">)</span>
+</pre></div>
+
+<h3>Install and configure text editors and IDE's</h3>
+
+<p>Configure <a href="http://www.sublimetext.com/">Sublime Text 2</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
+
+<div class="highlight"><pre><span class="nv">ST2</span><span class="o">=</span>~/.config/sublime-text-2
+
+<span class="c"># Copy configuration</span>
+mkdir -p <span class="nv">$ST2</span>/Packages/User
+cp <span class="nv">$DOTFILES</span>/st2/* <span class="nv">$ST2</span>/Packages/User
+
+<span class="c"># Install package_control package</span>
+mkdir -p <span class="nv">$ST2</span>/Installed<span class="se">\ </span>Packages
+curl http://sublime.wbond.net/Package%20Control.sublime-package &gt; <span class="nv">$ST2</span>/Installed<span class="se">\ </span>Packages/Package<span class="se">\ </span>Control.sublime-package
+
+<span class="c"># Install url handler for txtm:// and subl:// with Sublime Text 2</span>
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
+chmod +x sublime-url-handler
+sudo mv sublime-url-handler /usr/bin/
+wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
+sudo mv sublime-url-handler.desktop /usr/share/applications/
+sudo update-desktop-database
+</pre></div>
+
+<p>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
+
+<div class="highlight"><pre>curl -Lo- https://bit.ly/janus-bootstrap | bash
+</pre></div>
+
+<p>Install <a href="http://scala-ide.org/">Scala IDE</a>:</p>
+
+<div class="highlight"><pre>curl http://downloads.typesafe.com/scalaide-pack/3.0.0.vfinal-210-20130326/scala-SDK-3.0.0-vfinal-2.10-linux.gtk.x86_64.tar.gz | tar zx
+mv eclipse ~/scalaide
+convert ~/scalaide/icon.xpm -resize 48x48 ~/scalaide/icon.xpm
+mkdir -p ~/.local/share/applications <span class="o">&amp;&amp;</span> cp <span class="nv">$DOTFILES</span>/scalaide/scalaide.desktop ~/.local/share/applications/scalaide.desktop
+mkdir -p ~/scalaide/configuration/.settings <span class="o">&amp;&amp;</span> cp <span class="nv">$DOTFILES</span>/scalaide/org.eclipse.ui.ide.prefs ~/scalaide/configuration/.settings/org.eclipse.ui.ide.prefs
+update-desktop-database
+</pre></div>
+
+<p>Install <a href="https://developer.android.com/sdk/installing/bundle.html">ADT Bundle</a>:</p>
+
+<div class="highlight"><pre><span class="nv">ADTBUNDLE</span><span class="o">=</span>adt-bundle-linux-x86_64-20130219
+curl -O http://dl.google.com/android/adt/<span class="nv">$ADTBUNDLE</span>.zip
+unzip <span class="nv">$ADTBUNDLE</span>.zip <span class="o">&amp;&amp;</span> rm <span class="nv">$ADTBUNDLE</span>.zip
+mv <span class="nv">$ADTBUNDLE</span> ~/adt
+cp <span class="nv">$DOTFILES</span>/adt/adt.xpm ~/adt/eclipse/icon.xpm
+mkdir -p ~/.local/share/applications <span class="o">&amp;&amp;</span> cp <span class="nv">$DOTFILES</span>/adt/adt.desktop ~/.local/share/applications/adt.desktop
+mkdir -p ~/adt/eclipse/configuration/.settings <span class="o">&amp;&amp;</span> cp <span class="nv">$DOTFILES</span>/adt/org.eclipse.ui.ide.prefs ~/adt/eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
+update-desktop-database
+</pre></div>
+
+<h3>Configure command line tools</h3>
+
+<p>Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.</p>
+
+<div class="highlight"><pre>sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
+sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
+cp <span class="nv">$DOTFILES</span>/mimeapps.list ~/.local/share/applications
+</pre></div>
+
+<p>Configure <a href="http://betterthangrep.com/">ack</a>:</p>
+
+<div class="highlight"><pre>sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+cp <span class="nv">$DOTFILES</span>/ackrc ~/.ackrc
+</pre></div>
+
+<p>Configure <a href="http://git-scm.com/">git</a>:</p>
+
+<div class="highlight"><pre>cp <span class="nv">$DOTFILES</span>/gitconfig ~/.gitconfig
+</pre></div>
+
+<p>Configure <a href="http://www.zsh.org/">zsh</a> with <a href="https://github.com/robbyrussell/oh-my-zsh">Oh My Zsh</a>:</p>
+
+<div class="highlight"><pre>curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+chsh -s /bin/zsh
+cp <span class="nv">$DOTFILES</span>/zshrc ~/.zshrc
+cp <span class="nv">$DOTFILES</span>/zshenv ~/.zshenv
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/mmacedo/dotfiles/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/mmacedo/dotfiles/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/mmacedo/dotfiles"></a> is maintained by <a href="https://github.com/mmacedo">mmacedo</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
