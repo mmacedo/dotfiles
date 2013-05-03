@@ -31,15 +31,18 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>My dot files</h1>
+        <h1>
+<a></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
 
-<h2>OS</h2>
+<h2>
+<a></a>OS</h2>
 
 <p>Ubuntu 13.04 Raring Ringtail (x86_64)</p>
 
-<h2>Setup</h2>
+<h2>
+<a></a>Setup</h2>
 
 <p>All commands below are meant to run on bash.</p>
 
@@ -47,9 +50,10 @@
 /usr/bin/env bash
 </pre></div>
 
-<h3>Install software</h3>
+<h3>
+<a></a>Install software</h3>
 
-<p>Add software sources to install software that are not from Canonical:</p>
+<p><a></a>Add software sources to install software that are not from Canonical:</p>
 
 <div class="highlight"><pre><span class="c"># Enable Canonical Partner</span>
 sudo sed -i <span class="s2">"/^# deb .*partner/ s/^# //"</span> /etc/apt/sources.list
@@ -76,7 +80,7 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 <span class="nb">echo</span> <span class="s2">"deb http://dl.google.com/linux/talkplugin/deb/ stable main"</span> | sudo tee /etc/apt/sources.list.d/google.list
 </pre></div>
 
-<p>Install apt packages:</p>
+<p><a></a>Install apt packages:</p>
 
 <div class="highlight"><pre><span class="c"># Update package list</span>
 sudo apt-get update
@@ -110,7 +114,7 @@ sudo apt-get autoremove --purge -y
 sudo apt-get autoclean
 </pre></div>
 
-<p>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
+<p><a></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
 
 <div class="highlight"><pre><span class="nv">PHANTOMJS</span><span class="o">=</span>phantomjs-1.9.0-linux-x86_64
 curl http://phantomjs.googlecode.com/files/<span class="nv">$PHANTOMJS</span>.tar.bz2 | tar -xj
@@ -118,7 +122,7 @@ sudo mv <span class="nv">$PHANTOMJS</span> /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 </pre></div>
 
-<p>Install <a href="https://gittf.codeplex.com/">Git-TF</a>:</p>
+<p><a></a>Install <a href="https://gittf.codeplex.com/">Git-TF</a>:</p>
 
 <div class="highlight"><pre><span class="nv">GITTF</span><span class="o">=</span>git-tf-2.0.2.20130214
 wget http://download.microsoft.com/download/A/E/2/AE23B059-5727-445B-91CC-15B7A078A7F4/<span class="nv">$GITTF</span>.zip
@@ -128,9 +132,10 @@ sudo mv git-tf /usr/lib/
 sudo ln -s /usr/lib/git-tf/git-tf /usr/bin/git-tf
 </pre></div>
 
-<h3>Configure development environment</h3>
+<h3>
+<a></a>Configure development environment</h3>
 
-<p>Configure SSH key:</p>
+<p><a></a>Configure SSH key:</p>
 
 <div class="highlight"><pre><span class="c"># Generate SSH key</span>
 ssh-keygen -t rsa -C <span class="s2">"michelpm@gmail.com"</span>
@@ -139,9 +144,9 @@ ssh-keygen -t rsa -C <span class="s2">"michelpm@gmail.com"</span>
 xclip -sel clip &lt; ~/.ssh/id_rsa.pub
 </pre></div>
 
-<p>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
+<p><a></a>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
 
-<p>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
+<p><a></a>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
 
 <div class="highlight"><pre><span class="c"># Login</span>
 heroku login
@@ -153,7 +158,7 @@ heroku keys:clear
 heroku keys:add
 </pre></div>
 
-<p>Configure workspace:</p>
+<p><a></a>Configure workspace:</p>
 
 <div class="highlight"><pre><span class="c"># The directory where you are going to clone the dotfiles repository</span>
 <span class="c"># This variable will be used in several steps from here on</span>
@@ -166,9 +171,10 @@ mkdir -p ~/ws/<span class="o">{</span>etc,st2,scala,adt,ruby,js<span class="o">}
 git clone https://github.com/mmacedo/dotfiles <span class="nv">$DOTFILES</span>
 </pre></div>
 
-<h3>Configure programming stacks</h3>
+<h3>
+<a></a>Configure programming stacks</h3>
 
-<p>Install <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://expm.co/">expm</a>:</p>
+<p><a></a><a></a>Install <a href="http://elixir-lang.org/">Elixir</a> and <a href="http://expm.co/">expm</a>:</p>
 
 <div class="highlight"><pre><span class="c"># elixir</span>
 sudo git clone https://github.com/elixir-lang/elixir -b stable
@@ -179,25 +185,25 @@ curl -O http://expm.co/__download__/expm <span class="o">&amp;&amp;</span> chmod
 sudo mv expm bin/expm
 </pre></div>
 
-<p>Install <a href="http://www.scala-sbt.org/">sbt</a>:</p>
+<p><a></a>Install <a href="http://www.scala-sbt.org/">sbt</a>:</p>
 
 <div class="highlight"><pre>curl http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.tgz | tar -xz
 </pre></div>
 
-<p>Install <a href="https://github.com/n8han/giter8">giter8</a> using <a href="https://github.com/n8han/conscript">Conscript</a>:</p>
+<p><a></a><a></a>Install <a href="https://github.com/n8han/giter8">giter8</a> using <a href="https://github.com/n8han/conscript">Conscript</a>:</p>
 
 <div class="highlight"><pre>curl https://raw.github.com/n8han/conscript/master/setup.sh | bash
 bin/cs n8han/giter8
 </pre></div>
 
-<p>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
+<p><a></a>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
 
 <div class="highlight"><pre><span class="nv">SCALA</span><span class="o">=</span>scala-2.10.1
 curl http://www.scala-lang.org/downloads/distrib/files/<span class="nv">$SCALA</span>.tgz | tar -xz
 mv <span class="nv">$SCALA</span> scala
 </pre></div>
 
-<p>Install <a href="http://www.playframework.com/">Play!</a>:</p>
+<p><a></a>Install <a href="http://www.playframework.com/">Play!</a>:</p>
 
 <div class="highlight"><pre><span class="nv">PLAY</span><span class="o">=</span>play-2.1.1
 curl http://downloads.typesafe.com/play/2.1.1/<span class="nv">$PLAY</span>.zip
@@ -206,18 +212,18 @@ mv <span class="nv">$PLAY</span> play
 ln -s ~/play/play bin/play
 </pre></div>
 
-<p>Install <a href="http://www.pip-installer.org/">pip</a> and <a href="http://www.virtualenv.org/">virtualenv</a>:</p>
+<p><a></a><a></a>Install <a href="http://www.pip-installer.org/">pip</a> and <a href="http://www.virtualenv.org/">virtualenv</a>:</p>
 
 <div class="highlight"><pre>sudo easy_install pip
 sudo pip install virtualenv virtualenvwrapper
 </pre></div>
 
-<p>Install global <a href="http://nodejs.org/">NPM</a> (<a href="http://nodejs.org/">Node.js</a>) packages for their binaries (they will not be in the path to require as a library):</p>
+<p><a></a><a></a>Install global <a href="http://nodejs.org/">NPM</a> (<a href="http://nodejs.org/">Node.js</a>) packages for their binaries (they will not be in the path to require as a library):</p>
 
 <div class="highlight"><pre>sudo npm install -global coffee-script less jade ejs jasmine-node
 </pre></div>
 
-<p>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and the build the latest MRI/CRuby:</p>
+<p><a></a><a></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and the build the latest MRI/CRuby:</p>
 
 <div class="highlight"><pre><span class="c"># Run rbenv-installer</span>
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
@@ -246,9 +252,10 @@ gem update --system
 gem install <span class="k">$(</span><span class="nb">echo </span>rake thor <span class="nv">$GEMS_FOR_BUNDLER</span> <span class="nv">$GEMS_FOR_PRY</span> <span class="nv">$DATABASE_GEMS</span> <span class="nv">$C_GEMS</span><span class="k">)</span>
 </pre></div>
 
-<h3>Install and configure text editors and IDE's</h3>
+<h3>
+<a></a>Install and configure text editors and IDE's</h3>
 
-<p>Configure <a href="http://www.sublimetext.com/">Sublime Text 2</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
+<p><a></a>Configure <a href="http://www.sublimetext.com/">Sublime Text 2</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
 
 <div class="highlight"><pre><span class="nv">ST2</span><span class="o">=</span>~/.config/sublime-text-2
 
@@ -269,12 +276,12 @@ sudo mv sublime-url-handler.desktop /usr/share/applications/
 sudo update-desktop-database
 </pre></div>
 
-<p>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
+<p><a></a><a></a>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
 
 <div class="highlight"><pre>curl -Lo- https://bit.ly/janus-bootstrap | bash
 </pre></div>
 
-<p>Install <a href="http://scala-ide.org/">Scala IDE</a>:</p>
+<p><a></a>Install <a href="http://scala-ide.org/">Scala IDE</a>:</p>
 
 <div class="highlight"><pre>curl http://downloads.typesafe.com/scalaide-pack/3.0.0.vfinal-210-20130326/scala-SDK-3.0.0-vfinal-2.10-linux.gtk.x86_64.tar.gz | tar zx
 mv eclipse ~/scalaide
@@ -284,7 +291,7 @@ mkdir -p ~/scalaide/configuration/.settings <span class="o">&amp;&amp;</span> cp
 update-desktop-database
 </pre></div>
 
-<p>Install <a href="https://developer.android.com/sdk/installing/bundle.html">ADT Bundle</a>:</p>
+<p><a></a>Install <a href="https://developer.android.com/sdk/installing/bundle.html">ADT Bundle</a>:</p>
 
 <div class="highlight"><pre><span class="nv">ADTBUNDLE</span><span class="o">=</span>adt-bundle-linux-x86_64-20130219
 curl -O http://dl.google.com/android/adt/<span class="nv">$ADTBUNDLE</span>.zip
@@ -296,27 +303,28 @@ mkdir -p ~/adt/eclipse/configuration/.settings <span class="o">&amp;&amp;</span>
 update-desktop-database
 </pre></div>
 
-<h3>Configure command line tools</h3>
+<h3>
+<a></a>Configure command line tools</h3>
 
-<p>Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.</p>
+<p><a></a>Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.</p>
 
 <div class="highlight"><pre>sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
 sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
 cp <span class="nv">$DOTFILES</span>/mimeapps.list ~/.local/share/applications
 </pre></div>
 
-<p>Configure <a href="http://betterthangrep.com/">ack</a>:</p>
+<p><a></a>Configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
 <div class="highlight"><pre>sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
 cp <span class="nv">$DOTFILES</span>/ackrc ~/.ackrc
 </pre></div>
 
-<p>Configure <a href="http://git-scm.com/">git</a>:</p>
+<p><a></a>Configure <a href="http://git-scm.com/">git</a>:</p>
 
 <div class="highlight"><pre>cp <span class="nv">$DOTFILES</span>/gitconfig ~/.gitconfig
 </pre></div>
 
-<p>Configure <a href="http://www.zsh.org/">zsh</a> with <a href="https://github.com/robbyrussell/oh-my-zsh">Oh My Zsh</a>:</p>
+<p><a></a><a></a>Configure <a href="http://www.zsh.org/">zsh</a> with <a href="https://github.com/robbyrussell/oh-my-zsh">Oh My Zsh</a>:</p>
 
 <div class="highlight"><pre>curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
