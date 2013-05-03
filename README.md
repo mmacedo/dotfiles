@@ -1,14 +1,14 @@
-# My dot files #
+# <a id="my-dot-files"></a>My dot files #
 
 Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.
 
 
-## OS
+## <a id="os"></a>OS
 
 Ubuntu 13.04 Raring Ringtail (x86_64)
 
 
-## Setup
+## <a id="setup"></a>Setup
 
 All commands below are meant to run on bash.
 
@@ -18,9 +18,9 @@ All commands below are meant to run on bash.
 ```
 
 
-### Install software
+### <a id="install-software"></a>Install software
 
-Add software sources to install software that are not from Canonical:
+<a id="ppa"></a>Add software sources to install software that are not from Canonical:
 
 ```bash
 # Enable Canonical Partner
@@ -48,7 +48,7 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list
 ```
 
-Install apt packages:
+<a id="apt"></a>Install apt packages:
 
 ```bash
 # Update package list
@@ -83,7 +83,7 @@ sudo apt-get autoremove --purge -y
 sudo apt-get autoclean
 ```
 
-Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
+<a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
 
 ```bash
 PHANTOMJS=phantomjs-1.9.0-linux-x86_64
@@ -92,7 +92,7 @@ sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 ```
 
-Install [Git-TF](https://gittf.codeplex.com/):
+<a id="gittf"></a>Install [Git-TF](https://gittf.codeplex.com/):
 
 ```bash
 GITTF=git-tf-2.0.2.20130214
@@ -104,9 +104,9 @@ sudo ln -s /usr/lib/git-tf/git-tf /usr/bin/git-tf
 ```
 
 
-### Configure development environment
+### <a id="configure-development-environment"></a>Configure development environment
 
-Configure SSH key:
+<a id="ssh"></a>Configure SSH key:
 
 ```bash
 # Generate SSH key
@@ -116,9 +116,9 @@ ssh-keygen -t rsa -C "michelpm@gmail.com"
 xclip -sel clip < ~/.ssh/id_rsa.pub
 ```
 
-To upload to [Github](https://github.com/), go to [Account settings](https://github.com/settings/ssh), click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.
+<a id="ssh-github"></a>To upload to [Github](https://github.com/), go to [Account settings](https://github.com/settings/ssh), click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.
 
-To upload the key to [Heroku](http://www.heroku.com/), use the [Heroku Toolbelt](https://toolbelt.herokuapp.com/):
+<a id="ssh-heroku"></a>To upload the key to [Heroku](http://www.heroku.com/), use the [Heroku Toolbelt](https://toolbelt.herokuapp.com/):
 
 ```bash
 # Login
@@ -131,7 +131,7 @@ heroku keys:clear
 heroku keys:add
 ```
 
-Configure workspace:
+<a id="configure-workspace"></a>Configure workspace:
 
 ```bash
 # The directory where you are going to clone the dotfiles repository
@@ -146,9 +146,9 @@ git clone https://github.com/mmacedo/dotfiles $DOTFILES
 ```
 
 
-### Configure programming stacks
+### <a id="configure-programming-stacks"></a>Configure programming stacks
 
-Install [Elixir](http://elixir-lang.org/) and [expm](http://expm.co/):
+<a id="elixir"><a id="expm"></a></a>Install [Elixir](http://elixir-lang.org/) and [expm](http://expm.co/):
 
 ```bash
 # elixir
@@ -160,20 +160,20 @@ curl -O http://expm.co/__download__/expm && chmod +x expm
 sudo mv expm bin/expm
 ```
 
-Install [sbt](http://www.scala-sbt.org/):
+<a id="sbt"></a>Install [sbt](http://www.scala-sbt.org/):
 
 ```bash
 curl http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.tgz | tar -xz
 ```
 
-Install [giter8](https://github.com/n8han/giter8) using [Conscript](https://github.com/n8han/conscript):
+<a id="giter8"><a id="conscript"></a></a>Install [giter8](https://github.com/n8han/giter8) using [Conscript](https://github.com/n8han/conscript):
 
 ```bash
 curl https://raw.github.com/n8han/conscript/master/setup.sh | bash
 bin/cs n8han/giter8
 ```
 
-Install [scala](http://www.scala-lang.org/):
+<a id="scala"></a>Install [scala](http://www.scala-lang.org/):
 
 ```bash
 SCALA=scala-2.10.1
@@ -181,7 +181,7 @@ curl http://www.scala-lang.org/downloads/distrib/files/$SCALA.tgz | tar -xz
 mv $SCALA scala
 ```
 
-Install [Play!](http://www.playframework.com/):
+<a id="play"></a>Install [Play!](http://www.playframework.com/):
 
 ```bash
 PLAY=play-2.1.1
@@ -191,20 +191,20 @@ mv $PLAY play
 ln -s ~/play/play bin/play
 ```
 
-Install [pip](http://www.pip-installer.org/) and [virtualenv](http://www.virtualenv.org/):
+<a id="pip"></a><a id="virtualenv"></a>Install [pip](http://www.pip-installer.org/) and [virtualenv](http://www.virtualenv.org/):
 
 ```bash
 sudo easy_install pip
 sudo pip install virtualenv virtualenvwrapper
 ```
 
-Install global [NPM](http://nodejs.org/) ([Node.js](http://nodejs.org/)) packages for their binaries (they will not be in the path to require as a library):
+<a id="npm"></a><a id="nodejs"></a>Install global [NPM](http://nodejs.org/) ([Node.js](http://nodejs.org/)) packages for their binaries (they will not be in the path to require as a library):
 
 ```bash
 sudo npm install -global coffee-script less jade ejs jasmine-node
 ```
 
-Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and the build the latest MRI/CRuby:
+<a id="rbenv"></a><a id="ruby"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and the build the latest MRI/CRuby:
 
 ```bash
 # Run rbenv-installer
@@ -235,9 +235,9 @@ gem install $(echo rake thor $GEMS_FOR_BUNDLER $GEMS_FOR_PRY $DATABASE_GEMS $C_G
 ```
 
 
-### Install and configure text editors and IDE's
+### <a id="install-and-configure-text-editors-and-ides"></a>Install and configure text editors and IDE's
 
-Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
+<a id="st2"></a>Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
 
 ```bash
 ST2=~/.config/sublime-text-2
@@ -259,13 +259,13 @@ sudo mv sublime-url-handler.desktop /usr/share/applications/
 sudo update-desktop-database
 ```
 
-Install a [Vim](http://www.vim.org/) [distribution](https://github.com/carlhuda/janus) (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.
+<a id="vim"></a><a id="janus"></a>Install a [Vim](http://www.vim.org/) [distribution](https://github.com/carlhuda/janus) (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.
 
 ```bash
 curl -Lo- https://bit.ly/janus-bootstrap | bash
 ```
 
-Install [Scala IDE](http://scala-ide.org/):
+<a id="scala-ide"></a>Install [Scala IDE](http://scala-ide.org/):
 
 ```bash
 curl http://downloads.typesafe.com/scalaide-pack/3.0.0.vfinal-210-20130326/scala-SDK-3.0.0-vfinal-2.10-linux.gtk.x86_64.tar.gz | tar zx
@@ -276,7 +276,7 @@ mkdir -p ~/scalaide/configuration/.settings && cp $DOTFILES/scalaide/org.eclipse
 update-desktop-database
 ```
 
-Install [ADT Bundle](https://developer.android.com/sdk/installing/bundle.html):
+<a id="adt-bundle"></a>Install [ADT Bundle](https://developer.android.com/sdk/installing/bundle.html):
 
 ```bash
 ADTBUNDLE=adt-bundle-linux-x86_64-20130219
@@ -290,9 +290,9 @@ update-desktop-database
 ```
 
 
-### Configure command line tools
+### <a id="configure-command-line-tools"></a>Configure command line tools
 
-Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.
+<a id="default-applications"></a>Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.
 
 ```bash
 sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
@@ -300,20 +300,20 @@ sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
 cp $DOTFILES/mimeapps.list ~/.local/share/applications
 ```
 
-Configure [ack](http://betterthangrep.com/):
+<a id="ack"></a>Configure [ack](http://betterthangrep.com/):
 
 ```bash
 sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
 cp $DOTFILES/ackrc ~/.ackrc
 ```
 
-Configure [git](http://git-scm.com/):
+<a id="git"></a>Configure [git](http://git-scm.com/):
 
 ```bash
 cp $DOTFILES/gitconfig ~/.gitconfig
 ```
 
-Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
+<a id="zsh"></a><a id="oh-my-zsh"></a>Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
 
 ```bash
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
