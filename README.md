@@ -185,7 +185,7 @@ mv $SCALA scala
 
 ```bash
 PLAY=play-2.1.1
-curl http://downloads.typesafe.com/play/2.1.1/$PLAY.zip
+curl -O http://downloads.typesafe.com/play/2.1.1/$PLAY.zip
 unzip $PLAY.zip
 mv $PLAY play
 ln -s ~/play/play bin/play
