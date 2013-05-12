@@ -33,7 +33,7 @@ function newfile () {
   # ensure directory is created
   mkdir -p $(dirname $1)
   # ensure the file exists
-  touch $(basename $1)
+  touch $1
   # open in the editor
   subl $1
 }
