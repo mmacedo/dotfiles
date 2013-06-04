@@ -169,7 +169,7 @@ ST2=~/.config/sublime-text-2
 
 # Copy configuration
 mkdir -p $ST2/Packages/User
-cp ~/dotfiles/st2/* $ST2/Packages/User
+for file in ~/dotfiles/st2/*; do ln -s "$file" "$ST2/Packages/User/$(basename $file)"; done
 
 # Install package_control package
 mkdir -p $ST2/Installed\ Packages
