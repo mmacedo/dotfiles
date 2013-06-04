@@ -1,1 +1,1 @@
-require File.expand_path('./ws/etc/dotfiles/ruby_utils.rb', File.dirname(__FILE__))
+require File.expand_path('~/dotfiles/ruby_utils.rb')

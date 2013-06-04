@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=ADT
-Comment=Eclipse with ADT
-Icon=/home/mmacedo/adt/eclipse/icon.xpm
-Exec=/home/mmacedo/adt/eclipse/eclipse
-Terminal=false
-Categories=Development;IDE;Java;
