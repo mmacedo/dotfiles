@@ -219,4 +219,5 @@ ln -s ~/dotfiles/gitconfig ~/.gitconfig
 chsh -s /bin/fish
 curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
 mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,source,functions}.fish ~/.config/fish/
+mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 ```

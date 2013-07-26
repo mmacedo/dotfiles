@@ -1,6 +1,6 @@
 # Oh My Fish!
 set fish_path $HOME/.oh-my-fish
-set fish_theme numist
+set fish_theme my
 set fish_plugins rbenv rake bundler node
 . $fish_path/oh-my-fish.fish
 
