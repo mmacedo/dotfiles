@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 OPTIONS=$@
 
@@ -10,9 +10,10 @@ DOTFILES=$(dirname $(dirname $(readlink -f $0)))
 # Diff Sublime Text 2 Configuration
 diff --exclude "*.last-run" --exclude "Default (*).sublime-keymap" ~/.config/sublime-text-2/Packages/User $DOTFILES/st2 $OPTIONS
 
-# Diff zsh configuration
-diff ~/.zshenv $DOTFILES/zshenv $OPTIONS
-diff ~/.zshrc $DOTFILES/zshrc $OPTIONS
+# Diff fish configuration
+diff ~/.config/fish/config.fish $DOTFILES/config.fish $OPTIONS
+diff ~/.config/fish/source.fish $DOTFILES/source.fish $OPTIONS
+diff ~/.config/fish/functions.fish $DOTFILES/functions.fish $OPTIONS
 
 # Diff git configuration
 diff ~/.gitconfig $DOTFILES/gitconfig $OPTIONS
@@ -24,7 +25,3 @@ diff ~/.ackrc $DOTFILES/ackrc $OPTIONS
 diff ~/.gemrc $DOTFILES/gemrc $OPTIONS
 diff ~/.irbrc $DOTFILES/irbrc $OPTIONS
 diff ~/.pryrc $DOTFILES/pryrc $OPTIONS
-
-APPS=~/.local/share/applications
-# Diff applications configuration
-diff $APPS/mimeapps.list $DOTFILES/mimeapps.list $OPTIONS

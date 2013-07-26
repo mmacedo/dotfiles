@@ -14,7 +14,7 @@ All commands below are meant to run on bash.
 
 ```bash
 # Open bash
-/usr/bin/env bash
+/bin/bash
 ```
 
 
@@ -27,6 +27,7 @@ All commands below are meant to run on bash.
 sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 
 # Add ppa's
+sudo add-apt-repository -y ppa:zanchey/fishfish-snapshot
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
 sudo add-apt-repository -y ppa:skype-wrapper/ppa
@@ -58,9 +59,9 @@ typeset -A pkgfor
 pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake pinta inkscape shutter"
 pkgfor[build]="build-essential checkinstall"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-pkgfor[git]="git git-svn gitstats gitk"
+pkgfor[git]="git git-svn gitg"
 pkgfor[media]="qbittorrent vlc audacious"
-pkgfor[shell]="zsh ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
+pkgfor[shell]="fishfish ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
 pkgfor[stack]="nodejs rbenv openjdk-7-jdk"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
@@ -81,7 +82,7 @@ sudo apt-get autoclean
 <a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
 
 ```bash
-PHANTOMJS=phantomjs-1.9.0-linux-x86_64
+PHANTOMJS=phantomjs-1.9.1-linux-x86_64
 curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
 sudo mv $PHANTOMJS /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
@@ -122,16 +123,22 @@ heroku keys:add
 mkdir -p ~/ws/{clone,st2,ruby,nodejs}
 
 # Clone this repository
-git clone https://github.com/mmacedo/dotfiles ~/dotfiles
+git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 ```
 
 
 ### <a id="configure-programming-stacks"></a>Configure programming stacks
 
-<a id="npm"></a><a id="nodejs"></a>Install global [NPM](http://nodejs.org/) ([Node.js](http://nodejs.org/)) packages for their binaries (they will not be in the path to require as a library):
+<a id="npm"></a><a id="nodejs"></a>Install global [npm (node.js)](http://nodejs.org/) packages for their binaries (they will not be in the path to require as a library):
 
 ```bash
 sudo npm install -global coffee-script less jade ejs jasmine-node
+```
+
+<a id="nvm"></a></a>Install [nvm](https://github.com/creationix/nvm):
+
+```bash
+curl https://raw.github.com/creationix/nvm/master/install.sh | bash
 ```
 
 <a id="rbenv"></a><a id="ruby"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and the build the latest MRI/CRuby:
@@ -150,8 +157,8 @@ for rc in ~/dotfiles/{irb,pry,gem}rc; do ln -s $rc ~/.${rc##*/}; done
 eval "$(rbenv init -)"
 
 # Install latest MRI
-rbenv install 2.0.0-p195
-rbenv global 2.0.0-p195
+rbenv install 2.0.0-p247
+rbenv global 2.0.0-p247
 
 # Install gems
 gem update --system
@@ -193,14 +200,6 @@ curl -Lo- https://bit.ly/janus-bootstrap | bash
 
 ### <a id="configure-command-line-tools"></a>Configure command line tools
 
-<a id="default-applications"></a>Configure default applications. It still doesn't set all that is necessary to make chromium the default web browser.
-
-```bash
-sudo update-alternatives --set x-www-browser /usr/bin/chromium-browser
-sudo update-alternatives --set gnome-www-browser /usr/bin/chromium-browser
-cp ~/dotfiles/mimeapps.list ~/.local/share/applications
-```
-
 <a id="ack"></a>Configure [ack](http://betterthangrep.com/):
 
 ```bash
@@ -214,12 +213,10 @@ ln -s ~/dotfiles/ackrc ~/.ackrc
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ```
 
-<a id="zsh"></a><a id="oh-my-zsh"></a>Configure [zsh](http://www.zsh.org/) with [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh):
+<a id="fish"></a>Configure [fish](http://fishshell.com/):
 
 ```bash
-curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | bash
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-chsh -s /bin/zsh
-ln -s ~/dotfiles/zshrc ~/.zshrc
-ln -s ~/dotfiles/zshenv ~/.zshenv
+chsh -s /bin/fish
+curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
+mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,source,functions}.fish ~/.config/fish/
 ```
