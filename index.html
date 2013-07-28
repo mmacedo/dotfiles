@@ -1,57 +1,50 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="mmacedo's dotfiles : My very own scripts ^^" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <title>mmacedo's dotfiles</title>
+    <title>mmacedo's dotfiles by mmacedo</title>
   </head>
 
   <body>
+    <header>
+      <div class="inner">
+        <h1>mmacedo's dotfiles</h1>
+        <h2>My very own scripts ^^</h2>
+        <a href="https://github.com/mmacedo/dotfiles" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mmacedo/dotfiles">View on GitHub</a>
-
-          <h1 id="project_title">mmacedo's dotfiles</h1>
-          <h2 id="project_tagline">My very own scripts ^^</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mmacedo/dotfiles/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mmacedo/dotfiles/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a name="my-dot-files" class="anchor" href="#my-dot-files"><span class="octicon octicon-link"></span></a><a></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
 
 <h2>
-<a name="os" class="anchor" href="#os"><span class="octicon octicon-link"></span></a><a></a>OS</h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a><a></a>Requirements</h2>
 
-<p>Ubuntu 13.04 Raring Ringtail (x86_64)</p>
+<p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/raring/">Ubuntu 13.04 Raring Ringtail (x86_64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
 
-<h2>
-<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a><a></a>Setup</h2>
+<p>All commands below are meant to run on <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if <code>echo $0</code> doesn't print <code>bash</code>):</p>
 
-<p>All commands below are meant to run on bash.</p>
-
-<div class="highlight"><pre><span class="c"># Open bash</span>
-/bin/bash
+<div class="highlight"><pre>/usr/bin/env bash
 </pre></div>
 
-<h3>
-<a name="install-software" class="anchor" href="#install-software"><span class="octicon octicon-link"></span></a><a></a>Install software</h3>
+<h2>
+<a name="install-required-software" class="anchor" href="#install-required-software"><span class="octicon octicon-link"></span></a><a></a>Install required software</h2>
 
 <p><a></a>Add software sources to install software that are not from Canonical:</p>
 
@@ -90,14 +83,14 @@ sudo apt-get install -y ttf-mscorefonts-installer
 pkgfor<span class="o">[</span>app<span class="o">]=</span><span class="s2">"fbreader sublime-text vim-gtk kdiff3-qt meld guake pinta inkscape shutter"</span>
 pkgfor<span class="o">[</span>build<span class="o">]=</span><span class="s2">"build-essential checkinstall"</span>
 pkgfor<span class="o">[</span>db<span class="o">]=</span><span class="s2">"mongodb libsqlite3-dev postgresql libpq-dev"</span>
-pkgfor<span class="o">[</span>git<span class="o">]=</span><span class="s2">"git git-svn gitg"</span>
+pkgfor<span class="o">[</span>vcs<span class="o">]=</span><span class="s2">"git git-svn gitg hg"</span>
 pkgfor<span class="o">[</span>media<span class="o">]=</span><span class="s2">"qbittorrent vlc audacious"</span>
 pkgfor<span class="o">[</span>shell<span class="o">]=</span><span class="s2">"fishfish ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"</span>
 pkgfor<span class="o">[</span>stack<span class="o">]=</span><span class="s2">"nodejs rbenv openjdk-7-jdk"</span>
 pkgfor<span class="o">[</span>ubuntu<span class="o">]=</span><span class="s2">"ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"</span>
 pkgfor<span class="o">[</span>web<span class="o">]=</span><span class="s2">"chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"</span>
 pkgfor<span class="o">[</span>libs<span class="o">]=</span><span class="s2">"exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev"</span>
-sudo apt-get install -y <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[app]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[build]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[db]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[git]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[media]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[shell]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[stack]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[ubuntu]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[web]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[libs]</span><span class="k">}</span>
+sudo apt-get install -y <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[app]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[build]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[db]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[vcs]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[media]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[shell]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[stack]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[ubuntu]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[web]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[libs]</span><span class="k">}</span>
 
 <span class="c"># Remove unwanted packages</span>
 sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
@@ -118,8 +111,8 @@ sudo mv <span class="nv">$PHANTOMJS</span> /usr/lib/phantomjs
 sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 </pre></div>
 
-<h3>
-<a name="configure-development-environment" class="anchor" href="#configure-development-environment"><span class="octicon octicon-link"></span></a><a></a>Configure development environment</h3>
+<h2>
+<a name="configure-workspace" class="anchor" href="#configure-workspace"><span class="octicon octicon-link"></span></a><a></a>Configure workspace</h2>
 
 <p><a></a>Configure SSH key:</p>
 
@@ -153,20 +146,43 @@ mkdir -p ~/ws/<span class="o">{</span>clone,st2,ruby,nodejs<span class="o">}</sp
 git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 </pre></div>
 
-<h3>
-<a name="configure-programming-stacks" class="anchor" href="#configure-programming-stacks"><span class="octicon octicon-link"></span></a><a></a>Configure programming stacks</h3>
+<h2>
+<a name="configure-programming-stacks" class="anchor" href="#configure-programming-stacks"><span class="octicon octicon-link"></span></a><a></a>Configure programming stacks</h2>
 
 <p><a></a><a></a>Install global <a href="http://nodejs.org/">npm (node.js)</a> packages for their binaries (they will not be in the path to require as a library):</p>
 
 <div class="highlight"><pre>sudo npm install -global coffee-script less jade ejs jasmine-node
 </pre></div>
 
-<p><a></a>Install <a href="https://github.com/creationix/nvm">nvm</a>:</p>
+<p><a></a>Install <a href="https://github.com/creationix/nvm">nvm</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
 
-<div class="highlight"><pre>curl https://raw.github.com/creationix/nvm/master/install.sh | bash
+<div class="highlight"><pre><span class="c"># Install nvm</span>
+curl https://raw.github.com/creationix/nvm/master/install.sh | bash
+
+<span class="c"># Load nvm to install node</span>
+. .nvm/nvm.sh
+
+<span class="c"># Install latest node</span>
+nvm install v0.11.4
 </pre></div>
 
-<p><a></a><a></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and the build the latest MRI/CRuby:</p>
+<p><a></a><a></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
+
+<div class="highlight"><pre><span class="c"># Install pyenv</span>
+git clone git://github.com/yyuu/pyenv.git .pyenv
+
+<span class="c"># Load pyenv to install python</span>
+<span class="nb">eval</span> <span class="s2">"$(rbenv init -)"</span>
+
+<span class="c"># Install dependencies</span>
+sudo apt-get build-dep -y python3.3
+
+<span class="c"># Install latest python</span>
+pyenv install 3.3.2
+pyenv global 3.3.2
+</pre></div>
+
+<p><a></a><a></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
 <div class="highlight"><pre><span class="c"># Run rbenv-installer</span>
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
@@ -190,8 +206,13 @@ gem install bundler
 <span class="nb">pushd</span> ~/dotfiles; bundle install; <span class="nb">popd</span>
 </pre></div>
 
-<h3>
-<a name="install-and-configure-text-editors-and-ides" class="anchor" href="#install-and-configure-text-editors-and-ides"><span class="octicon octicon-link"></span></a><a></a>Install and configure text editors and IDE's</h3>
+<h2>
+<a name="configure-applications" class="anchor" href="#configure-applications"><span class="octicon octicon-link"></span></a><a></a>Configure applications</h2>
+
+<p><a></a>Configure <a href="http://guake.org/">Guake</a>.</p>
+
+<div class="highlight"><pre>gconftool-2 --load ~/dotfiles/guake-preferences.xml
+</pre></div>
 
 <p><a></a>Configure <a href="http://www.sublimetext.com/">Sublime Text 2</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
 
@@ -219,8 +240,8 @@ sudo update-desktop-database
 <div class="highlight"><pre>curl -Lo- https://bit.ly/janus-bootstrap | bash
 </pre></div>
 
-<h3>
-<a name="configure-command-line-tools" class="anchor" href="#configure-command-line-tools"><span class="octicon octicon-link"></span></a><a></a>Configure command line tools</h3>
+<h2>
+<a name="configure-command-line-tools" class="anchor" href="#configure-command-line-tools"><span class="octicon octicon-link"></span></a><a></a>Configure command line tools</h2>
 
 <p><a></a>Configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
@@ -233,25 +254,39 @@ ln -s ~/dotfiles/ackrc ~/.ackrc
 <div class="highlight"><pre>ln -s ~/dotfiles/gitconfig ~/.gitconfig
 </pre></div>
 
+<p><a></a>Configure <a href="http://mercurial.selenic.com/">hg</a>:</p>
+
+<div class="highlight"><pre>hg clone http://bitbucket.org/sjl/hg-prompt/
+ln -s ~/dotfiles/hgrc ~/.hgrc
+</pre></div>
+
 <p><a></a>Configure <a href="http://fishshell.com/">fish</a>:</p>
 
-<div class="highlight"><pre>chsh -s /bin/fish
+<div class="highlight"><pre>chsh -s <span class="k">$(</span>which fish<span class="k">)</span>
 curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-mkdir -p ~/.config/fish <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/<span class="o">{</span>config,source,functions<span class="o">}</span>.fish ~/.config/fish/
+mkdir -p ~/.config/fish <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/<span class="o">{</span>config,source,functions,pyenv,rbenv<span class="o">}</span>.fish ~/.config/fish/
 mkdir -p ~/.oh-my-fish/themes/my <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 </pre></div>
-      </section>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/mmacedo/dotfiles/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/mmacedo/dotfiles/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/mmacedo/dotfiles"></a> is maintained by <a href="https://github.com/mmacedo">mmacedo</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">mmacedo's dotfiles maintained by <a href="https://github.com/mmacedo">mmacedo</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -261,7 +296,6 @@ mkdir -p ~/.oh-my-fish/themes/my <span class="o">&amp;&amp;</span> ln -s ~/dotfi
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
