@@ -146,7 +146,7 @@ nvm install v0.11.4
 
 <a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
 
-```
+```bash
 # Install pyenv
 git clone git://github.com/yyuu/pyenv.git .pyenv
 
