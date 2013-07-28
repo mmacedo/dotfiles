@@ -8,13 +8,13 @@ end
 
 # better commands to open GUI apps
 function gvim -d "Open gvim"
-  nohup /usr/bin/gvim $argv >- ^-
+  nohup /usr/bin/gvim $argv >/dev/null ^&1
 end
 function subl -d "Open Sublime Text 2"
-  nohup /usr/bin/subl $argv >- ^-
+  nohup /usr/bin/subl $argv >/dev/null ^&1
 end
 function open -d "Open path with default application (xdg-open)"
-  nohup /usr/bin/xdg-open $argv >- ^-
+  nohup /usr/bin/xdg-open $argv >/dev/null ^&1
 end
 
 function newfile -d "create folder, file and open it on sublime text"
@@ -74,19 +74,15 @@ end
 
 function removeallgems -d "uninstall all gems from current ruby"
   gem list \
-  | cut -d" " -f1 \
-  | grep -v "^minitest\|rake\|bigdecimal\|io-console\|json\|rdoc\|test-unit\|psych\$" \
+  | cut -d' ' -f1 \
+  | grep -v '^minitest|rake|bigdecimal|io-console|json|rdoc|test-unit|psych$' \
   | xargs gem uninstall -aIx
-end
-
-function git_current_branch
-  git symbolic-ref --short HEAD ^-
 end
 
 function git_update
   set remote $argv[1]
   if test -z "$remote"; echo "Usage: command REMOTE [BRANCH]" >&2; exit 1; end
   set branch $argv[2]
-  if test -z "$branch"; set branch (git_current_branch); end
+  if test -z "$branch"; set branch (git symbolic-ref --short HEAD ^/dev/null); end
   git fetch $remote; and git rebase -p $remote/$branch
 end

@@ -95,7 +95,7 @@ function _exec_with
   end
 
   # Remove temporary files
-  command rm $variables_before $variables_after $functions_before $functions_after >-
+  command rm $variables_before $variables_after $functions_before $functions_after >/dev/null
 end
 
 function source --description 'Source bash/zsh/tcsh files'

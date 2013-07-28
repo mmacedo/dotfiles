@@ -3,22 +3,18 @@
 Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.
 
 
-## <a id="os"></a>OS
+## <a id="os"></a>Requirements
 
-Ubuntu 13.04 Raring Ringtail (x86_64)
+This setup is specifically created for use with [Ubuntu 13.04 Raring Ringtail (x86_64)](http://releases.ubuntu.com/raring/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
 
-
-## <a id="setup"></a>Setup
-
-All commands below are meant to run on bash.
+All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
 
 ```bash
-# Open bash
-/bin/bash
+/usr/bin/env bash
 ```
 
 
-### <a id="install-software"></a>Install software
+## <a id="install-software"></a>Install required software
 
 <a id="ppa"></a>Add software sources to install software that are not from Canonical:
 
@@ -59,14 +55,14 @@ typeset -A pkgfor
 pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake pinta inkscape shutter"
 pkgfor[build]="build-essential checkinstall"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-pkgfor[git]="git git-svn gitg"
+pkgfor[vcs]="git git-svn gitg hg"
 pkgfor[media]="qbittorrent vlc audacious"
 pkgfor[shell]="fishfish ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
 pkgfor[stack]="nodejs rbenv openjdk-7-jdk"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
 pkgfor[libs]="exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev"
-sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[git]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
+sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
 # Remove unwanted packages
 sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
@@ -89,7 +85,7 @@ sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
 ```
 
 
-### <a id="configure-development-environment"></a>Configure development environment
+## <a id="configure-development-environment"></a>Configure workspace
 
 <a id="ssh"></a>Configure SSH key:
 
@@ -127,7 +123,7 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 ```
 
 
-### <a id="configure-programming-stacks"></a>Configure programming stacks
+## <a id="configure-programming-stacks"></a>Configure programming stacks
 
 <a id="npm"></a><a id="nodejs"></a>Install global [npm (node.js)](http://nodejs.org/) packages for their binaries (they will not be in the path to require as a library):
 
@@ -135,13 +131,37 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 sudo npm install -global coffee-script less jade ejs jasmine-node
 ```
 
-<a id="nvm"></a></a>Install [nvm](https://github.com/creationix/nvm):
+<a id="nvm"></a></a>Install [nvm](https://github.com/creationix/nvm) and install the latest [Node.js](http://nodejs.org/):
 
 ```bash
+# Install nvm
 curl https://raw.github.com/creationix/nvm/master/install.sh | bash
+
+# Load nvm to install node
+. .nvm/nvm.sh
+
+# Install latest node
+nvm install v0.11.4
 ```
 
-<a id="rbenv"></a><a id="ruby"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and the build the latest MRI/CRuby:
+<a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
+
+```
+# Install pyenv
+git clone git://github.com/yyuu/pyenv.git .pyenv
+
+# Load pyenv to install python
+eval "$(rbenv init -)"
+
+# Install dependencies
+sudo apt-get build-dep -y python3.3
+
+# Install latest python
+pyenv install 3.3.2
+pyenv global 3.3.2
+```
+
+<a id="rbenv"></a><a id="ruby"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
 ```bash
 # Run rbenv-installer
@@ -167,7 +187,13 @@ pushd ~/dotfiles; bundle install; popd
 ```
 
 
-### <a id="install-and-configure-text-editors-and-ides"></a>Install and configure text editors and IDE's
+## <a id="install-and-configure-text-editors-and-ides"></a>Configure applications
+
+<a id="guake"></a>Configure [Guake](http://guake.org/).
+
+```bash
+gconftool-2 --load ~/dotfiles/guake-preferences.xml
+```
 
 <a id="st2"></a>Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
 
@@ -198,7 +224,7 @@ curl -Lo- https://bit.ly/janus-bootstrap | bash
 ```
 
 
-### <a id="configure-command-line-tools"></a>Configure command line tools
+## <a id="configure-command-line-tools"></a>Configure command line tools
 
 <a id="ack"></a>Configure [ack](http://betterthangrep.com/):
 
@@ -213,11 +239,18 @@ ln -s ~/dotfiles/ackrc ~/.ackrc
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ```
 
+<a id="hg"></a>Configure [hg](http://mercurial.selenic.com/):
+
+```bash
+hg clone http://bitbucket.org/sjl/hg-prompt/
+ln -s ~/dotfiles/hgrc ~/.hgrc
+```
+
 <a id="fish"></a>Configure [fish](http://fishshell.com/):
 
 ```bash
-chsh -s /bin/fish
+chsh -s $(which fish)
 curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,source,functions}.fish ~/.config/fish/
+mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,source,functions,pyenv,rbenv}.fish ~/.config/fish/
 mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 ```

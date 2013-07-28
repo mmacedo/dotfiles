@@ -1,0 +1,4 @@
+[ui]
+username = Michel Pavan Macedo <michelpm@gmail.com>
+[extensions]
+prompt = ~/hg-prompt/prompt.py

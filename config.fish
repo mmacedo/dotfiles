@@ -1,10 +1,24 @@
 # Oh My Fish!
-set fish_path $HOME/.oh-my-fish
+set fish_path ~/.oh-my-fish
 set fish_theme my
 set fish_plugins rbenv rake bundler node
 . $fish_path/oh-my-fish.fish
 
-. $HOME/.config/fish/source.fish
-source --bash $HOME/.nvm/nvm.sh
+# pyenv
+set PATH ~/.pyenv/bin $PATH
+set PATH ~/.pyenv/shims $PATH
 
-. $HOME/.config/fish/functions.fish
+# pyenv shell
+. ~/.config/fish/pyenv.fish
+
+# rbenv shell
+. ~/.config/fish/rbenv.fish
+
+# source
+. ~/.config/fish/source.fish
+
+# nvm
+source --bash ~/.nvm/nvm.sh
+
+# Custom aliases and functions
+. ~/.config/fish/functions.fish

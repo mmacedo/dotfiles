@@ -7,7 +7,7 @@ function fish_prompt
   set -l green (set_color -o green)
   set -l red (set_color -o red)
   set -l blue (set_color -o blue)
-  set -l magenta (set_color magenta)
+  set -l magenta (set_color -o magenta)
   set -l white (set_color white)
   set -l normal (set_color normal)
 
@@ -37,15 +37,20 @@ function fish_prompt
   end
 
   # Unconditional stuff
-  set -l path $blue(pwd | sed "s:^$HOME:~:")
-  set -l basic_prompt $yellow(whoami)$normal" at "$green(hostname -s)$normal" in "$blue$path" "
+  set -l path (pwd | sed "s:^$HOME:~:")
+  set -l basic_prompt $magenta(whoami)$normal" at "$yellow(hostname -s)$normal" in "$green$path" "
 
   # Prompt
   set -l prompt
   if [ "$UID" = "0" ]
     set prompt "$red# "
   else
-    set prompt "$normal% "
+    set prompt "$normal> "
+  end
+
+  # Prepend active virtualenv name
+  if [ $VIRTUAL_ENV ]
+    set prompt '('(basename $VIRTUAL_ENV)') '$prompt
   end
 
   # Git stuff
@@ -58,7 +63,7 @@ function fish_prompt
     end
 
     # Unconditional git component
-    set git_info "$normal""on $white$git_branch_name"
+    set git_info "$normal""on $magenta$git_branch_name"
 
     if [ (command git status -s --ignore-submodules=dirty | wc -l) -gt 0 ]
       set git_info "$git_info$yellow*"
@@ -67,17 +72,57 @@ function fish_prompt
     set git_info "$git_info "
   end
 
-  # Ruby stuff
-  set -l ruby_info
-  if which rvm-prompt >/dev/null ^&1
-    set ruby_info (rvm-prompt i v g)
-  else
-    if which rbenv >/dev/null ^&1
-      set ruby_info (rbenv version-name)
-    end
+  # Mercurial stuff
+  set -l hg_info
+  if [ (command hg id ^/dev/null) ]
+    set -l hg_branch "<$normal""on $magenta<branch>>"
+    set -l hg_tags "<$normal at $yellow<tags|$normal, $yellow>>"
+    set -l hg_status "$green<status|modified|unknown><update>$normal"
+    set -l hg_patches "<patches: $yellow<patches|join($normal → $yellow)>>"
+    set hg_info (hg prompt --angle-brackets "$hg_branch$hg_tags$hg_status$hg_patches " ^/dev/null)
   end
 
-  test $ruby_info; and set ruby_info "$normal""using $magenta‹$ruby_info›"
+  # Ruby stuff
+  set -l ruby_version
+  if which rbenv >/dev/null ^&1
+    set ruby_version rbenv:(rbenv version-name)
+  else if which rvm-prompt >/dev/null ^&1
+    set ruby_version rvm:(rvm-prompt i v g)
+  end
+
+  if [ ([ ! $ruby_version ]; or [ (echo $ruby_version | grep system\$) ]; and echo .) ]
+    set ruby_version ruby:(ruby -v | cut -d' ' -f2)
+  end
+
+  # Python stuff
+  set -l python_version
+  if which pyenv >/dev/null ^&1
+    set python_version pyenv:(pyenv version-name)
+  end
+
+  if [ ([ ! $python_version ]; or [ (echo $python_version | grep system\$) ]; and echo .) ]
+    set -l temp (python --version ^&1)
+    set python_version python:(echo $temp | cut -d' ' -f2)
+  end
+
+  # Node.js stuff
+  set -l nodejs_version
+  if [ (functions -q nvm; and [ $NVM_BIN ]; and [ (which node | grep $NVM_BIN) ]; and echo .) ]
+    # Strip empty line and spaces
+    set -l nvm_version (nvm version | tail -1 | sed 's/\s*//g')
+    # Strip ANSI color escape sequences
+    set nvm_version (echo $nvm_version | cat -v | sed 's/\^\[\[[0-9]\+\(;[0-9]\+\)\?m//g')
+    set nodejs_version nvm:$nvm_version
+  else
+    set nodejs_version node:(node -v)
+  end
+
+  if [ ([ ! $nodejs_version ]; or [ (echo $nodejs_version | grep system\$) ]; and echo .) ]
+    set -l temp (python --version ^&1)
+    set nodejs_version python:(echo $temp | cut -d' ' -f2)
+  end
+
+  set -l tech_info "$blue‹$ruby_version $python_version $nodejs_version›"
 
   # Job count
   set -l job_info
@@ -103,7 +148,7 @@ function fish_prompt
   if [ -n $status_info ]
     echo -s $status_info
   end
-  _rprint "$basic_prompt$git_info$ruby_info" $job_info
+  _rprint "$basic_prompt$git_info$hg_info" "$tech_info $job_info"
   echo -n -s $prompt
 
 end
