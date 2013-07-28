@@ -2,7 +2,7 @@
 --type-add=html=.erb,.haml,.tmpl
 --type-add=js=.coffee,.js.erb
 --type-set=coffee=.coffee
---type-add=css=.scss,.sass,.less
+--type-add=css=.scss,.sass,.less,.css
 --type-set=less=.less
 --type-set=sass=.scss,sass
 --type-set=cucumber=.feature
@@ -11,8 +11,9 @@
 --ignore-dir=doc
 --ignore-dir=log
 --ignore-dir=tmp
+--ignore-dir=.sass-cache
 
 --color
 --group
 --flush
---pager=less
+--pager=less -R

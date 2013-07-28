@@ -57,7 +57,7 @@ pkgfor[build]="build-essential checkinstall"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[vcs]="git git-svn gitg hg"
 pkgfor[media]="qbittorrent vlc audacious"
-pkgfor[shell]="fishfish ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
+pkgfor[shell]="fishfish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
 pkgfor[stack]="nodejs rbenv openjdk-7-jdk"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
@@ -226,10 +226,10 @@ curl -Lo- https://bit.ly/janus-bootstrap | bash
 
 ## <a id="configure-command-line-tools"></a>Configure command line tools
 
-<a id="ack"></a>Configure [ack](http://betterthangrep.com/):
+<a id="ack"></a>Install and configure [ack](http://betterthangrep.com/):
 
 ```bash
-sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+curl http://beyondgrep.com/ack-2.04-single-file > ~/bin/ack && chmod 0755 !#:3
 ln -s ~/dotfiles/ackrc ~/.ackrc
 ```
 
