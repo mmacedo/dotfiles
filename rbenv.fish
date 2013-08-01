@@ -1,3 +1,6 @@
+set PATH ~/.rbenv/bin $PATH
+set PATH ~/.rbenv/shims $PATH
+
 function rbenv_shell
   set -l ver $argv[1]
 

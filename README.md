@@ -58,10 +58,10 @@ pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[vcs]="git git-svn gitg hg"
 pkgfor[media]="qbittorrent vlc audacious"
 pkgfor[shell]="fishfish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
-pkgfor[stack]="nodejs rbenv openjdk-7-jdk"
+pkgfor[stack]="nodejs openjdk-7-jdk"
 pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
 pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
-pkgfor[libs]="exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev"
+pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev"
 sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
 # Remove unwanted packages
@@ -125,56 +125,21 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 
 ## <a id="configure-programming-stacks"></a>Configure programming stacks
 
-<a id="npm"></a><a id="nodejs"></a>Install global [npm (node.js)](http://nodejs.org/) packages for their binaries (they will not be in the path to require as a library):
-
-```bash
-sudo npm install -global coffee-script less jade ejs jasmine-node
-```
-
-<a id="nvm"></a></a>Install [nvm](https://github.com/creationix/nvm) and install the latest [Node.js](http://nodejs.org/):
-
-```bash
-# Install nvm
-curl https://raw.github.com/creationix/nvm/master/install.sh | bash
-
-# Load nvm to install node
-. .nvm/nvm.sh
-
-# Install latest node
-nvm install v0.11.4
-```
-
-<a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
-
-```bash
-# Install pyenv
-git clone git://github.com/yyuu/pyenv.git .pyenv
-
-# Load pyenv to install python
-eval "$(rbenv init -)"
-
-# Install dependencies
-sudo apt-get build-dep -y python3.3
-
-# Install latest python
-pyenv install 3.3.2
-pyenv global 3.3.2
-```
-
-<a id="rbenv"></a><a id="ruby"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
+<a id="ruby"></a><a id="rbenv"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
 ```bash
 # Run rbenv-installer
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
-# Run rbenv-bootstrap to install apt packages necessary to build Ruby on Ubuntu
-sudo rbenv bootstrap-ubuntu-12-10
-
 # Copy Ruby dotfiles
 for rc in ~/dotfiles/{irb,pry,gem}rc; do ln -s $rc ~/.${rc##*/}; done
 
-# Load rbenv ruby to install rubies and gems
+# Load rbenv to install ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# Install dependencies for ruby
+sudo rbenv bootstrap-ubuntu-12-10
 
 # Install latest MRI
 rbenv install 2.0.0-p247
@@ -186,6 +151,45 @@ gem install bundler
 pushd ~/dotfiles; bundle install; popd
 ```
 
+<a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
+
+```bash
+# Install pyenv
+git clone http://github.com/yyuu/pyenv ~/.pyenv
+
+# Load pyenv to install python
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Install dependencies for python
+sudo apt-get build-dep -y python3.3
+
+# Install latest python
+pyenv install 3.3.2
+pyenv global 3.3.2
+```
+
+<a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/creationix/nvm) and install the latest [Node.js](http://nodejs.org/):
+
+```bash
+# Install ndenv
+git clone http://github.com/riywo/ndenv ~/.ndenv
+
+# Install node-build
+git clone http://github.com/riywo/node-build ~/.ndenv/plugins/node-build
+
+# Load ndenv to install node
+export PATH="$HOME/.ndenv/bin:$PATH"
+eval "$(ndenv init -)"
+
+# Install latest node
+ndenv install v0.11.4
+ndenv global v0.11.4
+ndenv rehash
+
+# Install global packages
+pushd ~/dotfiles; npm install -global; popd
+```
 
 ## <a id="install-and-configure-text-editors-and-ides"></a>Configure applications
 
@@ -251,6 +255,6 @@ ln -s ~/dotfiles/hgrc ~/.hgrc
 ```bash
 chsh -s $(which fish)
 curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,source,functions,pyenv,rbenv}.fish ~/.config/fish/
+mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,functions,rbenv,pyenv,ndenv}.fish ~/.config/fish/
 mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 ```

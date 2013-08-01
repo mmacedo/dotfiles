@@ -82,15 +82,18 @@ function fish_prompt
     set hg_info (hg prompt --angle-brackets "$hg_branch$hg_tags$hg_status$hg_patches " ^/dev/null)
   end
 
+  function null_or_system
+    test -z $argv[1]; and return 0
+    echo $argv[1] | grep 'system$'; and return 0
+    return 1
+  end
+
   # Ruby stuff
   set -l ruby_version
   if which rbenv >/dev/null ^&1
     set ruby_version rbenv:(rbenv version-name)
-  else if which rvm-prompt >/dev/null ^&1
-    set ruby_version rvm:(rvm-prompt i v g)
   end
-
-  if [ ([ ! $ruby_version ]; or [ (echo $ruby_version | grep system\$) ]; and echo .) ]
+  if null_or_system $ruby_version
     set ruby_version ruby:(ruby -v | cut -d' ' -f2)
   end
 
@@ -99,27 +102,18 @@ function fish_prompt
   if which pyenv >/dev/null ^&1
     set python_version pyenv:(pyenv version-name)
   end
-
-  if [ ([ ! $python_version ]; or [ (echo $python_version | grep system\$) ]; and echo .) ]
+  if null_or_system $python_version
     set -l temp (python --version ^&1)
     set python_version python:(echo $temp | cut -d' ' -f2)
   end
 
   # Node.js stuff
   set -l nodejs_version
-  if [ (functions -q nvm; and [ $NVM_BIN ]; and [ (which node | grep $NVM_BIN) ]; and echo .) ]
-    # Strip empty line and spaces
-    set -l nvm_version (nvm version | tail -1 | sed 's/\s*//g')
-    # Strip ANSI color escape sequences
-    set nvm_version (echo $nvm_version | cat -v | sed 's/\^\[\[[0-9]\+\(;[0-9]\+\)\?m//g')
-    set nodejs_version nvm:$nvm_version
-  else
-    set nodejs_version node:(node -v)
+  if which ndenv >/dev/null ^&1
+    set nodejs_version ndenv:(ndenv version-name)
   end
-
-  if [ ([ ! $nodejs_version ]; or [ (echo $nodejs_version | grep system\$) ]; and echo .) ]
-    set -l temp (python --version ^&1)
-    set nodejs_version python:(echo $temp | cut -d' ' -f2)
+  if null_or_system $nodejs_version
+    set nodejs_version node:(node -v)
   end
 
   set -l tech_info "$blue‹$ruby_version $python_version $nodejs_version›"
