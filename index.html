@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="mmacedo's dotfiles : My very own scripts ^^" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>mmacedo's dotfiles by mmacedo</title>
+    <title>mmacedo's dotfiles</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>mmacedo's dotfiles</h1>
-        <h2>My very own scripts ^^</h2>
-        <a href="https://github.com/mmacedo/dotfiles" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mmacedo/dotfiles">View on GitHub</a>
+
+          <h1 id="project_title">mmacedo's dotfiles</h1>
+          <h2 id="project_tagline">My very own scripts ^^</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mmacedo/dotfiles/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mmacedo/dotfiles/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a name="my-dot-files" class="anchor" href="#my-dot-files"><span class="octicon octicon-link"></span></a><a></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
@@ -85,11 +88,11 @@ pkgfor<span class="o">[</span>build<span class="o">]=</span><span class="s2">"bu
 pkgfor<span class="o">[</span>db<span class="o">]=</span><span class="s2">"mongodb libsqlite3-dev postgresql libpq-dev"</span>
 pkgfor<span class="o">[</span>vcs<span class="o">]=</span><span class="s2">"git git-svn gitg hg"</span>
 pkgfor<span class="o">[</span>media<span class="o">]=</span><span class="s2">"qbittorrent vlc audacious"</span>
-pkgfor<span class="o">[</span>shell<span class="o">]=</span><span class="s2">"fishfish ack-grep xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"</span>
-pkgfor<span class="o">[</span>stack<span class="o">]=</span><span class="s2">"nodejs rbenv openjdk-7-jdk"</span>
+pkgfor<span class="o">[</span>shell<span class="o">]=</span><span class="s2">"fishfish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"</span>
+pkgfor<span class="o">[</span>stack<span class="o">]=</span><span class="s2">"nodejs openjdk-7-jdk"</span>
 pkgfor<span class="o">[</span>ubuntu<span class="o">]=</span><span class="s2">"ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"</span>
 pkgfor<span class="o">[</span>web<span class="o">]=</span><span class="s2">"chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"</span>
-pkgfor<span class="o">[</span>libs<span class="o">]=</span><span class="s2">"exuberant-ctags libxslt-dev libxml2-dev libxml2-utils libqt4-dev libreadline-dev libfreetype6-dev"</span>
+pkgfor<span class="o">[</span>libs<span class="o">]=</span><span class="s2">"exuberant-ctags libqt4-dev libfreetype6-dev"</span>
 sudo apt-get install -y <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[app]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[build]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[db]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[vcs]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[media]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[shell]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[stack]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[ubuntu]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[web]</span><span class="k">}</span> <span class="k">${</span><span class="nv">pkgfor</span><span class="p">[libs]</span><span class="k">}</span>
 
 <span class="c"># Remove unwanted packages</span>
@@ -149,52 +152,20 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 <h2>
 <a name="configure-programming-stacks" class="anchor" href="#configure-programming-stacks"><span class="octicon octicon-link"></span></a><a></a>Configure programming stacks</h2>
 
-<p><a></a><a></a>Install global <a href="http://nodejs.org/">npm (node.js)</a> packages for their binaries (they will not be in the path to require as a library):</p>
-
-<div class="highlight"><pre>sudo npm install -global coffee-script less jade ejs jasmine-node
-</pre></div>
-
-<p><a></a>Install <a href="https://github.com/creationix/nvm">nvm</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
-
-<div class="highlight"><pre><span class="c"># Install nvm</span>
-curl https://raw.github.com/creationix/nvm/master/install.sh | bash
-
-<span class="c"># Load nvm to install node</span>
-. .nvm/nvm.sh
-
-<span class="c"># Install latest node</span>
-nvm install v0.11.4
-</pre></div>
-
-<p><a></a><a></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
-
-<div class="highlight"><pre><span class="c"># Install pyenv</span>
-git clone git://github.com/yyuu/pyenv.git .pyenv
-
-<span class="c"># Load pyenv to install python</span>
-<span class="nb">eval</span> <span class="s2">"$(rbenv init -)"</span>
-
-<span class="c"># Install dependencies</span>
-sudo apt-get build-dep -y python3.3
-
-<span class="c"># Install latest python</span>
-pyenv install 3.3.2
-pyenv global 3.3.2
-</pre></div>
-
 <p><a></a><a></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
 <div class="highlight"><pre><span class="c"># Run rbenv-installer</span>
 curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
-<span class="c"># Run rbenv-bootstrap to install apt packages necessary to build Ruby on Ubuntu</span>
-sudo rbenv bootstrap-ubuntu-12-10
-
 <span class="c"># Copy Ruby dotfiles</span>
 <span class="k">for </span>rc in ~/dotfiles/<span class="o">{</span>irb,pry,gem<span class="o">}</span>rc; <span class="k">do </span>ln -s <span class="nv">$rc</span> ~/.<span class="k">${</span><span class="nv">rc</span><span class="p">##*/</span><span class="k">}</span>; <span class="k">done</span>
 
-<span class="c"># Load rbenv ruby to install rubies and gems</span>
+<span class="c"># Load rbenv to install ruby</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"$HOME/.rbenv/bin:$PATH"</span>
 <span class="nb">eval</span> <span class="s2">"$(rbenv init -)"</span>
+
+<span class="c"># Install dependencies for ruby</span>
+sudo rbenv bootstrap-ubuntu-12-10
 
 <span class="c"># Install latest MRI</span>
 rbenv install 2.0.0-p247
@@ -204,6 +175,44 @@ rbenv global 2.0.0-p247
 gem update --system
 gem install bundler
 <span class="nb">pushd</span> ~/dotfiles; bundle install; <span class="nb">popd</span>
+</pre></div>
+
+<p><a></a><a></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
+
+<div class="highlight"><pre><span class="c"># Install pyenv</span>
+git clone http://github.com/yyuu/pyenv ~/.pyenv
+
+<span class="c"># Load pyenv to install python</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"$HOME/.pyenv/bin:$PATH"</span>
+<span class="nb">eval</span> <span class="s2">"$(pyenv init -)"</span>
+
+<span class="c"># Install dependencies for python</span>
+sudo apt-get build-dep -y python3.3
+
+<span class="c"># Install latest python</span>
+pyenv install 3.3.2
+pyenv global 3.3.2
+</pre></div>
+
+<p><a></a><a></a><a></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
+
+<div class="highlight"><pre><span class="c"># Install ndenv</span>
+git clone http://github.com/riywo/ndenv ~/.ndenv
+
+<span class="c"># Install node-build</span>
+git clone http://github.com/riywo/node-build ~/.ndenv/plugins/node-build
+
+<span class="c"># Load ndenv to install node</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"$HOME/.ndenv/bin:$PATH"</span>
+<span class="nb">eval</span> <span class="s2">"$(ndenv init -)"</span>
+
+<span class="c"># Install latest node</span>
+ndenv install v0.11.4
+ndenv global v0.11.4
+ndenv rehash
+
+<span class="c"># Install global packages</span>
+<span class="nb">pushd</span> ~/dotfiles; npm install -global; <span class="nb">popd</span>
 </pre></div>
 
 <h2>
@@ -243,9 +252,9 @@ sudo update-desktop-database
 <h2>
 <a name="configure-command-line-tools" class="anchor" href="#configure-command-line-tools"><span class="octicon octicon-link"></span></a><a></a>Configure command line tools</h2>
 
-<p><a></a>Configure <a href="http://betterthangrep.com/">ack</a>:</p>
+<p><a></a>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
-<div class="highlight"><pre>sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+<div class="highlight"><pre>curl http://beyondgrep.com/ack-2.04-single-file &gt; ~/bin/ack <span class="o">&amp;&amp;</span> chmod 0755 !#:3
 ln -s ~/dotfiles/ackrc ~/.ackrc
 </pre></div>
 
@@ -264,29 +273,21 @@ ln -s ~/dotfiles/hgrc ~/.hgrc
 
 <div class="highlight"><pre>chsh -s <span class="k">$(</span>which fish<span class="k">)</span>
 curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-mkdir -p ~/.config/fish <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/<span class="o">{</span>config,source,functions,pyenv,rbenv<span class="o">}</span>.fish ~/.config/fish/
+mkdir -p ~/.config/fish <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/<span class="o">{</span>config,functions,rbenv,pyenv,ndenv<span class="o">}</span>.fish ~/.config/fish/
 mkdir -p ~/.oh-my-fish/themes/my <span class="o">&amp;&amp;</span> ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 </pre></div>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/mmacedo/dotfiles/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/mmacedo/dotfiles/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/mmacedo/dotfiles"></a> is maintained by <a href="https://github.com/mmacedo">mmacedo</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
     </div>
 
-            <script type="text/javascript">
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">mmacedo's dotfiles maintained by <a href="https://github.com/mmacedo">mmacedo</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -296,6 +297,7 @@ mkdir -p ~/.oh-my-fish/themes/my <span class="o">&amp;&amp;</span> ln -s ~/dotfi
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
