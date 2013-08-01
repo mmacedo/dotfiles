@@ -169,7 +169,7 @@ pyenv install 3.3.2
 pyenv global 3.3.2
 ```
 
-<a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/creationix/nvm) and install the latest [Node.js](http://nodejs.org/):
+<a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
 
 ```bash
 # Install ndenv
