@@ -5,28 +5,33 @@ function _exec_with
 
   set -l source
   switch "$shell"
-    case bash dash zsh ksh sh
+    case bash zsh ksh
       set source .
-    case tcsh csh
-      set source source
     case '*'
       echo "Unknown shell '$shell'" >&2
       return 1
   end
 
-  set -l function_names "typeset -f | sed '/^{\s*\\\$/,/^}\s*\\\$/d' | sed 's/\s*[(][)]\s*\\\$//' | sort"
+  # List variables, ignore $_, $PIPESTATUS, $COLUMNS and $SHLVL
   set -l variable_names "env | grep -v '^_|PIPESTATUS|COLUMNS|SHLVL\\\$' | sort"
+  # List functions, find headers (lines with '()'), keep only the name of the
+  #  function (remove after the first space or '('), ignore names with '$'
+  set -l function_names "typeset -f | grep '^[^ (]\\+ \\?()' | sed 's/^\\([^ (]\\+\\).*/\\1/' | grep -v '\\\$' | sort"
+  # List aliases, remove 'alias ' preffix if present and the value (everything after the =)
+  set -l aliases_names "alias | sed 's/\\(alias \\)\\?\\([^=]\\+\\).*/\\2/' | sort"
 
   # Create temp files to catch the change of variables and functions
-  set -l functions_before (mktemp)
-  set -l functions_after (mktemp)
   set -l variables_before (mktemp)
   set -l variables_after (mktemp)
+  set -l functions_before (mktemp)
+  set -l functions_after (mktemp)
+  set -l aliases_before (mktemp)
+  set -l aliases_after (mktemp)
 
-  set -l before "$function_names > $functions_before; $variable_names > $variables_before"
-  set -l after "$function_names > $functions_after; $variable_names > $variables_after"
+  set -l before "$variable_names > $variables_before; $function_names > $functions_before; $aliases_names > $aliases_before"
+  set -l after "$variable_names > $variables_after; $function_names > $functions_after; $aliases_names > $aliases_after"
 
-  eval "/usr/bin/env $shell -c \"$before; $source $file; $code $after\""
+  /usr/bin/env $shell -c "$before; $source $file; $code $after"
 
   # Separator used by read to store a single line into several variables
   set -l IFS =
@@ -88,17 +93,36 @@ function _exec_with
         eval "function $func; _exec_with $shell \"$file\" \"$func \$argv;\"; end"
 
         # DEBUG:
-        # echo Create wrapper for $func from $file
+        # echo Create wrapper for function $func from $file
+      case '*'
+        echo "Source error! Invalid case '$func'" >&2
+    end
+  end
+
+  diff $diffopts $aliases_before $aliases_after | while read -l state func
+    switch $state$func
+      case '-*'
+        # Do nothing if an alias was removed
+        continue
+      case '+*'
+        # code to manually execute an alias
+        set -l exec_alias "eval \\\$(eval echo `alias $func | sed 's/\\(alias \\)\\?[^=]\\+=//'`) \\\$argv"
+
+        # Create wrapper function
+        eval "function $func; _exec_with $shell \"$file\" \"$exec_alias;\"; end"
+
+        # DEBUG:
+        # echo Create wrapper for alias $func from $file
       case '*'
         echo "Source error! Invalid case '$func'" >&2
     end
   end
 
   # Remove temporary files
-  command rm $variables_before $variables_after $functions_before $functions_after >/dev/null
+  command rm $variables_before $variables_after $functions_before $functions_after $aliases_before $aliases_after >/dev/null
 end
 
-function source --description 'Source bash/zsh/tcsh files'
+function source --description 'Source bash/zsh/ksh files'
   set -l type
   while true
     if test (count $argv) -eq 0
@@ -117,18 +141,15 @@ function source --description 'Source bash/zsh/tcsh files'
   for file in $argv
     set -l file_type $type
     if not test "$file_type"
-      switch $file
-        case '*.sh'
+      switch (readlink -f $file)
+        case '*.sh', '**/.bash*'
           set file_type bash
-        case '*.zsh'
+        case '*.zsh', '**/.zsh*'
           set file_type zsh
-        case '*.ksh'
+        case '*.ksh', '**/.ksh*'
           set file_type ksh
-        case '*.csh' '*.tcsh'
-          set file_type tcsh
-        case '*'
-          echo "Failed to source $file. Shell not recognized!" >&2
-          return 1
+        case '**/.profile', '*'
+          set file_type bash
       end
     end
 

@@ -18,7 +18,7 @@ set PATH ~/.pyenv/shims $PATH
 . ~/.config/fish/source.fish
 
 # nvm
-source --bash ~/.nvm/nvm.sh
+source ~/.nvm/nvm.sh
 
 # Custom aliases and functions
 . ~/.config/fish/functions.fish
