@@ -2,19 +2,19 @@ function rm -d "Send files to trash"
   trash-put $argv
 end
 
-function play -d "Play audio files on command-line (via VLC)"
-  cvlc --play-and-exit
+function play -d "Play audio files on command-line (via (C)VLC)"
+  cvlc --play-and-exit $argv >/dev/null ^&1
 end
 
 # better commands to open GUI apps
 function gvim -d "Open gvim"
-  nohup /usr/bin/gvim $argv >/dev/null ^&1
+  eval (nohup /usr/bin/gvim $argv >/dev/null ^&1 &)
 end
 function subl -d "Open Sublime Text 2"
-  nohup /usr/bin/subl $argv >/dev/null ^&1
+  eval (nohup /usr/bin/subl $argv >/dev/null ^&1 &)
 end
 function open -d "Open path with default application (xdg-open)"
-  nohup /usr/bin/xdg-open $argv >/dev/null ^&1
+  eval (nohup /usr/bin/xdg-open $argv >/dev/null ^&1 &)
 end
 
 function newfile -d "create folder, file and open it on sublime text"
