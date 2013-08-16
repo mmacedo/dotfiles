@@ -1,3 +1,7 @@
+function be -d "bundle exec"
+  bundle exec $argv
+end
+
 function rm -d "Send files to trash"
   trash-put $argv
 end
