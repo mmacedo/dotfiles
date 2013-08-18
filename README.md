@@ -179,15 +179,13 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="st2"></a>Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
 
-    ST2=~/.config/sublime-text-2
-
     # Copy configuration
-    mkdir -p $ST2/Packages/User
-    for file in ~/dotfiles/st2/*; do ln -s "$file" "$ST2/Packages/User/$(basename $file)"; done
+    mkdir -p ~/.config/sublime-text-2/Packages/User
+    for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-2/Packages/User/; done
 
     # Install package_control package
-    mkdir -p $ST2/Installed\ Packages
-    curl http://sublime.wbond.net/Package%20Control.sublime-package > $ST2/Installed\ Packages/Package\ Control.sublime-package
+    mkdir -p ~/.config/sublime-text-2/Installed\ Packages
+    curl http://sublime.wbond.net/Package%20Control.sublime-package > ~/.config/sublime-text-2/Installed\ Packages/Package\ Control.sublime-package
 
     # Install url handler for txtm:// and subl:// with Sublime Text 2
     wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
