@@ -5,7 +5,7 @@ Designed for my own use, but feel free to use and submit issues and suggestions.
 
 ## <a id="os"></a>Requirements
 
-This setup is specifically created for use with [Ubuntu 13.04 Raring Ringtail (x86_64)](http://releases.ubuntu.com/raring/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
+This setup is specifically created for use with [Ubuntu 13.10 Saucy Salamander (AMD64)](http://releases.ubuntu.com/saucy/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
 
 All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
 
@@ -20,7 +20,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 
     # Add ppa's
-    sudo add-apt-repository -y ppa:zanchey/fishfish-snapshot
+    sudo add-apt-repository -y ppa:fish-shell/nightly-master
     sudo add-apt-repository -y ppa:chris-lea/node.js
     sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
     sudo add-apt-repository -y ppa:skype-wrapper/ppa
@@ -52,7 +52,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[vcs]="git git-svn gitg hg"
     pkgfor[media]="qbittorrent vlc audacious"
-    pkgfor[shell]="fishfish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
+    pkgfor[shell]="fish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
     pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
