@@ -48,7 +48,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Install packages
     typeset -A pkgfor
     pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake pinta inkscape shutter"
-    pkgfor[build]="build-essential checkinstall"
+    pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[vcs]="git git-svn gitg hg"
     pkgfor[media]="qbittorrent vlc audacious"
@@ -56,7 +56,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
     pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
-    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev"
+    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
     sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
     # Remove unwanted packages
@@ -171,6 +171,108 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Install global packages
     pushd ~/dotfiles; npm install -global; popd
 
+<a id="mono"></a>Install [mono](http://www.mono-project.com/), [monodevelop](http://monodevelop.com/) and [f#](http://fsharp.org/):
+
+    # Install libgdiplus (c50d1f96348b729aa01768b007cad64fb5937be2)
+    git clone git://github.com/mono/libgdiplus.git
+    pushd libgdiplus
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install mono
+    git clone git://github.com/mono/mono.git
+    pushd mono
+    git checkout mono-3.2.5
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install xsp (d3a882a489d069adf93f50bec46216b65c72c5c6)
+    git clone git://github.com/mono/xsp.git
+    pushd xsp
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install mod_mono (6b73e850920865b8f6a16f232e555c71ec1cd26a)
+    git clone git://github.com/mono/mod_mono.git
+    pushd mod_mono
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    echo \n"Include /etc/apache2/mod_mono.conf" | sudo tee -a /etc/apache2/apache2.conf >/dev/null
+    sudo sed -i 's|AddType application/x-asp-net \.aspx|MonoServerPath /opt/mono/bin/mod-mono-server4\n\n&|' /etc/apache2/mod_mono.conf
+    popd
+
+    # Install fsharp
+    git clone git://github.com/fsharp/fsharp.git
+    pushd fsharp
+    git checkout 3.0.31
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install gtk-sharp (gtk#)
+    git clone git://github.com/mono/gtk-sharp.git
+    pushd gtk-sharp
+    git checkout 2.12.22
+    ./bootstrap-2.12 --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install gnome-sharp (gtk#)
+    git clone git://github.com/mono/gnome-sharp.git
+    pushd gnome-sharp
+    git checkout 2.24.1
+    # Remove TestXfer.cs, TestXfer.exe and Mono.GetOptions from sample/gnomevfs/Makefile.am
+    ./bootstrap-2.24 --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install gnome-desktop-sharp (gtk#)
+    git clone git://github.com/mono/gnome-desktop-sharp.git
+    pushd gnome-desktop-sharp
+    git checkout 2.24.0
+    ./autogen.sh --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+
+    # Install monodevelop
+    git clone git://github.com/mono/monodevelop.git
+    pushd monodevelop
+    ./configure --prefix=/opt/mono
+    make
+    sudo make install
+    popd
+    cp ~/dotfiles/monodevelop.desktop ~/.local/share/applications/monodevelop.desktop
+
+<a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
+
+    # Install scala
+    wget http://www.scala-lang.org/files/archive/scala-2.10.3.tgz
+    tar zxf scala-2.10.3.tgz
+    sudo mv scala-2.10.3 /usr/share/scala
+
+    # Add links to the path
+    sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
+    sudo ln -s /usr/share/scala/bin/scalac /usr/bin/scalac
+    sudo ln -s /usr/share/scala/bin/fsc /usr/bin/fsc
+    sudo ln -s /usr/share/scala/bin/scaladoc /usr/bin/scaladoc
+    sudo ln -s /usr/share/scala/bin/scalap /usr/bin/scalap
+
+    # Install sbt
+    wget http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
+    sudo dpkg -i sbt.deb
+    rm sbt.deb
+
 ## <a id="install-and-configure-text-editors-and-ides"></a>Configure applications
 
 <a id="guake"></a>Configure [Guake](http://guake.org/).
@@ -220,5 +322,5 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     chsh -s $(which fish)
     curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-    mkdir -p ~/.config/fish && ln -s ~/dotfiles/{config,functions,rbenv,pyenv,ndenv}.fish ~/.config/fish/
+    mkdir -p ~/.config/fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
     mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/

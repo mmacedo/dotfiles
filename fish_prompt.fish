@@ -116,7 +116,19 @@ function fish_prompt
     set nodejs_version node:(node -v)
   end
 
-  set -l tech_info "$blue‹$ruby_version $python_version $nodejs_version›"
+  # Mono stuff
+  set -l mono_version
+  if which mono >/dev/null ^&1
+    set mono_version ' 'mono:(mono --version | head -1 | cut -d' ' -f5)
+  end
+
+  # Scala stuff
+  set -l scala_version
+  if which scala >/dev/null ^&1
+    set scala_version ' 'scala:(scala -version ^&1 | cut -d' ' -f5)
+  end
+
+  set -l tech_info "$blue‹$ruby_version $python_version $nodejs_version$mono_version$scala_version›"
 
   # Job count
   set -l job_info

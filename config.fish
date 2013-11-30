@@ -5,13 +5,19 @@ set fish_plugins rake bundler
 . $fish_path/oh-my-fish.fish
 
 # rbenv
-. ~/.config/fish/rbenv.fish
+. ~/dotfiles/rbenv.fish
 
 # pyenv
-. ~/.config/fish/pyenv.fish
+. ~/dotfiles/pyenv.fish
 
 # ndenv
-. ~/.config/fish/ndenv.fish
+. ~/dotfiles/ndenv.fish
+
+# mono
+. ~/dotfiles/mono.fish
+
+# scala
+. ~/dotfiles/scala.fish
 
 # Custom aliases and functions
-. ~/.config/fish/functions.fish
+. ~/dotfiles/functions.fish
