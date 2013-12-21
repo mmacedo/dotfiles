@@ -47,7 +47,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install packages
     typeset -A pkgfor
-    pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake pinta inkscape shutter"
+    pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter vlc"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[vcs]="git git-svn gitg hg"
