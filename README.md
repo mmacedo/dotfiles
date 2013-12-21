@@ -56,7 +56,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
     pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
-    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
+    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev libreadline-dev libbz2-dev ncurses-dev libssl-dev libxslt1-dev"
     sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
     # Remove unwanted packages
@@ -127,8 +127,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo rbenv bootstrap-ubuntu-12-10
 
     # Install latest MRI
-    rbenv install 2.0.0-p247
-    rbenv global 2.0.0-p247
+    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.0.0-p353
+    rbenv global 2.0.0-p353
 
     # Install gems
     gem update --system
@@ -144,12 +144,18 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
 
-    # Install dependencies for python
-    sudo apt-get build-dep -y python3.3
+    # Install python 2
+    sudo apt-get build-dep -y python2.7
+    pyenv install 2.7.6
+    pyenv shell 2.7.6
+    pip install ipython
 
     # Install latest python
+    sudo apt-get build-dep -y python3.3
     pyenv install 3.3.2
     pyenv global 3.3.2
+    pyenv shell 3.3.2
+    pip install ipython
 
 <a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
 

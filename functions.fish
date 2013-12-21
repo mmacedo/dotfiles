@@ -79,7 +79,7 @@ end
 function removeallgems -d "uninstall all gems from current ruby"
   gem list \
   | cut -d' ' -f1 \
-  | grep -v '^minitest|rake|bigdecimal|io-console|json|rdoc|test-unit|psych$' \
+  | grep -v '^minitest\|rake\|bigdecimal\|io-console\|json\|rdoc\|test-unit\|psych$' \
   | xargs gem uninstall -aIx
 end
 

@@ -9,7 +9,7 @@ gem 'ruby-graphviz'
 # for pry
 gem 'pry'
 gem 'awesome_print'
-gem 'pry-debugger'
+gem 'pry-byebug'
 gem 'pry-stack_explorer'
 gem 'ruby-prof'
 

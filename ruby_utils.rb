@@ -11,10 +11,10 @@ def jruby?; !!defined? JRuby; end
 if pry? and mri?
 
   def debug
-    require 'pry-debugger'
+    require 'pry-byebug'
     require 'pry-stack_explorer'
   rescue LoadError
-    puts "Install 'pry-debugger' and 'pry-stack_explorer'"
+    puts "Install 'pry-byebug' and 'pry-stack_explorer'"
   end
 
 end
