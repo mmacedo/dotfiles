@@ -73,7 +73,7 @@ function mvtodir -d "move files with last argument guaranteed to be a directory"
   # ensure target directory is created
   mkdir -p $folder; or return $status
   # pass target directory explicitly
-  mv --target-directory="$folder" (echo $files)
+  mv --target-directory="$folder" $files
 end
 
 function removeallgems -d "uninstall all gems from current ruby"
