@@ -27,15 +27,19 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Heroku Toolbelt ppa
     wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
-    echo "deb http://toolbelt.heroku.com/ubuntu ./" | sudo tee /etc/apt/sources.list.d/heroku.list
+    sudo add-apt-repository 'deb http://toolbelt.heroku.com/ubuntu ./'
 
     # Opera ppa
     wget -O - http://deb.opera.com/archive.key | sudo apt-key add -
-    echo "deb http://deb.opera.com/opera/ stable non-free" | sudo tee /etc/apt/sources.list.d/opera.list
+    sudo add-apt-repository 'deb http://deb.opera.com/opera/ stable non-free'
 
     # Google Talk Plugin ppa
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    echo "deb http://dl.google.com/linux/talkplugin/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google.list
+    sudo add-apt-repository 'deb http://dl.google.com/linux/talkplugin/deb/ stable main'
+
+    # Virtual box
+    wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+    sudo add-apt-repository 'deb http://download.virtualbox.org/virtualbox/debian saucy contrib'
 
 <a id="apt"></a>Install apt packages:
 
@@ -47,7 +51,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install packages
     typeset -A pkgfor
-    pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter vlc"
+    pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter vlc virtualbox-4.3"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[vcs]="git git-svn gitg hg"
@@ -75,6 +79,13 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
     sudo mv $PHANTOMJS /usr/lib/phantomjs
     sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
+
+<a id="virtualbox"></a>Configure [VirtualBox](https://www.virtualbox.org/):
+
+    # Download and Install VirtualBox Extension Pack
+    wget http://download.virtualbox.org/virtualbox/4.3.6/Oracle_VM_VirtualBox_Extension_Pack-4.3.6-91406.vbox-extpack
+    VBoxManage extpack install *.vbox-extpack
+    rm *.vbox-extpack
 
 
 ## <a id="configure-development-environment"></a>Configure workspace
