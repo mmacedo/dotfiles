@@ -63,9 +63,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev libreadline-dev libbz2-dev ncurses-dev libssl-dev libxslt1-dev"
     sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
-    # Remove unwanted packages
-    sudo apt-get purge -y unity-lens-shopping ubuntuone-client* python-ubuntuone-* totem deja-dup rhythmbox transmission* thunderbird
-
     # Perform full upgrade
     sudo apt-get dist-upgrade -y
 
