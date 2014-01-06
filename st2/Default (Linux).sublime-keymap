@@ -4,5 +4,8 @@
 
 
   { "keys": ["ctrl+up"], "command": "scroll_lines", "args": {"amount": 3.0 } },
-  { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -3.0 } }
+  { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -3.0 } },
+
+  { "keys": ["ctrl+q"], "command": "toggle_record_macro" },
+  { "keys": ["ctrl+shift+q"], "command": "run_macro" }
 ]
