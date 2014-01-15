@@ -54,15 +54,22 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[dev]="sublime-text vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
     pkgfor[other]="fbreader virtualbox-4.3"
+    pkgfor[web]="opera google-talkplugin skype skype-wrapper"
     pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick ffmpeg graphviz heroku-toolbelt"
     pkgfor[vcs]="git git-svn mercurial"
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
-    pkgfor[web]="opera google-talkplugin skype skype-wrapper"
-    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
-    sudo apt-get install -y ${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
+    pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
+    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
+    
+    pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
+    pkgs2="${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]}"
+    pkgs3="${pkgfor[build]} ${pkgfor[db]} ${pkgfor[ubuntu]}"
+    pkgs4="${pkgfor[mono]} ${pkgfor[libs]}"
+    
+    sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 
     # Perform full upgrade
     sudo apt-get dist-upgrade -y
