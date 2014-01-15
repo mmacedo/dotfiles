@@ -51,17 +51,18 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install packages
     typeset -A pkgfor
-    pkgfor[app]="fbreader sublime-text vim-gtk kdiff3-qt meld guake gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter vlc virtualbox-4.3"
+    pkgfor[dev]="sublime-text vim-gtk kdiff3-qt meld guake"
+    pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
+    pkgfor[other]="fbreader virtualbox-4.3"
+    pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick ffmpeg graphviz heroku-toolbelt"
+    pkgfor[vcs]="git git-svn mercurial"
+    pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-    pkgfor[vcs]="git git-svn gitg hg"
-    pkgfor[media]="qbittorrent vlc audacious"
-    pkgfor[shell]="fish xclip trash-cli curl imagemagick ffmpeg graphviz heroku-toolbelt"
-    pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
-    pkgfor[web]="chromium-browser chromium-codecs-ffmpeg-extra opera google-talkplugin skype skype-wrapper"
-    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev libreadline-dev libbz2-dev ncurses-dev libssl-dev libxslt1-dev"
-    sudo apt-get install -y ${pkgfor[app]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[vcs]} ${pkgfor[media]} ${pkgfor[shell]} ${pkgfor[stack]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
+    pkgfor[web]="opera google-talkplugin skype skype-wrapper"
+    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
+    sudo apt-get install -y ${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]} ${pkgfor[build]} ${pkgfor[db]} ${pkgfor[ubuntu]} ${pkgfor[web]} ${pkgfor[libs]}
 
     # Perform full upgrade
     sudo apt-get dist-upgrade -y
