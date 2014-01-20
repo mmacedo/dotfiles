@@ -16,8 +16,11 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="ppa"></a>Add software sources to install software that are not from Canonical:
 
-    # Enable Canonical Partner
+    # Enable partner
     sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
+    
+    # Enable proposed
+    echo 'deb http://br.archive.ubuntu.com/ubuntu/ saucy-proposed universe main restricted multiverse' | sudo tee -a /etc/apt/sources.list
 
     # Add ppa's
     sudo add-apt-repository -y ppa:fish-shell/nightly-master
@@ -60,7 +63,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-    pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic python-software-properties p7zip-full p7zip-rar"
+    pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar"
     pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
     
@@ -71,12 +74,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     
     sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 
-    # Perform full upgrade
+    # Perform update
     sudo apt-get dist-upgrade -y
-
-    # Clean up
-    sudo apt-get autoremove --purge -y
-    sudo apt-get autoclean
 
 <a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
 
@@ -119,7 +118,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="configure-workspace"></a>Configure workspace:
 
     # Create empty folders on the workspace
-    mkdir -p ~/ws/{clone,st2,ruby,nodejs}
+    mkdir -p ~/ws/{etc,st2,rb,js}
 
     # Clone this repository
     git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
@@ -140,15 +139,16 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(rbenv init -)"
 
     # Install dependencies for ruby
-    sudo rbenv bootstrap-ubuntu-12-10
+    rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.0.0-p353
-    rbenv global 2.0.0-p353
+    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.1.0
+    rbenv global 2.1.0
 
     # Install gems
     gem update --system
     gem install bundler
+    rbenv rehash
     pushd ~/dotfiles; bundle install; popd
 
 <a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
@@ -168,9 +168,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install latest python
     sudo apt-get build-dep -y python3.3
-    pyenv install 3.3.2
-    pyenv global 3.3.2
-    pyenv shell 3.3.2
+    pyenv install 3.3.3
+    pyenv global 3.3.3
+    pyenv shell 3.3.3
     pip install ipython
 
 <a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
@@ -186,12 +186,11 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(ndenv init -)"
 
     # Install latest node
-    ndenv install v0.11.4
-    ndenv global v0.11.4
-    ndenv rehash
+    ndenv install v0.11.9
+    ndenv global v0.11.9
 
     # Install global packages
-    pushd ~/dotfiles; npm install -global; popd
+    npm install -global coffee-script
 
 <a id="mono"></a>Install [mono](http://www.mono-project.com/), [monodevelop](http://monodevelop.com/) and [f#](http://fsharp.org/):
 
@@ -202,6 +201,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf libgdiplus
 
     # Install mono
     git clone git://github.com/mono/mono.git
@@ -211,6 +211,16 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf mono
+
+    # Add mono just installed to the path
+    MONO_PREFIX=/opt/mono
+    export DYLD_FALLBACK_LIBRARY_PATH="$MONO_PREFIX/lib:$DYLD_LIBRARY_FALLBACK_PATH"
+    export LD_LIBRARY_PATH="$MONO_PREFIX/lib:$LD_LIBRARY_PATH"
+    export C_INCLUDE_PATH=$MONO_PREFIX/include
+    export ACLOCAL_PATH=$MONO_PREFIX/share/aclocal
+    export PKG_CONFIG_PATH=$MONO_PREFIX/lib/pkgconfig
+    export PATH="$MONO_PREFIX/bin:$PATH"
 
     # Install xsp (d3a882a489d069adf93f50bec46216b65c72c5c6)
     git clone git://github.com/mono/xsp.git
@@ -219,6 +229,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf xsp
 
     # Install mod_mono (6b73e850920865b8f6a16f232e555c71ec1cd26a)
     git clone git://github.com/mono/mod_mono.git
@@ -226,9 +237,10 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     ./autogen.sh --prefix=/opt/mono
     make
     sudo make install
+    popd
+    rm -rf mod_mono
     echo \n"Include /etc/apache2/mod_mono.conf" | sudo tee -a /etc/apache2/apache2.conf >/dev/null
     sudo sed -i 's|AddType application/x-asp-net \.aspx|MonoServerPath /opt/mono/bin/mod-mono-server4\n\n&|' /etc/apache2/mod_mono.conf
-    popd
 
     # Install fsharp
     git clone git://github.com/fsharp/fsharp.git
@@ -238,6 +250,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf fsharp
 
     # Install gtk-sharp (gtk#)
     git clone git://github.com/mono/gtk-sharp.git
@@ -247,6 +260,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf gtk-sharp
 
     # Install gnome-sharp (gtk#)
     git clone git://github.com/mono/gnome-sharp.git
@@ -257,6 +271,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf gnome-sharp
 
     # Install gnome-desktop-sharp (gtk#)
     git clone git://github.com/mono/gnome-desktop-sharp.git
@@ -266,6 +281,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     make
     sudo make install
     popd
+    rm -rf gnome-desktop-sharp
 
     # Install monodevelop
     git clone git://github.com/mono/monodevelop.git
@@ -275,6 +291,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo make install
     popd
     cp ~/dotfiles/monodevelop.desktop ~/.local/share/applications/monodevelop.desktop
+    rm -rf monodevelop
 
 <a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
 
@@ -323,7 +340,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     curl -Lo- https://bit.ly/janus-bootstrap | bash
 
-
 ## <a id="configure-command-line-tools"></a>Configure command line tools
 
 <a id="ack"></a>Install and configure [ack](http://betterthangrep.com/):
@@ -344,5 +360,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     chsh -s $(which fish)
     curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
-    mkdir -p ~/.config/fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
+    mkdir -p ~/.config/fish && rm ~/.config/fish/config.fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
     mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
+
