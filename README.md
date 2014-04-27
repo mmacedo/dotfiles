@@ -7,7 +7,7 @@ Designed for my own use, but feel free to use and submit issues and suggestions.
 
 This setup is specifically created for use with [Ubuntu 14.04 LTS Trusty Tahr (AMD64)](http://releases.ubuntu.com/trusty/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
 
-All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
+All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_\(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
 
     /usr/bin/env bash
 
