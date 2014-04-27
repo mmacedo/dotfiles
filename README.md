@@ -57,8 +57,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[dev]="sublime-text vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
     pkgfor[other]="fbreader virtualbox-4.3"
-    pkgfor[web]="opera google-talkplugin skype skype-wrapper"
-    pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick ffmpeg graphviz heroku-toolbelt"
+    pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper"
+    pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
     pkgfor[vcs]="git git-svn mercurial"
     pkgfor[stack]="nodejs openjdk-7-jdk"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
@@ -129,7 +129,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="ruby"></a><a id="rbenv"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
     # Run rbenv-installer
-    curl https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+    curl https://raw.githubusercontent.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
     # Copy Ruby dotfiles
     for rc in ~/dotfiles/{irb,pry,gem}rc; do ln -s $rc ~/.${rc##*/}; done
@@ -142,8 +142,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.1.0
-    rbenv global 2.1.0
+    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.1.1
+    rbenv global 2.1.1
 
     # Install gems
     gem update --system
@@ -167,10 +167,10 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pip install ipython
 
     # Install latest python
-    sudo apt-get build-dep -y python3.3
-    pyenv install 3.3.3
-    pyenv global 3.3.3
-    pyenv shell 3.3.3
+    sudo apt-get build-dep -y python3.4
+    pyenv install 3.4.0
+    pyenv global 3.4.0
+    pyenv shell 3.4.0
     pip install ipython
 
 <a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
@@ -186,8 +186,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(ndenv init -)"
 
     # Install latest node
-    ndenv install v0.11.9
-    ndenv global v0.11.9
+    ndenv install v0.10.26
+    ndenv global v0.10.26
 
     # Install global packages
     npm install -global coffee-script
@@ -296,9 +296,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
 
     # Install scala
-    wget http://www.scala-lang.org/files/archive/scala-2.10.3.tgz
-    tar zxf scala-2.10.3.tgz
-    sudo mv scala-2.10.3 /usr/share/scala
+    wget http://www.scala-lang.org/files/archive/scala-2.11.0.tgz
+    tar zxf scala-2.11.0.tgz
+    sudo mv scala-2.11.0 /usr/share/scala
 
     # Add links to the path
     sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
@@ -322,6 +322,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Copy configuration
     mkdir -p ~/.config/sublime-text-2/Packages/User
+    rm ~/.config/sublime-text-2/Packages/User/{Preferences.sublime-settings,Default\ \(Linux\).sublime-keymap}
     for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-2/Packages/User/; done
 
     # Install package_control package
@@ -359,7 +360,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="fish"></a>Configure [fish](http://fishshell.com/):
 
     chsh -s $(which fish)
-    curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | bash
+    curl -L https://raw.githubusercontent.com/bpinto/oh-my-fish/master/tools/install.fish | fish
     mkdir -p ~/.config/fish && rm ~/.config/fish/config.fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
     mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 
