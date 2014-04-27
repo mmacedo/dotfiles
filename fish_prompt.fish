@@ -1,3 +1,4 @@
+# name: my
 function fish_prompt
   set -l last_status $status
 
@@ -42,6 +43,7 @@ function fish_prompt
 
   # Prompt
   set -l prompt
+  set -l UID (id -u $USER)
   if [ "$UID" = "0" ]
     set prompt "$red# "
   else
@@ -91,29 +93,29 @@ function fish_prompt
   # Ruby stuff
   set -l ruby_version
   if which rbenv >/dev/null ^&1
-    set ruby_version rbenv:(rbenv version-name)
+    set ruby_version ' 'rbenv:(rbenv version-name)
   end
   if null_or_system $ruby_version
-    set ruby_version ruby:(ruby -v | cut -d' ' -f2)
+    set ruby_version ' 'ruby:(ruby -v | cut -d' ' -f2)
   end
 
   # Python stuff
   set -l python_version
   if which pyenv >/dev/null ^&1
-    set python_version pyenv:(pyenv version-name)
+    set python_version ' 'pyenv:(pyenv version-name)
   end
   if null_or_system $python_version
     set -l temp (python --version ^&1)
-    set python_version python:(echo $temp | cut -d' ' -f2)
+    set python_version ' 'python:(echo $temp | cut -d' ' -f2)
   end
 
   # Node.js stuff
   set -l nodejs_version
   if which ndenv >/dev/null ^&1
-    set nodejs_version ndenv:(ndenv version-name)
+    set nodejs_version ' 'ndenv:(ndenv version-name)
   end
   if null_or_system $nodejs_version
-    set nodejs_version node:(node -v)
+    set nodejs_version ' 'node:(node -v)
   end
 
   # Mono stuff
@@ -128,7 +130,7 @@ function fish_prompt
     set scala_version ' 'scala:(scala -version ^&1 | cut -d' ' -f5)
   end
 
-  set -l tech_info "$blue‹$ruby_version $python_version $nodejs_version$mono_version$scala_version›"
+  set -l tech_info "$blue$ruby_version$python_version$nodejs_version$mono_version$scala_version"
 
   # Job count
   set -l job_info
