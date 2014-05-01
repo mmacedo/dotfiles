@@ -340,6 +340,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="vim"></a><a id="janus"></a>Install a [Vim](http://www.vim.org/) [distribution](https://github.com/carlhuda/janus) (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.
 
     curl -Lo- https://bit.ly/janus-bootstrap | bash
+    ln -s ~/dotfiles/vimrc.before ~/.vimrc.before
 
 ## <a id="configure-command-line-tools"></a>Configure command line tools
 

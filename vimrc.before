@@ -1,0 +1,1 @@
+set shell=/bin/sh
