@@ -18,14 +18,14 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Enable partner
     sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
-    
+
     # Enable proposed
-    echo 'deb http://br.archive.ubuntu.com/ubuntu/ saucy-proposed universe main restricted multiverse' | sudo tee -a /etc/apt/sources.list
+    echo 'deb http://br.archive.ubuntu.com/ubuntu/ trusty-proposed universe main restricted multiverse' | sudo tee -a /etc/apt/sources.list
 
     # Add ppa's
     sudo add-apt-repository -y ppa:fish-shell/nightly-master
     sudo add-apt-repository -y ppa:chris-lea/node.js
-    sudo add-apt-repository -y ppa:webupd8team/sublime-text-2
+    sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
     sudo add-apt-repository -y ppa:skype-wrapper/ppa
 
     # Heroku Toolbelt ppa
@@ -54,7 +54,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install packages
     typeset -A pkgfor
-    pkgfor[dev]="sublime-text vim-gtk kdiff3-qt meld guake"
+    pkgfor[dev]="sublime-text-installer vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
     pkgfor[other]="fbreader virtualbox-4.3"
     pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper"
@@ -66,12 +66,12 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar"
     pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
-    
+
     pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
     pkgs2="${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]}"
     pkgs3="${pkgfor[build]} ${pkgfor[db]} ${pkgfor[ubuntu]}"
     pkgs4="${pkgfor[mono]} ${pkgfor[libs]}"
-    
+
     sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 
     # Perform update
@@ -129,7 +129,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="ruby"></a><a id="rbenv"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
     # Run rbenv-installer
-    curl https://raw.githubusercontent.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+    curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
     # Copy Ruby dotfiles
     for rc in ~/dotfiles/{irb,pry,gem}rc; do ln -s $rc ~/.${rc##*/}; done
@@ -318,18 +318,18 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     gconftool-2 --load ~/dotfiles/guake-preferences.xml
 
-<a id="st2"></a>Configure [Sublime Text 2](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 2 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
+<a id="st2"></a>Configure [Sublime Text 3](http://www.sublimetext.com/) and install [Sublime Package Control](http://wbond.net/sublime_packages/package_control) and [URL handler](http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html). First time you open Sublime Text 3 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.
 
     # Copy configuration
-    mkdir -p ~/.config/sublime-text-2/Packages/User
-    rm ~/.config/sublime-text-2/Packages/User/{Preferences.sublime-settings,Default\ \(Linux\).sublime-keymap}
-    for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-2/Packages/User/; done
+    mkdir -p ~/.config/sublime-text-3/Packages/User
+    rm ~/.config/sublime-text-3/Packages/User/{Preferences.sublime-settings,Default\ \(Linux\).sublime-keymap}
+    for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-3/Packages/User/; done
 
     # Install package_control package
-    mkdir -p ~/.config/sublime-text-2/Installed\ Packages
-    curl http://sublime.wbond.net/Package%20Control.sublime-package > ~/.config/sublime-text-2/Installed\ Packages/Package\ Control.sublime-package
+    mkdir -p ~/.config/sublime-text-3/Installed\ Packages
+    curl http://sublime.wbond.net/Package%20Control.sublime-package > ~/.config/sublime-text-3/Installed\ Packages/Package\ Control.sublime-package
 
-    # Install url handler for txtm:// and subl:// with Sublime Text 2
+    # Install url handler for txtm:// and subl:// with Sublime Text 3
     wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
     chmod +x sublime-url-handler
     sudo mv sublime-url-handler /usr/bin/
@@ -360,7 +360,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="fish"></a>Configure [fish](http://fishshell.com/):
 
     chsh -s $(which fish)
-    curl -L https://raw.githubusercontent.com/bpinto/oh-my-fish/master/tools/install.fish | fish
+    curl -L https://raw.github.com/bpinto/oh-my-fish/master/tools/install.fish | fish
     mkdir -p ~/.config/fish && rm ~/.config/fish/config.fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
     mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 

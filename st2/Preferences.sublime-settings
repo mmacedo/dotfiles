@@ -21,5 +21,6 @@
 	"tab_size": 2,
 	"theme": "Phoenix Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"update_check": false
 }
