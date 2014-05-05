@@ -18,6 +18,8 @@
 	"phoenix_color_orange": true,
 	"phoenix_dirty_bottom_bar_orange": true,
 	"phoenix_solid_current_tab": true,
+	"show_encoding": true,
+	"show_line_endings": true,
 	"tab_size": 2,
 	"theme": "Phoenix Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,

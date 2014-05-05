@@ -2,13 +2,9 @@
 	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
-		"Backbone.js",
 		"Better CoffeeScript",
 		"Block Nav",
-		"ChangeQuotes",
 		"Color Highlighter",
-		"Cucumber",
-		"Dotfiles Syntax Highlighting",
 		"eco",
 		"EJS",
 		"fish-shell",
@@ -16,7 +12,6 @@
 		"Haml",
 		"Handlebars",
 		"HTML Mustache",
-		"Inc-Dec-Value",
 		"Incrementor",
 		"INI",
 		"Jade",
@@ -29,16 +24,13 @@
 		"Rails Partial",
 		"RailsCasts Colour Scheme",
 		"Ruby Block Converter",
-		"Ruby on Rails snippets",
 		"Sass",
 		"SCSS",
 		"SideBarEnhancements",
 		"Stylus",
 		"Theme - Phoenix",
 		"ToggleQuotes",
-		"Underscore.js Snippets",
 		"VAlign",
-		"WordCount",
-		"WordHighlight"
+		"WordCount"
 	]
 }
