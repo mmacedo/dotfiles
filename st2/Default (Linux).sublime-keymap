@@ -9,5 +9,5 @@
   { "keys": ["ctrl+q"], "command": "toggle_record_macro" },
   { "keys": ["ctrl+shift+q"], "command": "run_macro" },
 
-  { "keys": ["context_menu", "ctrl+f10"], "command": "context_menu" }
+  { "keys": ["ctrl+f10"], "command": "context_menu" }
 ]

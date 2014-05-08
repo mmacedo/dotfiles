@@ -33,6 +33,8 @@ end
 function newexe -d "create file with +x and #!"
   # guess shebang by file extension
   switch (basename $argv[1])
+    case '*.lua'
+      set sh lua
     case '*.coffee'
       set sh coffee
     case '*.js'
