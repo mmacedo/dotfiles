@@ -6,9 +6,7 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage",
-		"Color Highlighter",
-		"INI"
+		"Vintage"
 	],
 	"indent_guide_options":
 	[
