@@ -92,3 +92,20 @@ function git_update
   if test -z "$branch"; set branch (git symbolic-ref --short HEAD ^/dev/null); end
   git fetch $remote; and git rebase -p $remote/$branch
 end
+
+function encode64
+  set -l format
+  set -l input_file
+  if test (count $argv) -eq 2
+    set format $argv[1]
+    set input_file $argv[2]
+  else
+    set format png
+    set input_file $argv[1]
+  end
+  set -l image_file (mktemp)
+  convert $input_file -format $format $image_file
+  echo -n "url(data:image/$format;base64,"
+  python3 -c 'import sys;import urllib.parse;import base64;print(urllib.parse.quote(base64.b64encode(open(sys.argv[1], "rb").read())),end="")' $image_file
+  echo ")"
+end
