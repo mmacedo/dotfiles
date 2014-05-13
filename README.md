@@ -143,8 +143,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    env CONFIGURE_OPTS="--with-readline-dir=/usr/include/readline" rbenv install 2.1.1
-    rbenv global 2.1.1
+    RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.2
+    rbenv global 2.1.2
 
     # Install gems
     gem update --system
@@ -347,6 +347,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="ack"></a>Install and configure [ack](http://betterthangrep.com/):
 
+    mkdir ~/bin
     curl http://beyondgrep.com/ack-2.04-single-file > ~/bin/ack && chmod 0755 !#:3
     ln -s ~/dotfiles/ackrc ~/.ackrc
 
