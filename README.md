@@ -58,7 +58,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[dev]="sublime-text-installer vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
     pkgfor[other]="fbreader virtualbox-4.3"
-    pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper"
+    pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
     pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
     pkgfor[vcs]="git git-svn mercurial"
     pkgfor[stack]="nodejs openjdk-7-jdk love"
@@ -300,6 +300,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     wget http://www.scala-lang.org/files/archive/scala-2.11.0.tgz
     tar zxf scala-2.11.0.tgz
     sudo mv scala-2.11.0 /usr/share/scala
+    rm scala-2.11.0.tgz
 
     # Add links to the path
     sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
