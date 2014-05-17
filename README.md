@@ -28,6 +28,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
     sudo add-apt-repository -y ppa:skype-wrapper/ppa
     sudo apt-add-repository -y ppa:bartbes/love-stable
+    sudo add-apt-repository -y ppa:danjaredg/jayatana
 
     # Heroku Toolbelt ppa
     wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
@@ -64,7 +65,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[stack]="nodejs openjdk-7-jdk love"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-    pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar"
+    pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar jayatana"
     pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
 
