@@ -27,8 +27,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo add-apt-repository -y ppa:chris-lea/node.js
     sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
     sudo add-apt-repository -y ppa:skype-wrapper/ppa
-    sudo apt-add-repository -y ppa:bartbes/love-stable
+    sudo add-apt-repository -y ppa:bartbes/love-stable
     sudo add-apt-repository -y ppa:danjaredg/jayatana
+    sudo add-apt-repository -y ppa:webupd8team/atom
 
     # Heroku Toolbelt ppa
     wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
@@ -56,7 +57,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install packages
     typeset -A pkgfor
-    pkgfor[dev]="sublime-text-installer vim-gtk kdiff3-qt meld guake"
+    pkgfor[dev]="atom sublime-text-installer vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
     pkgfor[other]="fbreader virtualbox-4.3"
     pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
@@ -368,4 +369,3 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     curl -L https://raw.github.com/bpinto/oh-my-fish/master/tools/install.fish | fish
     mkdir -p ~/.config/fish && rm ~/.config/fish/config.fish && ln -s ~/dotfiles/config.fish ~/.config/fish/
     mkdir -p ~/.oh-my-fish/themes/my && ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
-
