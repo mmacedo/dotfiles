@@ -127,7 +127,7 @@ function fish_prompt
   # Scala stuff
   set -l scala_version
   if which scala >/dev/null ^&1
-    set scala_version ' 'scala:(scala -version ^&1 | cut -d' ' -f5)
+    set scala_version ' 'scala:(scala -version ^&1 | tail -1 | cut -d' ' -f5)
   end
 
   set -l tech_info "$blue$ruby_version$python_version$nodejs_version$mono_version$scala_version"
