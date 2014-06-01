@@ -66,8 +66,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     pkgfor[stack]="nodejs openjdk-7-jdk love lua5.1"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-    pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar jayatana"
-    pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
+    pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
+    pkgfor[mono]="mono-gmcs fsharp monodevelop"
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
 
     pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
@@ -194,107 +194,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install global packages
     npm install -global coffee-script
-
-<a id="mono"></a>Install [mono](http://www.mono-project.com/), [monodevelop](http://monodevelop.com/) and [f#](http://fsharp.org/):
-
-    # Install libgdiplus (c50d1f96348b729aa01768b007cad64fb5937be2)
-    git clone git://github.com/mono/libgdiplus.git
-    pushd libgdiplus
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf libgdiplus
-
-    # Install mono
-    git clone git://github.com/mono/mono.git
-    pushd mono
-    git checkout mono-3.2.5
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf mono
-
-    # Add mono just installed to the path
-    MONO_PREFIX=/opt/mono
-    export DYLD_FALLBACK_LIBRARY_PATH="$MONO_PREFIX/lib:$DYLD_LIBRARY_FALLBACK_PATH"
-    export LD_LIBRARY_PATH="$MONO_PREFIX/lib:$LD_LIBRARY_PATH"
-    export C_INCLUDE_PATH=$MONO_PREFIX/include
-    export ACLOCAL_PATH=$MONO_PREFIX/share/aclocal
-    export PKG_CONFIG_PATH=$MONO_PREFIX/lib/pkgconfig
-    export PATH="$MONO_PREFIX/bin:$PATH"
-
-    # Install xsp (d3a882a489d069adf93f50bec46216b65c72c5c6)
-    git clone git://github.com/mono/xsp.git
-    pushd xsp
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf xsp
-
-    # Install mod_mono (6b73e850920865b8f6a16f232e555c71ec1cd26a)
-    git clone git://github.com/mono/mod_mono.git
-    pushd mod_mono
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf mod_mono
-    echo \n"Include /etc/apache2/mod_mono.conf" | sudo tee -a /etc/apache2/apache2.conf >/dev/null
-    sudo sed -i 's|AddType application/x-asp-net \.aspx|MonoServerPath /opt/mono/bin/mod-mono-server4\n\n&|' /etc/apache2/mod_mono.conf
-
-    # Install fsharp
-    git clone git://github.com/fsharp/fsharp.git
-    pushd fsharp
-    git checkout 3.0.31
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf fsharp
-
-    # Install gtk-sharp (gtk#)
-    git clone git://github.com/mono/gtk-sharp.git
-    pushd gtk-sharp
-    git checkout 2.12.22
-    ./bootstrap-2.12 --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf gtk-sharp
-
-    # Install gnome-sharp (gtk#)
-    git clone git://github.com/mono/gnome-sharp.git
-    pushd gnome-sharp
-    git checkout 2.24.1
-    # Remove TestXfer.cs, TestXfer.exe and Mono.GetOptions from sample/gnomevfs/Makefile.am
-    ./bootstrap-2.24 --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf gnome-sharp
-
-    # Install gnome-desktop-sharp (gtk#)
-    git clone git://github.com/mono/gnome-desktop-sharp.git
-    pushd gnome-desktop-sharp
-    git checkout 2.24.0
-    ./autogen.sh --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    rm -rf gnome-desktop-sharp
-
-    # Install monodevelop
-    git clone git://github.com/mono/monodevelop.git
-    pushd monodevelop
-    ./configure --prefix=/opt/mono
-    make
-    sudo make install
-    popd
-    cp ~/dotfiles/monodevelop.desktop ~/.local/share/applications/monodevelop.desktop
-    rm -rf monodevelop
 
 <a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
 
