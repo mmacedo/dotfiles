@@ -13,9 +13,6 @@ set fish_plugins rake bundler
 # ndenv
 . ~/dotfiles/ndenv.fish
 
-# mono
-. ~/dotfiles/mono.fish
-
 # scala
 . ~/dotfiles/scala.fish
 

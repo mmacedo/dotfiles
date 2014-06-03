@@ -2,7 +2,6 @@
 
 Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.
 
-
 ## <a id="os"></a>Requirements
 
 This setup is specifically created for use with [Ubuntu 14.04 LTS Trusty Tahr (AMD64)](http://releases.ubuntu.com/trusty/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
@@ -10,7 +9,6 @@ This setup is specifically created for use with [Ubuntu 14.04 LTS Trusty Tahr (A
 All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_\(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
 
     /usr/bin/env bash
-
 
 ## <a id="install-software"></a>Install required software
 
@@ -59,7 +57,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     typeset -A pkgfor
     pkgfor[dev]="atom sublime-text-installer vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
-    pkgfor[other]="fbreader virtualbox-4.3"
+    pkgfor[other]="fbreader virtualbox-4.3 vagrant"
     pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
     pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
     pkgfor[vcs]="git git-svn mercurial"
@@ -82,10 +80,17 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
 
-    PHANTOMJS=phantomjs-1.9.1-linux-x86_64
-    curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
-    sudo mv $PHANTOMJS /usr/lib/phantomjs
-    sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
+    PHANTOMJS=phantomjs-1.9.7-linux-x86_64
+    curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
+    sudo mv $PHANTOMJS /usr/local/lib/phantomjs
+    sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+
+<a id="vagrant"></a>Install [Vagrant](http://www.vagrantup.com/) manually and add an [Ubuntu box](https://vagrantcloud.com/ubuntu/trusty64):
+
+    wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
+    sudo dpkg -i vagrant_1.6.3_x86_64.deb
+    rm vagrant_1.6.3_x86_64.deb
+    vagrant box add ubuntu/trusty64
 
 <a id="virtualbox"></a>Configure [VirtualBox](https://www.virtualbox.org/):
 
@@ -93,7 +98,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     wget http://download.virtualbox.org/virtualbox/4.3.6/Oracle_VM_VirtualBox_Extension_Pack-4.3.6-91406.vbox-extpack
     VBoxManage extpack install *.vbox-extpack
     rm *.vbox-extpack
-
 
 ## <a id="configure-development-environment"></a>Configure workspace
 
@@ -121,11 +125,10 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="configure-workspace"></a>Configure workspace:
 
     # Create empty folders on the workspace
-    mkdir -p ~/ws/{etc,st2,rb,js}
+    mkdir -p ~/ws/{etc,st3,rb,js}
 
     # Clone this repository
     git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
-
 
 ## <a id="configure-programming-stacks"></a>Configure programming stacks
 
@@ -200,15 +203,15 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Install scala
     wget http://www.scala-lang.org/files/archive/scala-2.11.0.tgz
     tar zxf scala-2.11.0.tgz
-    sudo mv scala-2.11.0 /usr/share/scala
+    sudo mv scala-2.11.0 /usr/local/share/scala
     rm scala-2.11.0.tgz
 
     # Add links to the path
-    sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
-    sudo ln -s /usr/share/scala/bin/scalac /usr/bin/scalac
-    sudo ln -s /usr/share/scala/bin/fsc /usr/bin/fsc
-    sudo ln -s /usr/share/scala/bin/scaladoc /usr/bin/scaladoc
-    sudo ln -s /usr/share/scala/bin/scalap /usr/bin/scalap
+    sudo ln -s /usr/local/share/scala/bin/scala /usr/local/bin/scala
+    sudo ln -s /usr/local/share/scala/bin/scalac /usr/local/bin/scalac
+    sudo ln -s /usr/local/share/scala/bin/fsc /usr/local/bin/fsc
+    sudo ln -s /usr/local/share/scala/bin/scaladoc /usr/local/bin/scaladoc
+    sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
 
     # Install sbt
     wget http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
@@ -235,9 +238,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Install url handler for txtm:// and subl:// with Sublime Text 3
     wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
     chmod +x sublime-url-handler
-    sudo mv sublime-url-handler /usr/bin/
+    sudo mv sublime-url-handler /usr/local/bin/
     wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
-    sudo mv sublime-url-handler.desktop /usr/share/applications/
+    sudo mv sublime-url-handler.desktop /usr/local/share/applications/
     sudo update-desktop-database
 
 <a id="vim"></a><a id="janus"></a>Install a [Vim](http://www.vim.org/) [distribution](https://github.com/carlhuda/janus) (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.
@@ -249,8 +252,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="ack"></a>Install and configure [ack](http://betterthangrep.com/):
 
-    mkdir ~/bin
-    curl http://beyondgrep.com/ack-2.04-single-file > ~/bin/ack && chmod 0755 !#:3
+    curl http://beyondgrep.com/ack-2.04-single-file | sudo tee /usr/local/bin/ack
+    sudo chmod 0755 /usr/local/bin/ack
     ln -s ~/dotfiles/ackrc ~/.ackrc
 
 <a id="git"></a>Configure [git](http://git-scm.com/):
