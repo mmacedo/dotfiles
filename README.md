@@ -134,6 +134,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="ruby"></a><a id="rbenv"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
+    # Stop errors when on system ruby
+    sudo gem install bundler
+
     # Run rbenv-installer
     curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
@@ -148,8 +151,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.2
-    rbenv global 2.1.2
+    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.5
+    rbenv global 2.1.5
 
     # Install gems
     gem update --system
@@ -168,15 +171,15 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install python 2
     sudo apt-get build-dep -y python2.7
-    pyenv install 2.7.6
-    pyenv shell 2.7.6
+    pyenv install 2.7.9
+    pyenv shell 2.7.9
     pip install ipython
 
     # Install latest python
     sudo apt-get build-dep -y python3.4
-    pyenv install 3.4.0
-    pyenv global 3.4.0
-    pyenv shell 3.4.0
+    pyenv install 3.4.2
+    pyenv global 3.4.2
+    pyenv shell 3.4.2
     pip install ipython
 
 <a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
@@ -192,8 +195,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(ndenv init -)"
 
     # Install latest node
-    ndenv install v0.10.26
-    ndenv global v0.10.26
+    ndenv install v0.11.14
+    ndenv global v0.11.14
 
     # Install global packages
     npm install -global coffee-script
@@ -201,10 +204,10 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 <a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
 
     # Install scala
-    wget http://www.scala-lang.org/files/archive/scala-2.11.0.tgz
-    tar zxf scala-2.11.0.tgz
-    sudo mv scala-2.11.0 /usr/local/share/scala
-    rm scala-2.11.0.tgz
+    wget http://www.scala-lang.org/files/archive/scala-2.11.4.tgz
+    tar zxf scala-2.11.4.tgz
+    sudo mv scala-2.11.4 /usr/local/share/scala
+    rm scala-2.11.4.tgz
 
     # Add links to the path
     sudo ln -s /usr/local/share/scala/bin/scala /usr/local/bin/scala
