@@ -86,7 +86,7 @@ function fish_prompt
 
   function null_or_system
     test -z $argv[1]; and return 0
-    echo $argv[1] | grep 'system$'; and return 0
+    echo $argv[1] | grep 'system$' >/dev/null; and return 0
     return 1
   end
 
