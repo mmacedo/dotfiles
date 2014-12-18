@@ -217,9 +217,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
 
     # Install sbt
-    wget http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
-    sudo dpkg -i sbt.deb
-    rm sbt.deb
+    wget https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
+    sudo dpkg -i sbt-0.13.7.deb
+    rm sbt-0.13.7.deb
 
 ## <a id="install-and-configure-text-editors-and-ides"></a>Configure applications
 
