@@ -103,9 +103,8 @@ function encode64
     set format png
     set input_file $argv[1]
   end
-  set -l image_file (mktemp)
+  set -l image_file (mktemp).$format
   convert $input_file -format $format $image_file
-  echo -n "url(data:image/$format;base64,"
+  echo -n "data:image/$format;base64,"
   python3 -c 'import sys;import urllib.parse;import base64;print(urllib.parse.quote(base64.b64encode(open(sys.argv[1], "rb").read())),end="")' $image_file
-  echo ")"
 end
