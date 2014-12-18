@@ -14,6 +14,11 @@
 		"draw_active",
 		"draw_stack"
 	],
+	"index_exclude_patterns":
+	[
+		"*.sqlite3",
+		"*.log"
+	],
 	"phoenix_color_expanded_folder": true,
 	"phoenix_color_orange": true,
 	"phoenix_dirty_bottom_bar_orange": true,
