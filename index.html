@@ -1,40 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>mmacedo&#39;s dotfiles by mmacedo</title>
+    <meta name="description" content="mmacedo&#39;s dotfiles : My very own scripts ^^">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>mmacedo&#39;s dotfiles</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>mmacedo&#39;s dotfiles</h1>
-        <p>My very own scripts ^^</p>
 
-        <p class="view"><a href="https://github.com/mmacedo/dotfiles">View the Project on GitHub <small>mmacedo/dotfiles</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mmacedo/dotfiles">View on GitHub</a>
 
+          <h1 id="project_title">mmacedo&#39;s dotfiles</h1>
+          <h2 id="project_tagline">My very own scripts ^^</h2>
 
-        <ul>
-          <li><a href="https://github.com/mmacedo/dotfiles/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/mmacedo/dotfiles/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/mmacedo/dotfiles">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mmacedo/dotfiles/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mmacedo/dotfiles/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
-<a name="my-dot-files" class="anchor" href="#my-dot-files"><span class="octicon octicon-link"></span></a><a></a>My dot files</h1>
+<a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="my-dot-files"></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a><a></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="os"></a>Requirements</h2>
 
 <p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/trusty/">Ubuntu 14.04 LTS Trusty Tahr (AMD64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
 
@@ -44,9 +49,10 @@
 </code></pre>
 
 <h2>
-<a name="install-required-software" class="anchor" href="#install-required-software"><span class="octicon octicon-link"></span></a><a></a>Install required software</h2>
+<a id="install-required-software" class="anchor" href="#install-required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="install-software"></a>Install required software</h2>
 
-<p><a></a>Add software sources to install software that are not from Canonical:</p>
+<p><a id="ppa"></a>Add software sources to install software that are not from Canonical:</p>
 
 <pre><code># Enable partner
 sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
@@ -59,7 +65,9 @@ sudo add-apt-repository -y ppa:fish-shell/nightly-master
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:skype-wrapper/ppa
-sudo apt-add-repository -y ppa:bartbes/love-stable
+sudo add-apt-repository -y ppa:bartbes/love-stable
+sudo add-apt-repository -y ppa:danjaredg/jayatana
+sudo add-apt-repository -y ppa:webupd8team/atom
 
 # Heroku Toolbelt ppa
 wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
@@ -78,7 +86,7 @@ wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | s
 sudo add-apt-repository 'deb http://download.virtualbox.org/virtualbox/debian saucy contrib'
 </code></pre>
 
-<p><a></a>Install apt packages:</p>
+<p><a id="apt"></a>Install apt packages:</p>
 
 <pre><code># Update package list
 sudo apt-get update
@@ -88,17 +96,17 @@ sudo apt-get install -y ttf-mscorefonts-installer
 
 # Install packages
 typeset -A pkgfor
-pkgfor[dev]="sublime-text-installer vim-gtk kdiff3-qt meld guake"
+pkgfor[dev]="atom sublime-text-installer vim-gtk kdiff3-qt meld guake"
 pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
-pkgfor[other]="fbreader virtualbox-4.3"
-pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper"
+pkgfor[other]="fbreader virtualbox-4.3 vagrant"
+pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
 pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
 pkgfor[vcs]="git git-svn mercurial"
-pkgfor[stack]="nodejs openjdk-7-jdk love"
+pkgfor[stack]="nodejs openjdk-7-jdk love lua5.1"
 pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
-pkgfor[ubuntu]="ubuntu-restricted-extras aptitude synaptic apt-file python-software-properties p7zip-full p7zip-rar"
-pkgfor[mono]="mono-gmcs apache2-dev libgtk2.0-dev libglade2-dev libglib2.0-dev libgnome2-dev libgnomeui-dev libgnomecanvas2-dev"
+pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
+pkgfor[mono]="mono-gmcs fsharp monodevelop"
 pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
 
 pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
@@ -112,15 +120,23 @@ sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 sudo apt-get dist-upgrade -y
 </code></pre>
 
-<p><a></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
+<p><a id="phantomjs"></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
 
-<pre><code>PHANTOMJS=phantomjs-1.9.1-linux-x86_64
-curl http://phantomjs.googlecode.com/files/$PHANTOMJS.tar.bz2 | tar -xj
-sudo mv $PHANTOMJS /usr/lib/phantomjs
-sudo ln -s /usr/lib/phantomjs/bin/phantomjs /usr/bin/phantomjs
+<pre><code>PHANTOMJS=phantomjs-1.9.7-linux-x86_64
+curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
+sudo mv $PHANTOMJS /usr/local/lib/phantomjs
+sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
 </code></pre>
 
-<p><a></a>Configure <a href="https://www.virtualbox.org/">VirtualBox</a>:</p>
+<p><a id="vagrant"></a>Install <a href="http://www.vagrantup.com/">Vagrant</a> manually and add an <a href="https://vagrantcloud.com/ubuntu/trusty64">Ubuntu box</a>:</p>
+
+<pre><code>wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
+sudo dpkg -i vagrant_1.6.3_x86_64.deb
+rm vagrant_1.6.3_x86_64.deb
+vagrant box add ubuntu/trusty64
+</code></pre>
+
+<p><a id="virtualbox"></a>Configure <a href="https://www.virtualbox.org/">VirtualBox</a>:</p>
 
 <pre><code># Download and Install VirtualBox Extension Pack
 wget http://download.virtualbox.org/virtualbox/4.3.6/Oracle_VM_VirtualBox_Extension_Pack-4.3.6-91406.vbox-extpack
@@ -129,9 +145,10 @@ rm *.vbox-extpack
 </code></pre>
 
 <h2>
-<a name="configure-workspace" class="anchor" href="#configure-workspace"><span class="octicon octicon-link"></span></a><a></a>Configure workspace</h2>
+<a id="configure-workspace" class="anchor" href="#configure-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="configure-development-environment"></a>Configure workspace</h2>
 
-<p><a></a>Configure SSH key:</p>
+<p><a id="ssh"></a>Configure SSH key:</p>
 
 <pre><code># Generate SSH key
 ssh-keygen -t rsa -C "michelpm@gmail.com"
@@ -140,9 +157,9 @@ ssh-keygen -t rsa -C "michelpm@gmail.com"
 xclip -sel clip &lt; ~/.ssh/id_rsa.pub
 </code></pre>
 
-<p><a></a>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
+<p><a id="ssh-github"></a>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
 
-<p><a></a>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
+<p><a id="ssh-heroku"></a>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
 
 <pre><code># Login
 heroku login
@@ -154,21 +171,25 @@ heroku keys:clear
 heroku keys:add
 </code></pre>
 
-<p><a></a>Configure workspace:</p>
+<p><a id="configure-workspace"></a>Configure workspace:</p>
 
 <pre><code># Create empty folders on the workspace
-mkdir -p ~/ws/{etc,st2,rb,js}
+mkdir -p ~/ws/{etc,st3,rb,js}
 
 # Clone this repository
 git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 </code></pre>
 
 <h2>
-<a name="configure-programming-stacks" class="anchor" href="#configure-programming-stacks"><span class="octicon octicon-link"></span></a><a></a>Configure programming stacks</h2>
+<a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="configure-programming-stacks"></a>Configure programming stacks</h2>
 
-<p><a></a><a></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
+<p><a id="ruby"></a><a id="rbenv"></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
-<pre><code># Run rbenv-installer
+<pre><code># Stop errors when on system ruby
+sudo gem install bundler
+
+# Run rbenv-installer
 curl -L https://raw.github.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
 
 # Copy Ruby dotfiles
@@ -182,8 +203,8 @@ eval "$(rbenv init -)"
 rbenv bootstrap-ubuntu-12-04
 
 # Install latest MRI
-RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.2
-rbenv global 2.1.2
+env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.5
+rbenv global 2.1.5
 
 # Install gems
 gem update --system
@@ -192,7 +213,7 @@ rbenv rehash
 pushd ~/dotfiles; bundle install; popd
 </code></pre>
 
-<p><a></a><a></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
+<p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
 
 <pre><code># Install pyenv
 git clone http://github.com/yyuu/pyenv ~/.pyenv
@@ -203,19 +224,19 @@ eval "$(pyenv init -)"
 
 # Install python 2
 sudo apt-get build-dep -y python2.7
-pyenv install 2.7.6
-pyenv shell 2.7.6
+pyenv install 2.7.9
+pyenv shell 2.7.9
 pip install ipython
 
 # Install latest python
 sudo apt-get build-dep -y python3.4
-pyenv install 3.4.0
-pyenv global 3.4.0
-pyenv shell 3.4.0
+pyenv install 3.4.2
+pyenv global 3.4.2
+pyenv shell 3.4.2
 pip install ipython
 </code></pre>
 
-<p><a></a><a></a><a></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
+<p><a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
 
 <pre><code># Install ndenv
 git clone http://github.com/riywo/ndenv ~/.ndenv
@@ -228,144 +249,44 @@ export PATH="$HOME/.ndenv/bin:$PATH"
 eval "$(ndenv init -)"
 
 # Install latest node
-ndenv install v0.10.26
-ndenv global v0.10.26
+ndenv install v0.11.14
+ndenv global v0.11.14
 
 # Install global packages
 npm install -global coffee-script
 </code></pre>
 
-<p><a></a>Install <a href="http://www.mono-project.com/">mono</a>, <a href="http://monodevelop.com/">monodevelop</a> and <a href="http://fsharp.org/">f#</a>:</p>
-
-<pre><code># Install libgdiplus (c50d1f96348b729aa01768b007cad64fb5937be2)
-git clone git://github.com/mono/libgdiplus.git
-pushd libgdiplus
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf libgdiplus
-
-# Install mono
-git clone git://github.com/mono/mono.git
-pushd mono
-git checkout mono-3.2.5
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf mono
-
-# Add mono just installed to the path
-MONO_PREFIX=/opt/mono
-export DYLD_FALLBACK_LIBRARY_PATH="$MONO_PREFIX/lib:$DYLD_LIBRARY_FALLBACK_PATH"
-export LD_LIBRARY_PATH="$MONO_PREFIX/lib:$LD_LIBRARY_PATH"
-export C_INCLUDE_PATH=$MONO_PREFIX/include
-export ACLOCAL_PATH=$MONO_PREFIX/share/aclocal
-export PKG_CONFIG_PATH=$MONO_PREFIX/lib/pkgconfig
-export PATH="$MONO_PREFIX/bin:$PATH"
-
-# Install xsp (d3a882a489d069adf93f50bec46216b65c72c5c6)
-git clone git://github.com/mono/xsp.git
-pushd xsp
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf xsp
-
-# Install mod_mono (6b73e850920865b8f6a16f232e555c71ec1cd26a)
-git clone git://github.com/mono/mod_mono.git
-pushd mod_mono
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf mod_mono
-echo \n"Include /etc/apache2/mod_mono.conf" | sudo tee -a /etc/apache2/apache2.conf &gt;/dev/null
-sudo sed -i 's|AddType application/x-asp-net \.aspx|MonoServerPath /opt/mono/bin/mod-mono-server4\n\n&amp;|' /etc/apache2/mod_mono.conf
-
-# Install fsharp
-git clone git://github.com/fsharp/fsharp.git
-pushd fsharp
-git checkout 3.0.31
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf fsharp
-
-# Install gtk-sharp (gtk#)
-git clone git://github.com/mono/gtk-sharp.git
-pushd gtk-sharp
-git checkout 2.12.22
-./bootstrap-2.12 --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf gtk-sharp
-
-# Install gnome-sharp (gtk#)
-git clone git://github.com/mono/gnome-sharp.git
-pushd gnome-sharp
-git checkout 2.24.1
-# Remove TestXfer.cs, TestXfer.exe and Mono.GetOptions from sample/gnomevfs/Makefile.am
-./bootstrap-2.24 --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf gnome-sharp
-
-# Install gnome-desktop-sharp (gtk#)
-git clone git://github.com/mono/gnome-desktop-sharp.git
-pushd gnome-desktop-sharp
-git checkout 2.24.0
-./autogen.sh --prefix=/opt/mono
-make
-sudo make install
-popd
-rm -rf gnome-desktop-sharp
-
-# Install monodevelop
-git clone git://github.com/mono/monodevelop.git
-pushd monodevelop
-./configure --prefix=/opt/mono
-make
-sudo make install
-popd
-cp ~/dotfiles/monodevelop.desktop ~/.local/share/applications/monodevelop.desktop
-rm -rf monodevelop
-</code></pre>
-
-<p><a></a>Install <a href="http://www.scala-sbt.org/">sbt</a> and <a href="http://www.scala-lang.org/">scala</a>:</p>
+<p><a id="scala"></a>Install <a href="http://www.scala-sbt.org/">sbt</a> and <a href="http://www.scala-lang.org/">scala</a>:</p>
 
 <pre><code># Install scala
-wget http://www.scala-lang.org/files/archive/scala-2.11.0.tgz
-tar zxf scala-2.11.0.tgz
-sudo mv scala-2.11.0 /usr/share/scala
+wget http://www.scala-lang.org/files/archive/scala-2.11.4.tgz
+tar zxf scala-2.11.4.tgz
+sudo mv scala-2.11.4 /usr/local/share/scala
+rm scala-2.11.4.tgz
 
 # Add links to the path
-sudo ln -s /usr/share/scala/bin/scala /usr/bin/scala
-sudo ln -s /usr/share/scala/bin/scalac /usr/bin/scalac
-sudo ln -s /usr/share/scala/bin/fsc /usr/bin/fsc
-sudo ln -s /usr/share/scala/bin/scaladoc /usr/bin/scaladoc
-sudo ln -s /usr/share/scala/bin/scalap /usr/bin/scalap
+sudo ln -s /usr/local/share/scala/bin/scala /usr/local/bin/scala
+sudo ln -s /usr/local/share/scala/bin/scalac /usr/local/bin/scalac
+sudo ln -s /usr/local/share/scala/bin/fsc /usr/local/bin/fsc
+sudo ln -s /usr/local/share/scala/bin/scaladoc /usr/local/bin/scaladoc
+sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
 
 # Install sbt
-wget http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt//0.12.3/sbt.deb
-sudo dpkg -i sbt.deb
-rm sbt.deb
+wget https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
+sudo dpkg -i sbt-0.13.7.deb
+rm sbt-0.13.7.deb
 </code></pre>
 
 <h2>
-<a name="configure-applications" class="anchor" href="#configure-applications"><span class="octicon octicon-link"></span></a><a></a>Configure applications</h2>
+<a id="configure-applications" class="anchor" href="#configure-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="install-and-configure-text-editors-and-ides"></a>Configure applications</h2>
 
-<p><a></a>Configure <a href="http://guake.org/">Guake</a>.</p>
+<p><a id="guake"></a>Configure <a href="http://guake.org/">Guake</a>.</p>
 
 <pre><code>gconftool-2 --load ~/dotfiles/guake-preferences.xml
 </code></pre>
 
-<p><a></a>Configure <a href="http://www.sublimetext.com/">Sublime Text 3</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 3 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
+<p><a id="st2"></a>Configure <a href="http://www.sublimetext.com/">Sublime Text 3</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 3 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
 
 <pre><code># Copy configuration
 mkdir -p ~/.config/sublime-text-3/Packages/User
@@ -379,40 +300,41 @@ curl http://sublime.wbond.net/Package%20Control.sublime-package &gt; ~/.config/s
 # Install url handler for txtm:// and subl:// with Sublime Text 3
 wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler
 chmod +x sublime-url-handler
-sudo mv sublime-url-handler /usr/bin/
+sudo mv sublime-url-handler /usr/local/bin/
 wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
-sudo mv sublime-url-handler.desktop /usr/share/applications/
+sudo mv sublime-url-handler.desktop /usr/local/share/applications/
 sudo update-desktop-database
 </code></pre>
 
-<p><a></a><a></a>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
+<p><a id="vim"></a><a id="janus"></a>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
 
 <pre><code>curl -Lo- https://bit.ly/janus-bootstrap | bash
 ln -s ~/dotfiles/vimrc.before ~/.vimrc.before
 </code></pre>
 
 <h2>
-<a name="configure-command-line-tools" class="anchor" href="#configure-command-line-tools"><span class="octicon octicon-link"></span></a><a></a>Configure command line tools</h2>
+<a id="configure-command-line-tools" class="anchor" href="#configure-command-line-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="configure-command-line-tools"></a>Configure command line tools</h2>
 
-<p><a></a>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
+<p><a id="ack"></a>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
-<pre><code>mkdir ~/bin
-curl http://beyondgrep.com/ack-2.04-single-file &gt; ~/bin/ack &amp;&amp; chmod 0755 !#:3
+<pre><code>curl http://beyondgrep.com/ack-2.04-single-file | sudo tee /usr/local/bin/ack
+sudo chmod 0755 /usr/local/bin/ack
 ln -s ~/dotfiles/ackrc ~/.ackrc
 </code></pre>
 
-<p><a></a>Configure <a href="http://git-scm.com/">git</a>:</p>
+<p><a id="git"></a>Configure <a href="http://git-scm.com/">git</a>:</p>
 
 <pre><code>ln -s ~/dotfiles/gitconfig ~/.gitconfig
 </code></pre>
 
-<p><a></a>Configure <a href="http://mercurial.selenic.com/">hg</a>:</p>
+<p><a id="hg"></a>Configure <a href="http://mercurial.selenic.com/">hg</a>:</p>
 
 <pre><code>hg clone http://bitbucket.org/sjl/hg-prompt/
 ln -s ~/dotfiles/hgrc ~/.hgrc
 </code></pre>
 
-<p><a></a>Configure <a href="http://fishshell.com/">fish</a>:</p>
+<p><a id="fish"></a>Configure <a href="http://fishshell.com/">fish</a>:</p>
 
 <pre><code>chsh -s $(which fish)
 curl -L https://raw.github.com/bpinto/oh-my-fish/master/tools/install.fish | fish
@@ -420,12 +342,16 @@ mkdir -p ~/.config/fish &amp;&amp; rm ~/.config/fish/config.fish &amp;&amp; ln -
 mkdir -p ~/.oh-my-fish/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 </code></pre>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/mmacedo">mmacedo</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">mmacedo&#39;s dotfiles maintained by <a href="https://github.com/mmacedo">mmacedo</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -436,6 +362,7 @@ mkdir -p ~/.oh-my-fish/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
