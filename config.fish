@@ -1,7 +1,7 @@
 # Oh My Fish!
 set fish_path ~/.oh-my-fish
 set fish_theme my
-set fish_plugins rake bundler
+set fish_plugins rake bundler rbenv pyenv ndenv
 . $fish_path/oh-my-fish.fish
 
 # rbenv
