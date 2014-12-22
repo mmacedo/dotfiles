@@ -22,49 +22,65 @@ function open -d "Open path with default application (xdg-open)"
 end
 
 function newfile -d "create folder, file and open it on sublime text"
-  # ensure directory is created
-  mkdir -p (dirname $argv[1])
-  # ensure the file exists
-  touch $argv[1]
-  # open in the editor
-  subl $argv[1]
+  if test (count $argv) -eq 0
+    echo "Usage: newfile FILES" >&2
+    exit 1
+  end
+
+  for file in $argv
+    # ensure directory is created
+    mkdir -p (dirname $file)
+    # ensure the file exists
+    touch $file
+    # open in the editor
+    subl $file
+  end
 end
 
 function newexe -d "create file with +x and #!"
-  # guess shebang by file extension
-  switch (basename $argv[1])
-    case '*.lua'
-      set sh lua
-    case '*.coffee'
-      set sh coffee
-    case '*.js'
-      set sh node
-    # add -mode(compile), it is usually faster
-    case '*.erl'
-      set sh escript\n\n\-mode\(compile\).
-    case '*.scm'
-      set sh racket\n\#lang scheme
-    case '*.rkt'
-      set sh racket\n\#lang racket
-    case '*.rb'
-      set sh ruby
-    case '*.py'
-      set sh python
-    # defaults to bash
-    case '*'
-      set sh bash
+  if test (count $argv) -eq 0
+    echo "Usage: newexe FILES" >&2
+    exit 1
   end
 
-  # ensure directory is created
-  mkdir -p (dirname $argv[1])
-  # create the file with the shebang
-  if not test -f $argv[1]
-    echo -n \#\!/usr/bin/env {$sh}\n\n > $argv[1]
+  for file in $argv
+    # guess shebang by file extension
+    switch (basename $file)
+      case '*.lua'
+        set sh lua
+      case '*.coffee'
+        set sh coffee
+      case '*.js'
+        set sh node
+      # add -mode(compile), it is usually faster
+      case '*.erl'
+        set sh escript\n\n\-mode\(compile\).
+      case '*.scm'
+        set sh racket\n\#lang scheme
+      case '*.rkt'
+        set sh racket\n\#lang racket
+      case '*.rb'
+        set sh ruby
+      case '*.py'
+        set sh python
+      case '*.fish'
+        set sh fish
+      # defaults to bash
+      case '*'
+        set sh bash
+    end
+
+    # ensure directory is created
+    mkdir -p (dirname $file)
+    # create the file with the shebang
+    if not test -f $file
+      echo -n \#\!/usr/bin/env {$sh}\n\n > $file
+    end
+    # add permissions to execute
+    chmod +x $file
+    # open in the editor
+    subl $file
   end
-  # add permissions to execute
-  chmod +x $argv[1]
-  # open in the editor
-  subl $argv[1]
 end
 
 function mvtodir -d "move files with last argument guaranteed to be a directory"
