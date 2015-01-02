@@ -1,5 +1,14 @@
 {
 	"auto_upgrade_last_run": null,
+	"in_process_packages":
+	[
+	],
+	"installed_dependencies":
+	[
+		"0_package_control_loader",
+		"bz2",
+		"ssl-linux"
+	],
 	"installed_packages":
 	[
 		"Better CoffeeScript",
@@ -19,6 +28,7 @@
 		"LiveReload",
 		"Markdown Preview",
 		"Package Control",
+		"Pretty JSON",
 		"Racket",
 		"Rails Partial",
 		"RailsCasts Colour Scheme",
