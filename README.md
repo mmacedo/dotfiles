@@ -151,8 +151,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.1.5
-    rbenv global 2.1.5
+    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.0
+    rbenv global 2.2.0
 
     # Install gems
     gem update --system
