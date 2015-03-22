@@ -80,7 +80,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 <a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
 
-    PHANTOMJS=phantomjs-1.9.7-linux-x86_64
+    PHANTOMJS=phantomjs-1.9.8-linux-x86_64
     curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
     sudo mv $PHANTOMJS /usr/local/lib/phantomjs
     sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
@@ -151,8 +151,8 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv bootstrap-ubuntu-12-04
 
     # Install latest MRI
-    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.0
-    rbenv global 2.2.0
+    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.1
+    rbenv global 2.2.1
 
     # Install gems
     gem update --system
@@ -195,11 +195,11 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(ndenv init -)"
 
     # Install latest node
-    ndenv install v0.11.14
-    ndenv global v0.11.14
+    ndenv install v0.12.0
+    ndenv global v0.12.0
 
     # Install global packages
-    npm install -global coffee-script
+    npm install -global coffee-script bower
 
 <a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
 
