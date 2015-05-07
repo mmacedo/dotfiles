@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="mmacedo&#39;s dotfiles : My very own scripts ^^">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>mmacedo&#39;s dotfiles</title>
+    <meta charset="UTF-8">
+    <title>mmacedo&#39;s dotfiles by mmacedo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">mmacedo&#39;s dotfiles</h1>
+      <h2 class="project-tagline">My very own scripts ^^</h2>
+      <a href="https://github.com/mmacedo/dotfiles" class="btn">View on GitHub</a>
+      <a href="https://github.com/mmacedo/dotfiles/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/mmacedo/dotfiles/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/mmacedo/dotfiles">View on GitHub</a>
-
-          <h1 id="project_title">mmacedo&#39;s dotfiles</h1>
-          <h2 id="project_tagline">My very own scripts ^^</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/mmacedo/dotfiles/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/mmacedo/dotfiles/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="my-dot-files"></a>My dot files</h1>
 
@@ -41,7 +29,7 @@
 <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="os"></a>Requirements</h2>
 
-<p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/trusty/">Ubuntu 14.04 LTS Trusty Tahr (AMD64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
+<p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/vivid/">Ubuntu 15.04 Vivid Vervet (AMD64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
 
 <p>All commands below are meant to run on <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">bash</a> (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if <code>echo $0</code> doesn't print <code>bash</code>):</p>
 
@@ -69,6 +57,9 @@ sudo add-apt-repository -y ppa:bartbes/love-stable
 sudo add-apt-repository -y ppa:danjaredg/jayatana
 sudo add-apt-repository -y ppa:webupd8team/atom
 
+# sbt
+echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+
 # Heroku Toolbelt ppa
 wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
 sudo add-apt-repository 'deb http://toolbelt.heroku.com/ubuntu ./'
@@ -94,20 +85,23 @@ sudo apt-get update
 # Install this package first, because it requires manual interaction
 sudo apt-get install -y ttf-mscorefonts-installer
 
+# A GPG key has not been published for this repository
+sudo apt-get install -y --force-yes sbt
+
 # Install packages
 typeset -A pkgfor
 pkgfor[dev]="atom sublime-text-installer vim-gtk kdiff3-qt meld guake"
 pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
-pkgfor[other]="fbreader virtualbox-4.3 vagrant"
+pkgfor[other]="fbreader virtualbox-4.3"
 pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
 pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
 pkgfor[vcs]="git git-svn mercurial"
-pkgfor[stack]="nodejs openjdk-7-jdk love lua5.1"
+pkgfor[stack]="nodejs openjdk-8-jdk sbt love lua5.1"
 pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
 pkgfor[mono]="mono-gmcs fsharp monodevelop"
-pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
+pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev zlib1g-dev libssl-dev libxml2 libxml2-dev libxslt1-dev tklib"
 
 pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
 pkgs2="${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]}"
@@ -120,20 +114,12 @@ sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 sudo apt-get dist-upgrade -y
 </code></pre>
 
-<p><a id="phantomjs"></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since apt package is too old:</p>
+<p><a id="phantomjs"></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since the apt package is usually many versions behind:</p>
 
-<pre><code>PHANTOMJS=phantomjs-1.9.7-linux-x86_64
+<pre><code>PHANTOMJS=phantomjs-1.9.8-linux-x86_64
 curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
 sudo mv $PHANTOMJS /usr/local/lib/phantomjs
 sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
-</code></pre>
-
-<p><a id="vagrant"></a>Install <a href="http://www.vagrantup.com/">Vagrant</a> manually and add an <a href="https://vagrantcloud.com/ubuntu/trusty64">Ubuntu box</a>:</p>
-
-<pre><code>wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
-sudo dpkg -i vagrant_1.6.3_x86_64.deb
-rm vagrant_1.6.3_x86_64.deb
-vagrant box add ubuntu/trusty64
 </code></pre>
 
 <p><a id="virtualbox"></a>Configure <a href="https://www.virtualbox.org/">VirtualBox</a>:</p>
@@ -184,7 +170,7 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 <a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="configure-programming-stacks"></a>Configure programming stacks</h2>
 
-<p><a id="ruby"></a><a id="rbenv"></a>Install several <a href="https://github.com/sstephenson/rbenv">rbenv</a> plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
+<p><a id="ruby"></a><a id="rbenv"></a>Install <a href="https://github.com/sstephenson/rbenv">rbenv</a> and several plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
 <pre><code># Stop errors when on system ruby
 sudo gem install bundler
@@ -199,12 +185,9 @@ for rc in ~/dotfiles/{irb,pry,gem}rc; do ln -s $rc ~/.${rc##*/}; done
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# Install dependencies for ruby
-rbenv bootstrap-ubuntu-12-04
-
 # Install latest MRI
-env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.0
-rbenv global 2.2.0
+env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.2
+rbenv global 2.2.2
 
 # Install gems
 gem update --system
@@ -213,7 +196,7 @@ rbenv rehash
 pushd ~/dotfiles; bundle install; popd
 </code></pre>
 
-<p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a>:</p>
+<p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a> 2 and 3:</p>
 
 <pre><code># Install pyenv
 git clone http://github.com/yyuu/pyenv ~/.pyenv
@@ -222,21 +205,24 @@ git clone http://github.com/yyuu/pyenv ~/.pyenv
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Install dependencies for python 2 and 3
+sudo apt-get build-dep -y python2.7 python3.4
+
 # Install python 2
-sudo apt-get build-dep -y python2.7
 pyenv install 2.7.9
 pyenv shell 2.7.9
+pip install --upgrade pip
 pip install ipython
 
 # Install latest python
-sudo apt-get build-dep -y python3.4
-pyenv install 3.4.2
-pyenv global 3.4.2
-pyenv shell 3.4.2
+pyenv install 3.4.3
+pyenv global 3.4.3
+pyenv shell 3.4.3
+pip install --upgrade pip
 pip install ipython
 </code></pre>
 
-<p><a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and install the latest <a href="http://nodejs.org/">Node.js</a>:</p>
+<p><a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and <a href="http://github.com/riywo/node-build">node-build</a> build the latest <a href="http://nodejs.org/">Node.js</a>:</p>
 
 <pre><code># Install ndenv
 git clone http://github.com/riywo/ndenv ~/.ndenv
@@ -249,20 +235,20 @@ export PATH="$HOME/.ndenv/bin:$PATH"
 eval "$(ndenv init -)"
 
 # Install latest node
-ndenv install v0.11.14
-ndenv global v0.11.14
+ndenv install v0.12.2
+ndenv global v0.12.2
 
 # Install global packages
-npm install -global coffee-script
+npm install -global coffee-script bower
 </code></pre>
 
-<p><a id="scala"></a>Install <a href="http://www.scala-sbt.org/">sbt</a> and <a href="http://www.scala-lang.org/">scala</a>:</p>
+<p><a id="scala"></a><a id="sbt"></a>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
 
 <pre><code># Install scala
-wget http://www.scala-lang.org/files/archive/scala-2.11.4.tgz
-tar zxf scala-2.11.4.tgz
-sudo mv scala-2.11.4 /usr/local/share/scala
-rm scala-2.11.4.tgz
+wget http://downloads.typesafe.com/scala/2.12.0-M1/scala-2.12.0-M1.tgz
+tar zxf scala-2.12.0-M1.tgz
+sudo mv scala-2.12.0-M1 /usr/local/share/scala
+rm scala-2.12.0-M1.tgz
 
 # Add links to the path
 sudo ln -s /usr/local/share/scala/bin/scala /usr/local/bin/scala
@@ -270,11 +256,6 @@ sudo ln -s /usr/local/share/scala/bin/scalac /usr/local/bin/scalac
 sudo ln -s /usr/local/share/scala/bin/fsc /usr/local/bin/fsc
 sudo ln -s /usr/local/share/scala/bin/scaladoc /usr/local/bin/scaladoc
 sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
-
-# Install sbt
-wget https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
-sudo dpkg -i sbt-0.13.7.deb
-rm sbt-0.13.7.deb
 </code></pre>
 
 <h2>
@@ -291,7 +272,7 @@ rm sbt-0.13.7.deb
 <pre><code># Copy configuration
 mkdir -p ~/.config/sublime-text-3/Packages/User
 rm ~/.config/sublime-text-3/Packages/User/{Preferences.sublime-settings,Default\ \(Linux\).sublime-keymap}
-for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-3/Packages/User/; done
+for file in ~/dotfiles/st3/*; do ln -s "$file" ~/.config/sublime-text-3/Packages/User/; done
 
 # Install package_control package
 mkdir -p ~/.config/sublime-text-3/Installed\ Packages
@@ -302,6 +283,7 @@ wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-u
 chmod +x sublime-url-handler
 sudo mv sublime-url-handler /usr/local/bin/
 wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
+sudo mkdir -p /usr/local/share/applications/
 sudo mv sublime-url-handler.desktop /usr/local/share/applications/
 sudo update-desktop-database
 </code></pre>
@@ -341,18 +323,16 @@ curl -L https://raw.github.com/bpinto/oh-my-fish/master/tools/install.fish | fis
 mkdir -p ~/.config/fish &amp;&amp; rm ~/.config/fish/config.fish &amp;&amp; ln -s ~/dotfiles/config.fish ~/.config/fish/
 mkdir -p ~/.oh-my-fish/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
 </code></pre>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">mmacedo&#39;s dotfiles maintained by <a href="https://github.com/mmacedo">mmacedo</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/mmacedo/dotfiles">mmacedo&#39;s dotfiles</a> is maintained by <a href="https://github.com/mmacedo">mmacedo</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-              <script type="text/javascript">
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -363,6 +343,6 @@ mkdir -p ~/.oh-my-fish/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/
             } catch(err) {}
           </script>
 
-
   </body>
 </html>
+
