@@ -1,8 +1,8 @@
 {
-	"color_scheme": "Packages/RailsCasts Colour Scheme/RailsCastsColorScheme.tmTheme",
+	"color_scheme": "Packages/Railscasts Extended/Railscasts Extended.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Ubuntu Mono",
-	"font_size": 12,
+	"font_size": 10,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -17,7 +17,8 @@
 	"index_exclude_patterns":
 	[
 		"*.sqlite3",
-		"*.log"
+		"*.log",
+		"/home/michel/ws/blog/_deploy*"
 	],
 	"phoenix_color_expanded_folder": true,
 	"phoenix_color_orange": true,

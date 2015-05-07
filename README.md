@@ -4,7 +4,7 @@ Designed for my own use, but feel free to use and submit issues and suggestions.
 
 ## <a id="os"></a>Requirements
 
-This setup is specifically created for use with [Ubuntu 14.04 LTS Trusty Tahr (AMD64)](http://releases.ubuntu.com/trusty/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
+This setup is specifically created for use with [Ubuntu 15.04 Vivid Vervet (AMD64)](http://releases.ubuntu.com/vivid/), to use with other versions or distributions just replace the [APT](https://en.wikipedia.org/wiki/Advanced_Packaging_Tool) calls and the [Ubuntu repositories and packages](https://help.ubuntu.com/community/Repositories/Ubuntu).
 
 All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash_\(Unix_shell\)) (default shell on Ubuntu). Open a terminal with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>t</kbd>. To open bash (if `echo $0` doesn't print `bash`):
 
@@ -28,6 +28,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo add-apt-repository -y ppa:bartbes/love-stable
     sudo add-apt-repository -y ppa:danjaredg/jayatana
     sudo add-apt-repository -y ppa:webupd8team/atom
+
+    # sbt
+    echo "deb http://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 
     # Heroku Toolbelt ppa
     wget -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
@@ -53,20 +56,23 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Install this package first, because it requires manual interaction
     sudo apt-get install -y ttf-mscorefonts-installer
 
+    # A GPG key has not been published for this repository
+    sudo apt-get install -y --force-yes sbt
+
     # Install packages
     typeset -A pkgfor
     pkgfor[dev]="atom sublime-text-installer vim-gtk kdiff3-qt meld guake"
     pkgfor[draw]="gimp gimp-gmic gimp-plugin-registry pinta inkscape shutter"
-    pkgfor[other]="fbreader virtualbox-4.3 vagrant"
+    pkgfor[other]="fbreader virtualbox-4.3"
     pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
     pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
     pkgfor[vcs]="git git-svn mercurial"
-    pkgfor[stack]="nodejs openjdk-7-jdk love lua5.1"
+    pkgfor[stack]="nodejs openjdk-8-jdk sbt love lua5.1"
     pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
     pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
     pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
     pkgfor[mono]="mono-gmcs fsharp monodevelop"
-    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev libssl-dev libxslt1-dev"
+    pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev zlib1g-dev libssl-dev libxml2 libxml2-dev libxslt1-dev tklib"
 
     pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
     pkgs2="${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]}"
@@ -78,19 +84,12 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Perform update
     sudo apt-get dist-upgrade -y
 
-<a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since apt package is too old:
+<a id="phantomjs"></a>Install [PhantomJS](http://phantomjs.org/) manually, since the apt package is usually many versions behind:
 
     PHANTOMJS=phantomjs-1.9.8-linux-x86_64
     curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
     sudo mv $PHANTOMJS /usr/local/lib/phantomjs
     sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
-
-<a id="vagrant"></a>Install [Vagrant](http://www.vagrantup.com/) manually and add an [Ubuntu box](https://vagrantcloud.com/ubuntu/trusty64):
-
-    wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
-    sudo dpkg -i vagrant_1.6.3_x86_64.deb
-    rm vagrant_1.6.3_x86_64.deb
-    vagrant box add ubuntu/trusty64
 
 <a id="virtualbox"></a>Configure [VirtualBox](https://www.virtualbox.org/):
 
@@ -132,7 +131,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
 ## <a id="configure-programming-stacks"></a>Configure programming stacks
 
-<a id="ruby"></a><a id="rbenv"></a>Install several [rbenv](https://github.com/sstephenson/rbenv) plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
+<a id="ruby"></a><a id="rbenv"></a>Install [rbenv](https://github.com/sstephenson/rbenv) and several plugins with [rbenv-installer](https://github.com/fesplugas/rbenv-installer) and build the latest [MRI/CRuby](http://www.ruby-lang.org/):
 
     # Stop errors when on system ruby
     sudo gem install bundler
@@ -147,12 +146,9 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     export PATH="$HOME/.rbenv/bin:$PATH"
     eval "$(rbenv init -)"
 
-    # Install dependencies for ruby
-    rbenv bootstrap-ubuntu-12-04
-
     # Install latest MRI
-    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.1
-    rbenv global 2.2.1
+    env RUBY_CONFIGURE_OPTS=--with-readline-dir="/usr/lib/libreadline.so" rbenv install 2.2.2
+    rbenv global 2.2.2
 
     # Install gems
     gem update --system
@@ -160,7 +156,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     rbenv rehash
     pushd ~/dotfiles; bundle install; popd
 
-<a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/):
+<a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/) 2 and 3:
 
     # Install pyenv
     git clone http://github.com/yyuu/pyenv ~/.pyenv
@@ -169,20 +165,23 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
 
+    # Install dependencies for python 2 and 3
+    sudo apt-get build-dep -y python2.7 python3.4
+
     # Install python 2
-    sudo apt-get build-dep -y python2.7
     pyenv install 2.7.9
     pyenv shell 2.7.9
+    pip install --upgrade pip
     pip install ipython
 
     # Install latest python
-    sudo apt-get build-dep -y python3.4
-    pyenv install 3.4.2
-    pyenv global 3.4.2
-    pyenv shell 3.4.2
+    pyenv install 3.4.3
+    pyenv global 3.4.3
+    pyenv shell 3.4.3
+    pip install --upgrade pip
     pip install ipython
 
-<a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and install the latest [Node.js](http://nodejs.org/):
+<a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install [ndenv](https://github.com/riywo/ndenv) and [node-build](http://github.com/riywo/node-build) build the latest [Node.js](http://nodejs.org/):
 
     # Install ndenv
     git clone http://github.com/riywo/ndenv ~/.ndenv
@@ -195,19 +194,19 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     eval "$(ndenv init -)"
 
     # Install latest node
-    ndenv install v0.12.0
-    ndenv global v0.12.0
+    ndenv install v0.12.2
+    ndenv global v0.12.2
 
     # Install global packages
     npm install -global coffee-script bower
 
-<a id="scala"></a>Install [sbt](http://www.scala-sbt.org/) and [scala](http://www.scala-lang.org/):
+<a id="scala"></a><a id="sbt"></a>Install [scala](http://www.scala-lang.org/):
 
     # Install scala
-    wget http://www.scala-lang.org/files/archive/scala-2.11.4.tgz
-    tar zxf scala-2.11.4.tgz
-    sudo mv scala-2.11.4 /usr/local/share/scala
-    rm scala-2.11.4.tgz
+    wget http://downloads.typesafe.com/scala/2.12.0-M1/scala-2.12.0-M1.tgz
+    tar zxf scala-2.12.0-M1.tgz
+    sudo mv scala-2.12.0-M1 /usr/local/share/scala
+    rm scala-2.12.0-M1.tgz
 
     # Add links to the path
     sudo ln -s /usr/local/share/scala/bin/scala /usr/local/bin/scala
@@ -215,11 +214,6 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     sudo ln -s /usr/local/share/scala/bin/fsc /usr/local/bin/fsc
     sudo ln -s /usr/local/share/scala/bin/scaladoc /usr/local/bin/scaladoc
     sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
-
-    # Install sbt
-    wget https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb
-    sudo dpkg -i sbt-0.13.7.deb
-    rm sbt-0.13.7.deb
 
 ## <a id="install-and-configure-text-editors-and-ides"></a>Configure applications
 
@@ -232,7 +226,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     # Copy configuration
     mkdir -p ~/.config/sublime-text-3/Packages/User
     rm ~/.config/sublime-text-3/Packages/User/{Preferences.sublime-settings,Default\ \(Linux\).sublime-keymap}
-    for file in ~/dotfiles/st2/*; do ln -s "$file" ~/.config/sublime-text-3/Packages/User/; done
+    for file in ~/dotfiles/st3/*; do ln -s "$file" ~/.config/sublime-text-3/Packages/User/; done
 
     # Install package_control package
     mkdir -p ~/.config/sublime-text-3/Installed\ Packages
@@ -243,6 +237,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     chmod +x sublime-url-handler
     sudo mv sublime-url-handler /usr/local/bin/
     wget https://raw.github.com/MrZYX/PKGBUILDs/master/sublime-url-handler/sublime-url-handler.desktop
+    sudo mkdir -p /usr/local/share/applications/
     sudo mv sublime-url-handler.desktop /usr/local/share/applications/
     sudo update-desktop-database
 
