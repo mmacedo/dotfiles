@@ -155,6 +155,7 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
     gem install bundler
     rbenv rehash
     pushd ~/dotfiles; bundle install; popd
+    gem update
 
 <a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/) 2 and 3:
 

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'thor'
+gem 'rails'
 
 # for bundler
 gem 'ruby-graphviz'
@@ -11,6 +12,8 @@ gem 'pry'
 gem 'awesome_print'
 gem 'pry-byebug'
 gem 'pry-stack_explorer'
+gem 'pry-rescue'
+
 gem 'ruby-prof'
 
 # db
