@@ -186,10 +186,13 @@ rbenv global 2.2.2
 
 # Install gems
 gem update --system
+gem update
 gem install bundler
 rbenv rehash
 pushd ~/dotfiles; bundle install; popd
-gem update
+
+# Install rails and test the installation of some gems with dependencies
+gem install rails mongoid pg sqlite3 therubyracer bson_ext yajl-ruby nokogiri
 </code></pre>
 
 <p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a> 2 and 3:</p>
