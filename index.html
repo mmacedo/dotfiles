@@ -20,14 +20,12 @@
 
     <section class="main-content">
       <h1>
-<a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="my-dot-files"></a>My dot files</h1>
+<a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="my-dot-files"></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
 
 <h2>
-<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="os"></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="os"></a>Requirements</h2>
 
 <p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/vivid/">Ubuntu 15.04 Vivid Vervet (AMD64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
 
@@ -37,8 +35,7 @@
 </code></pre>
 
 <h2>
-<a id="install-required-software" class="anchor" href="#install-required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="install-software"></a>Install required software</h2>
+<a id="install-required-software" class="anchor" href="#install-required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="install-software"></a>Install required software</h2>
 
 <p><a id="ppa"></a>Add software sources to install software that are not from Canonical:</p>
 
@@ -131,8 +128,7 @@ rm *.vbox-extpack
 </code></pre>
 
 <h2>
-<a id="configure-workspace" class="anchor" href="#configure-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="configure-development-environment"></a>Configure workspace</h2>
+<a id="configure-workspace" class="anchor" href="#configure-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-development-environment"></a>Configure workspace</h2>
 
 <p><a id="ssh"></a>Configure SSH key:</p>
 
@@ -167,8 +163,7 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 </code></pre>
 
 <h2>
-<a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="configure-programming-stacks"></a>Configure programming stacks</h2>
+<a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-programming-stacks"></a>Configure programming stacks</h2>
 
 <p><a id="ruby"></a><a id="rbenv"></a>Install <a href="https://github.com/sstephenson/rbenv">rbenv</a> and several plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
@@ -194,6 +189,7 @@ gem update --system
 gem install bundler
 rbenv rehash
 pushd ~/dotfiles; bundle install; popd
+gem update
 </code></pre>
 
 <p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a> 2 and 3:</p>
@@ -259,8 +255,7 @@ sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
 </code></pre>
 
 <h2>
-<a id="configure-applications" class="anchor" href="#configure-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="install-and-configure-text-editors-and-ides"></a>Configure applications</h2>
+<a id="configure-applications" class="anchor" href="#configure-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="install-and-configure-text-editors-and-ides"></a>Configure applications</h2>
 
 <p><a id="guake"></a>Configure <a href="http://guake.org/">Guake</a>.</p>
 
@@ -295,8 +290,7 @@ ln -s ~/dotfiles/vimrc.before ~/.vimrc.before
 </code></pre>
 
 <h2>
-<a id="configure-command-line-tools" class="anchor" href="#configure-command-line-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="configure-command-line-tools"></a>Configure command line tools</h2>
+<a id="configure-command-line-tools" class="anchor" href="#configure-command-line-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-command-line-tools"></a>Configure command line tools</h2>
 
 <p><a id="ack"></a>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
