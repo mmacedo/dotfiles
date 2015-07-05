@@ -1,22 +1,39 @@
 begin
+  require 'unicode'
+rescue LoadError
+  puts "Install 'unicode'"
+end
+
+begin
   require 'awesome_print'
-rescue LoadError => e
-  puts "Install '#{e.path}'"
+rescue LoadError
+  puts "Install 'awesome_print'"
 end
 
 def pry?; !!defined? Pry; end
 def mri?; !!defined? RUBY_ENGINE and RUBY_ENGINE == "ruby"; end
 def jruby?; !!defined? JRuby; end
 
-if pry? and mri?
+if pry?
+  # Some plugins conflict, so loading all at once is dumb
+  Pry.config.should_load_plugins = false
 
-  def debug
-    require 'pry-byebug'
-    require 'pry-stack_explorer'
-  rescue LoadError
-    puts "Install 'pry-byebug' and 'pry-stack_explorer'"
+  if mri?
+    def start_debugging
+      require 'pry-byebug'
+      undefine_method :start_rescuing
+    rescue LoadError
+      puts "Install 'pry-byebug'"
+    end
   end
 
+  def start_rescuing
+    require 'pry-rescue'
+    require 'pry-stack_explorer'
+    undefine_method :start_debugging
+  rescue LoadError
+    puts "Install 'pry-rescue' and 'pry-stack_explorer'"
+  end
 end
 
 if mri?

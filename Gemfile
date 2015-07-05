@@ -2,27 +2,20 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'thor'
-gem 'rails'
 
 # for bundler
 gem 'ruby-graphviz'
 
 # for pry
 gem 'pry'
-gem 'awesome_print'
+# pry-byebug
 gem 'pry-byebug'
-gem 'pry-stack_explorer'
+# pry-rescue
 gem 'pry-rescue'
+gem 'pry-stack_explorer'
 
+# for ruby_utils.rb (imported on .irbrc and .pryrc)
+gem 'awesome_print'
 gem 'ruby-prof'
+gem 'unicode'
 
-# db
-gem 'mongoid'
-gem 'pg'
-gem 'sqlite3'
-
-# C gems
-gem 'therubyracer'
-gem 'bson_ext'
-gem 'yajl-ruby'
-gem 'nokogiri'

@@ -152,10 +152,13 @@ All commands below are meant to run on [bash](https://en.wikipedia.org/wiki/Bash
 
     # Install gems
     gem update --system
+    gem update
     gem install bundler
     rbenv rehash
     pushd ~/dotfiles; bundle install; popd
-    gem update
+
+    # Install rails and test the installation of some gems with dependencies
+    gem install rails mongoid pg sqlite3 therubyracer bson_ext yajl-ruby nokogiri
 
 <a id="pyenv"></a><a id="python"></a>Install [pyenv](https://github.com/yyuu/pyenv) and build the latest [Python](http://www.python.org/) 2 and 3:
 
