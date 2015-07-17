@@ -16,10 +16,11 @@
 	],
 	"index_exclude_patterns":
 	[
-		"_deploy*",
+		"_deploy",
 		"node_modules",
 		"*.log",
-		"*.sqlite3"
+		"*.sqlite3",
+		".pygments-cache"
 	],
 	"phoenix_color_expanded_folder": true,
 	"phoenix_color_orange": true,
