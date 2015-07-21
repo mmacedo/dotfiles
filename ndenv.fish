@@ -33,11 +33,11 @@ function __fish_ndenv_executables
   ndenv exec --complete
 end
 
-function __fish_ndenv_installed_rubies
+function __fish_ndenv_installed_nodes
   ndenv versions --bare
 end
 
-function __fish_ndenv_official_rubies
+function __fish_ndenv_official_nodes
   node-build --definitions
 end
 
@@ -57,8 +57,8 @@ complete -f -c ndenv -n '__fish_ndenv_needs_command' -a exec
 complete -f -c ndenv -n '__fish_ndenv_using_command exec' -a '(__fish_ndenv_executables)'
 
 ### global
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a global -d 'Set or show the global Ruby version'
-complete -f -c ndenv -n '__fish_ndenv_using_command global' -a '(__fish_ndenv_installed_rubies)'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a global -d 'Set or show the global node version'
+complete -f -c ndenv -n '__fish_ndenv_using_command global' -a '(__fish_ndenv_installed_nodes)'
 
 ### help
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a help
@@ -71,11 +71,11 @@ complete -f -c ndenv -n '__fish_ndenv_needs_command' -a init
 
 ### install
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a install -d 'Install a node version'
-complete -f -c ndenv -n '__fish_ndenv_using_command install' -a '(__fish_ndenv_official_rubies)'
+complete -f -c ndenv -n '__fish_ndenv_using_command install' -a '(__fish_ndenv_official_nodes)'
 
 ### local
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a local -d 'Set or show the local directory-specific Ruby version'
-complete -f -c ndenv -n '__fish_ndenv_using_command local' -a '(__fish_ndenv_installed_rubies)'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a local -d 'Set or show the local directory-specific node version'
+complete -f -c ndenv -n '__fish_ndenv_using_command local' -a '(__fish_ndenv_installed_nodes)'
 
 ### prefix
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a prefix -d 'Shows a node version installed folder'
@@ -88,15 +88,15 @@ complete -f -c ndenv -n '__fish_ndenv_needs_command' -a rehash -d 'Rehash ndenv 
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a root -d 'ndenv root folder'
 
 ### shell
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a shell -d 'Set or show the shell-specific Ruby version'
-complete -f -c ndenv -n '__fish_ndenv_using_command shell' -a '--unset (__fish_ndenv_installed_rubies)'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a shell -d 'Set or show the shell-specific node version'
+complete -f -c ndenv -n '__fish_ndenv_using_command shell' -a '--unset (__fish_ndenv_installed_nodes)'
 
 ### shims
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a shims
 complete -f -c ndenv -n '__fish_ndenv_using_command shims' -a '--short'
 
 ### version
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a version  -d 'Show the current Ruby version'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a version  -d 'Show the current node version'
 
 ### version-file
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a version-file
@@ -114,12 +114,12 @@ complete -f -c ndenv -n '__fish_ndenv_needs_command' -a version-name
 complete -f -c ndenv -n '__fish_ndenv_needs_command' -a version-origin
 
 ### versions
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a versions -d 'List all Ruby versions known by ndenv'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a versions -d 'List all node versions known by ndenv'
 
 ### whence
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a whence -d 'List all Ruby versions with the given command'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a whence -d 'List all node versions with the given command'
 complete -f -c ndenv -n '__fish_ndenv_using_command whence' -a '--complete --path'
 
 ### which
-complete -f -c ndenv -n '__fish_ndenv_needs_command' -a which -d 'Show the full path for the given Ruby command'
+complete -f -c ndenv -n '__fish_ndenv_needs_command' -a which -d 'Show the full path for the given node command'
 complete -f -c ndenv -n '__fish_ndenv_using_command which' -a '(__fish_ndenv_executables)'

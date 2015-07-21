@@ -33,11 +33,11 @@ function __fish_pyenv_executables
   pyenv exec --complete
 end
 
-function __fish_pyenv_installed_rubies
+function __fish_pyenv_installed_pythons
   pyenv versions --bare
 end
 
-function __fish_pyenv_official_rubies
+function __fish_pyenv_official_pythons
   python-build --definitions
 end
 
@@ -57,8 +57,8 @@ complete -f -c pyenv -n '__fish_pyenv_needs_command' -a exec
 complete -f -c pyenv -n '__fish_pyenv_using_command exec' -a '(__fish_pyenv_executables)'
 
 ### global
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a global -d 'Set or show the global Ruby version'
-complete -f -c pyenv -n '__fish_pyenv_using_command global' -a '(__fish_pyenv_installed_rubies)'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a global -d 'Set or show the global Python version'
+complete -f -c pyenv -n '__fish_pyenv_using_command global' -a '(__fish_pyenv_installed_pythons)'
 
 ### help
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a help
@@ -71,11 +71,11 @@ complete -f -c pyenv -n '__fish_pyenv_needs_command' -a init
 
 ### install
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a install -d 'Install a python version'
-complete -f -c pyenv -n '__fish_pyenv_using_command install' -a '(__fish_pyenv_official_rubies)'
+complete -f -c pyenv -n '__fish_pyenv_using_command install' -a '(__fish_pyenv_official_pythons)'
 
 ### local
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a local -d 'Set or show the local directory-specific Ruby version'
-complete -f -c pyenv -n '__fish_pyenv_using_command local' -a '(__fish_pyenv_installed_rubies)'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a local -d 'Set or show the local directory-specific Python version'
+complete -f -c pyenv -n '__fish_pyenv_using_command local' -a '(__fish_pyenv_installed_pythons)'
 
 ### prefix
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a prefix -d 'Shows a python version installed folder'
@@ -88,15 +88,15 @@ complete -f -c pyenv -n '__fish_pyenv_needs_command' -a rehash -d 'Rehash pyenv 
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a root -d 'pyenv root folder'
 
 ### shell
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a shell -d 'Set or show the shell-specific Ruby version'
-complete -f -c pyenv -n '__fish_pyenv_using_command shell' -a '--unset (__fish_pyenv_installed_rubies)'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a shell -d 'Set or show the shell-specific Python version'
+complete -f -c pyenv -n '__fish_pyenv_using_command shell' -a '--unset (__fish_pyenv_installed_pythons)'
 
 ### shims
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a shims
 complete -f -c pyenv -n '__fish_pyenv_using_command shims' -a '--short'
 
 ### version
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a version  -d 'Show the current Ruby version'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a version  -d 'Show the current Python version'
 
 ### version-file
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a version-file
@@ -114,12 +114,12 @@ complete -f -c pyenv -n '__fish_pyenv_needs_command' -a version-name
 complete -f -c pyenv -n '__fish_pyenv_needs_command' -a version-origin
 
 ### versions
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a versions -d 'List all Ruby versions known by pyenv'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a versions -d 'List all Python versions known by pyenv'
 
 ### whence
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a whence -d 'List all Ruby versions with the given command'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a whence -d 'List all Python versions with the given command'
 complete -f -c pyenv -n '__fish_pyenv_using_command whence' -a '--complete --path'
 
 ### which
-complete -f -c pyenv -n '__fish_pyenv_needs_command' -a which -d 'Show the full path for the given Ruby command'
+complete -f -c pyenv -n '__fish_pyenv_needs_command' -a which -d 'Show the full path for the given Python command'
 complete -f -c pyenv -n '__fish_pyenv_using_command which' -a '(__fish_pyenv_executables)'
