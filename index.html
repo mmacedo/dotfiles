@@ -20,12 +20,12 @@
 
     <section class="main-content">
       <h1>
-<a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="my-dot-files"></a>My dot files</h1>
+<a id="my-dot-files" class="anchor" href="#my-dot-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>My dot files</h1>
 
 <p>Designed for my own use, but feel free to use and submit issues and suggestions. I would be glad to know that it helped anyone besides me.</p>
 
 <h2>
-<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="os"></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <p>This setup is specifically created for use with <a href="http://releases.ubuntu.com/vivid/">Ubuntu 15.04 Vivid Vervet (AMD64)</a>, to use with other versions or distributions just replace the <a href="https://en.wikipedia.org/wiki/Advanced_Packaging_Tool">APT</a> calls and the <a href="https://help.ubuntu.com/community/Repositories/Ubuntu">Ubuntu repositories and packages</a>.</p>
 
@@ -35,9 +35,9 @@
 </code></pre>
 
 <h2>
-<a id="install-required-software" class="anchor" href="#install-required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="install-software"></a>Install required software</h2>
+<a id="install-required-software" class="anchor" href="#install-required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install required software</h2>
 
-<p><a id="ppa"></a>Add software sources to install software that are not from Canonical:</p>
+<p>Add software sources to install software that are not from Canonical:</p>
 
 <pre><code># Enable partner
 sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
@@ -47,7 +47,6 @@ echo 'deb http://br.archive.ubuntu.com/ubuntu/ trusty-proposed universe main res
 
 # Add ppa's
 sudo add-apt-repository -y ppa:fish-shell/nightly-master
-sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:skype-wrapper/ppa
 sudo add-apt-repository -y ppa:bartbes/love-stable
@@ -74,7 +73,7 @@ wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | s
 sudo add-apt-repository 'deb http://download.virtualbox.org/virtualbox/debian saucy contrib'
 </code></pre>
 
-<p><a id="apt"></a>Install apt packages:</p>
+<p>Install apt packages:</p>
 
 <pre><code># Update package list
 sudo apt-get update
@@ -93,7 +92,7 @@ pkgfor[other]="fbreader virtualbox-4.3"
 pkgfor[web]="chromium-browser opera google-talkplugin skype skype-wrapper pepperflashplugin-nonfree"
 pkgfor[shell]="fish xclip trash-cli curl vlc imagemagick graphviz heroku-toolbelt"
 pkgfor[vcs]="git git-svn mercurial"
-pkgfor[stack]="nodejs openjdk-8-jdk sbt love lua5.1"
+pkgfor[stack]="openjdk-8-jdk sbt love lua5.1"
 pkgfor[build]="build-essential checkinstall autoconf automake libtool g++ gettext"
 pkgfor[db]="mongodb libsqlite3-dev postgresql libpq-dev"
 pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
@@ -111,7 +110,7 @@ sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 sudo apt-get dist-upgrade -y
 </code></pre>
 
-<p><a id="phantomjs"></a>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since the apt package is usually many versions behind:</p>
+<p>Install <a href="http://phantomjs.org/">PhantomJS</a> manually, since the apt package is usually many versions behind:</p>
 
 <pre><code>PHANTOMJS=phantomjs-1.9.8-linux-x86_64
 curl -Ls https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS.tar.bz2 | tar -xj
@@ -119,7 +118,7 @@ sudo mv $PHANTOMJS /usr/local/lib/phantomjs
 sudo ln -s /usr/local/lib/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
 </code></pre>
 
-<p><a id="virtualbox"></a>Configure <a href="https://www.virtualbox.org/">VirtualBox</a>:</p>
+<p>Configure <a href="https://www.virtualbox.org/">VirtualBox</a>:</p>
 
 <pre><code># Download and Install VirtualBox Extension Pack
 wget http://download.virtualbox.org/virtualbox/4.3.6/Oracle_VM_VirtualBox_Extension_Pack-4.3.6-91406.vbox-extpack
@@ -128,9 +127,9 @@ rm *.vbox-extpack
 </code></pre>
 
 <h2>
-<a id="configure-workspace" class="anchor" href="#configure-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-development-environment"></a>Configure workspace</h2>
+<a id="configure-workspace" class="anchor" href="#configure-workspace" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure workspace</h2>
 
-<p><a id="ssh"></a>Configure SSH key:</p>
+<p>Configure SSH key:</p>
 
 <pre><code># Generate SSH key
 ssh-keygen -t rsa -C "michelpm@gmail.com"
@@ -139,9 +138,9 @@ ssh-keygen -t rsa -C "michelpm@gmail.com"
 xclip -sel clip &lt; ~/.ssh/id_rsa.pub
 </code></pre>
 
-<p><a id="ssh-github"></a>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
+<p>To upload to <a href="https://github.com/">Github</a>, go to <a href="https://github.com/settings/ssh">Account settings</a>, click 'Add SSH key', paste in the 'Key' text field and click in 'Add key'.</p>
 
-<p><a id="ssh-heroku"></a>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
+<p>To upload the key to <a href="http://www.heroku.com/">Heroku</a>, use the <a href="https://toolbelt.herokuapp.com/">Heroku Toolbelt</a>:</p>
 
 <pre><code># Login
 heroku login
@@ -153,7 +152,7 @@ heroku keys:clear
 heroku keys:add
 </code></pre>
 
-<p><a id="configure-workspace"></a>Configure workspace:</p>
+<p>Configure workspace:</p>
 
 <pre><code># Create empty folders on the workspace
 mkdir -p ~/ws/{etc,st3,rb,js}
@@ -163,9 +162,9 @@ git clone git@github.com:mmacedo/dotfiles.git ~/dotfiles
 </code></pre>
 
 <h2>
-<a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-programming-stacks"></a>Configure programming stacks</h2>
+<a id="configure-programming-stacks" class="anchor" href="#configure-programming-stacks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure programming stacks</h2>
 
-<p><a id="ruby"></a><a id="rbenv"></a>Install <a href="https://github.com/sstephenson/rbenv">rbenv</a> and several plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
+<p>Install <a href="https://github.com/sstephenson/rbenv">rbenv</a> and several plugins with <a href="https://github.com/fesplugas/rbenv-installer">rbenv-installer</a> and build the latest <a href="http://www.ruby-lang.org/">MRI/CRuby</a>:</p>
 
 <pre><code># Stop errors when on system ruby
 sudo gem install bundler
@@ -195,7 +194,7 @@ pushd ~/dotfiles; bundle install; popd
 gem install rails mongoid pg sqlite3 therubyracer bson_ext yajl-ruby nokogiri
 </code></pre>
 
-<p><a id="pyenv"></a><a id="python"></a>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a> 2 and 3:</p>
+<p>Install <a href="https://github.com/yyuu/pyenv">pyenv</a> and build the latest <a href="http://www.python.org/">Python</a> 2 and 3:</p>
 
 <pre><code># Install pyenv
 git clone http://github.com/yyuu/pyenv ~/.pyenv
@@ -207,21 +206,19 @@ eval "$(pyenv init -)"
 # Install dependencies for python 2 and 3
 sudo apt-get build-dep -y python2.7 python3.4
 
-# Install python 2
-pyenv install 2.7.9
-pyenv shell 2.7.9
-pip install --upgrade pip
-pip install ipython
-
-# Install latest python
+# Install latest python 2 and 3
+pyenv install 2.7.10
 pyenv install 3.4.3
-pyenv global 3.4.3
-pyenv shell 3.4.3
+pyenv global 3.4.3 2.7.10
+
+# Update pip and install ipython for both
+pip2 install --upgrade pip
+pip2 install ipython
 pip install --upgrade pip
 pip install ipython
 </code></pre>
 
-<p><a id="node"></a><a id="nodejs"></a><a id="ndenv"></a>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and <a href="http://github.com/riywo/node-build">node-build</a> build the latest <a href="http://nodejs.org/">Node.js</a>:</p>
+<p>Install <a href="https://github.com/riywo/ndenv">ndenv</a> and <a href="http://github.com/riywo/node-build">node-build</a> build the latest <a href="http://nodejs.org/">Node.js</a>:</p>
 
 <pre><code># Install ndenv
 git clone http://github.com/riywo/ndenv ~/.ndenv
@@ -233,15 +230,28 @@ git clone http://github.com/riywo/node-build ~/.ndenv/plugins/node-build
 export PATH="$HOME/.ndenv/bin:$PATH"
 eval "$(ndenv init -)"
 
-# Install latest node
-ndenv install v0.12.2
-ndenv global v0.12.2
+# Install latest node.js
+ndenv install v0.12.7
+ndenv global v0.12.7
+ndenv rehash
 
-# Install global packages
-npm install -global coffee-script bower
+# And some packages
+npm update -g
+npm install -g grunt-cli jshint jscs jsdoc karma-cli less coffee-script bower
+ndenv rehash
+
+# Install latest io.js
+ndenv install iojs-v2.4.0
+ndenv global iojs-v2.4.0
+ndenv rehash
+
+# And some packages
+npm update -g
+npm install -g grunt-cli jshint jscs jsdoc karma-cli less coffee-script bower
+ndenv rehash
 </code></pre>
 
-<p><a id="scala"></a><a id="sbt"></a>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
+<p>Install <a href="http://www.scala-lang.org/">scala</a>:</p>
 
 <pre><code># Install scala
 wget http://downloads.typesafe.com/scala/2.12.0-M1/scala-2.12.0-M1.tgz
@@ -258,14 +268,14 @@ sudo ln -s /usr/local/share/scala/bin/scalap /usr/local/bin/scalap
 </code></pre>
 
 <h2>
-<a id="configure-applications" class="anchor" href="#configure-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="install-and-configure-text-editors-and-ides"></a>Configure applications</h2>
+<a id="configure-applications" class="anchor" href="#configure-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure applications</h2>
 
-<p><a id="guake"></a>Configure <a href="http://guake.org/">Guake</a>.</p>
+<p>Configure <a href="http://guake.org/">Guake</a>.</p>
 
 <pre><code>gconftool-2 --load ~/dotfiles/guake-preferences.xml
 </code></pre>
 
-<p><a id="st2"></a>Configure <a href="http://www.sublimetext.com/">Sublime Text 3</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 3 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
+<p>Configure <a href="http://www.sublimetext.com/">Sublime Text 3</a> and install <a href="http://wbond.net/sublime_packages/package_control">Sublime Package Control</a> and <a href="http://blog.byscripts.info/2013/02/txmt-protocol-and-sublime-text-2-english.html">URL handler</a>. First time you open Sublime Text 3 after doing these steps, Sublime Text 2 will install Sublime Package Control. First time it opens after that, Sublime Package Control is going to read my list of packages and install every one of them, but it is going to generate several errors and may need a few restarts until it finishes. Also, do not forget to enter license.</p>
 
 <pre><code># Copy configuration
 mkdir -p ~/.config/sublime-text-3/Packages/User
@@ -286,39 +296,44 @@ sudo mv sublime-url-handler.desktop /usr/local/share/applications/
 sudo update-desktop-database
 </code></pre>
 
-<p><a id="vim"></a><a id="janus"></a>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it mainly to edit git commit messages.</p>
+<p>Install a <a href="http://www.vim.org/">Vim</a> <a href="https://github.com/carlhuda/janus">distribution</a> (need the ruby in the path to have rake installed). I don't pay much to attention to it, since I use it only to edit git commit messages.</p>
 
 <pre><code>curl -Lo- https://bit.ly/janus-bootstrap | bash
 ln -s ~/dotfiles/vimrc.before ~/.vimrc.before
 </code></pre>
 
 <h2>
-<a id="configure-command-line-tools" class="anchor" href="#configure-command-line-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="configure-command-line-tools"></a>Configure command line tools</h2>
+<a id="configure-command-line-tools" class="anchor" href="#configure-command-line-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configure command line tools</h2>
 
-<p><a id="ack"></a>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
+<p>Install and configure <a href="http://betterthangrep.com/">ack</a>:</p>
 
 <pre><code>curl http://beyondgrep.com/ack-2.04-single-file | sudo tee /usr/local/bin/ack
 sudo chmod 0755 /usr/local/bin/ack
 ln -s ~/dotfiles/ackrc ~/.ackrc
 </code></pre>
 
-<p><a id="git"></a>Configure <a href="http://git-scm.com/">git</a>:</p>
+<p>Configure <a href="http://git-scm.com/">git</a>:</p>
 
 <pre><code>ln -s ~/dotfiles/gitconfig ~/.gitconfig
 </code></pre>
 
-<p><a id="hg"></a>Configure <a href="http://mercurial.selenic.com/">hg</a>:</p>
+<p>Configure <a href="http://mercurial.selenic.com/">hg</a>:</p>
 
 <pre><code>hg clone http://bitbucket.org/sjl/hg-prompt/
 ln -s ~/dotfiles/hgrc ~/.hgrc
 </code></pre>
 
-<p><a id="fish"></a>Configure <a href="http://fishshell.com/">fish</a>:</p>
+<p>Configure <a href="http://fishshell.com/">fish</a>:</p>
 
 <pre><code>chsh -s $(which fish)
-curl -L https://raw.github.com/bpinto/oh-my-fish/master/tools/install.fish | fish
-mkdir -p ~/.config/fish &amp;&amp; rm ~/.config/fish/config.fish &amp;&amp; ln -s ~/dotfiles/config.fish ~/.config/fish/
-mkdir -p ~/.oh-my-fish/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/themes/my/
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/tools/install.fish | fish
+mkdir -p ~/.config/fish &amp;&amp; rm ~/.config/fish/config.fish &amp;&amp; ln -s ~/dotfiles/config.fish ~/.config/fish/config.fish
+mkdir -p ~/.oh-my-fish/custom/themes/my &amp;&amp; ln -s ~/dotfiles/fish_prompt.fish ~/.oh-my-fish/custom/themes/my/fish_prompt.fish
+</code></pre>
+
+<p>When you first enter fish, you have to install the plugins:</p>
+
+<pre><code>omf install
 </code></pre>
 
       <footer class="site-footer">
