@@ -72,11 +72,12 @@ Install apt packages:
     pkgfor[ubuntu]="ubuntu-restricted-extras gdebi apt-file python-software-properties p7zip-full p7zip-rar jayatana"
     pkgfor[mono]="mono-gmcs fsharp monodevelop"
     pkgfor[libs]="exuberant-ctags libqt4-dev libfreetype6-dev libreadline-dev libbz2-dev libncurses5-dev zlib1g-dev libssl-dev libxml2 libxml2-dev libxslt1-dev tklib"
+    pkgfor[cute]="fortune-mod cowsay"
 
     pkgs1="${pkgfor[dev]} ${pkgfor[draw]} ${pkgfor[other]} ${pkgfor[web]}"
     pkgs2="${pkgfor[shell]} ${pkgfor[vcs]} ${pkgfor[stack]}"
     pkgs3="${pkgfor[build]} ${pkgfor[db]} ${pkgfor[ubuntu]}"
-    pkgs4="${pkgfor[mono]} ${pkgfor[libs]}"
+    pkgs4="${pkgfor[mono]} ${pkgfor[libs]} ${pkgfor[cute]}"
 
     sudo apt-get install -y $pkgs1 $pkgs2 $pkgs3 $pkgs4
 
@@ -288,3 +289,9 @@ Configure [fish](http://fishshell.com/):
 When you first enter fish, you have to install the plugins:
 
     omf install
+
+## Lolcat
+
+Do [this](https://github.com/busyloop/lolcat):
+
+    fortune | cowsay | lolcat

@@ -19,3 +19,5 @@ gem 'awesome_print'
 gem 'ruby-prof'
 gem 'unicode'
 
+# Cute lol
+gem 'lolcat'
