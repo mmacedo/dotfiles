@@ -47,7 +47,7 @@ function fish_prompt
   if [ "$UID" = "0" ]
     set prompt "$red# "
   else
-    set prompt "$normal> "
+    set prompt "$normal""λ "
   end
 
   # Prepend active virtualenv name
