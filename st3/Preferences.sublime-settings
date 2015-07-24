@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Railscasts Extended/Railscasts Extended.tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Dawn.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Ubuntu Mono",
 	"font_size": 12,
@@ -23,8 +23,9 @@
 		".pygments-cache"
 	],
 	"phoenix_color_expanded_folder": true,
-	"phoenix_color_orange": true,
-	"phoenix_dirty_bottom_bar_orange": true,
+	"phoenix_color_green": true,
+	"phoenix_dirty_bottom_bar": true,
+	"phoenix_dirty_bottom_bar_red": true,
 	"phoenix_solid_current_tab": true,
 	"show_encoding": true,
 	"show_line_endings": true,
