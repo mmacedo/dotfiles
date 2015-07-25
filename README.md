@@ -18,7 +18,7 @@ Add software sources to install software that are not from Canonical:
     sudo sed -i "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
 
     # Enable proposed
-    echo 'deb http://br.archive.ubuntu.com/ubuntu/ trusty-proposed universe main restricted multiverse' | sudo tee -a /etc/apt/sources.list
+    echo 'deb http://br.archive.ubuntu.com/ubuntu/ vivid-proposed universe multiverse main restricted' | sudo tee -a /etc/apt/sources.list
 
     # Add ppa's
     sudo add-apt-repository -y ppa:fish-shell/nightly-master
